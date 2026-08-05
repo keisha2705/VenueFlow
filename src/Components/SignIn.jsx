@@ -70,4 +70,4 @@ function SignIn({ showSignup }) {
 );
 }
 
-export default Signin
+export default SignIn
