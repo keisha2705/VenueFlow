@@ -34,7 +34,6 @@ function Signin({ showSignup }) {
     localStorage.setItem("user", JSON.stringify(data));
 
      alert("Welcome Back!!")
-
         if(data.role === "user"){
             navigate("/user")
         }else if(data.role === "manager"){
