@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "/home/keishatyramoyo/Bookings/venueFlow/my-react-app/Styling/SignUp.css";
-import { auth } from "../firebase";
+import "../Styling/SignUp.css";
+import { auth } from "../lib/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-function SignUp() {
+function SignUp({showLogin}) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +29,7 @@ function SignUp() {
       // saving the other info on Mongodb
       const response = await fetch("http://localhost:3000/signup", {
          method: "POST",
-         headers: {"Content-Type":"application.json"},
+         headers: {"Content-Type":"application/json"},
          body : JSON.stringify({ uid: userCredential.user.uid, username, email })
       });
       const data = await response.json();
@@ -46,7 +46,6 @@ function SignUp() {
   return (
     <div className="signup-page">
       <div className="left-side">
-
          <div className="Logo">
             <p>ENVTR</p>
         </div>
@@ -70,10 +69,7 @@ function SignUp() {
           <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
 
           <button type="submit">sign up</button>
-          <p className="login-link">
-            Already have an account?
-            <span onClick={() => navigate("/Signin")}> Login</span>
-          </p>
+          <p className="login-link">Already have an account?<span onClick={showLogin}> Login</span></p>
         </form>
       </div>
     </div>

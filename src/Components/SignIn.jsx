@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "../styling/Login.css";
+import "../Styling/SignIn.css";
 
 function Signin({ showSignup }) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();  
+  const [password, setPassword] = useState(""); 
  
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -34,7 +34,6 @@ function Signin({ showSignup }) {
     localStorage.setItem("user", JSON.stringify(data));
 
      alert("Welcome Back!!")
-
         if(data.role === "user"){
             navigate("/user")
         }else if(data.role === "manager"){
