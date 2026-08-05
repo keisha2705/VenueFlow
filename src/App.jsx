@@ -1,17 +1,26 @@
-// import { useState } from 'react'
-import SignUp from '/home/keishatyramoyo/Bookings/venueFlow/my-react-app/Components/SignUp.jsx'
-
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AuthPage from "./Pages/AuthPage";
+import ProtectedRoute from  "./Components/ProtectedRoutes";
 
 function App() {
   return (
-    <div>
-    <SignUp/> 
-    </div>
-  );
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AuthPage />} />
+          
+          <Route path="/protected" element={
+            <ProtectedRoute role="admin">
+              <div>This is where the protected page will go</div>
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </BrowserRouter>
+
+    </>
+  )
 }
 
-
-
-
-
 export default App
+
