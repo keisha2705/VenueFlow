@@ -47,14 +47,14 @@ function SignUp({showLogin}) {
     <div className="signup-page">
       <div className="left-side">
          <div className="Logo">
-            <p>ENVTR</p>
+            <p><img src="./LOGO.png" alt="logo" width="300" height="300" /></p>
         </div>
         <h1>WELCOME</h1>
       </div>
 
       <div className="right-side">
         <form className="signup-form" onSubmit={handleSignup}>
-          <h2>Sign Up</h2>
+          <h1>Sign Up</h1>
 
           <h4>Username</h4>
           <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
