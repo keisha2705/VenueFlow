@@ -13,8 +13,9 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#f6f7f8;
+    background: linear-gradient(to bottom, #30006d, #ff00ff);
     padding:40px;
+
 }
 
 .left-side{
@@ -29,6 +30,7 @@
     align-items:center;
     text-align:center;
     padding:40px;
+    border-radius: 20px;
 
 }
 
@@ -71,7 +73,7 @@
 }
 
 .signup-form h2{
-    color:black;
+    color:rgb(255, 251, 251);
     text-align:center;
     margin-bottom:40px;
     font-size:32px;
@@ -81,9 +83,9 @@
     background:transparent;
     border-width:1px;
     border-radius:20px;
-    border-bottom: white  black;
+    /* border-bottom: white  black; */
     outline:none;
-    color:black;
+    color:rgb(255, 249, 249);
     font-size:16px;
     padding:10px 5px;
     margin-bottom:25px;
@@ -107,7 +109,7 @@
 }
 
 .signup-form button:hover{
-    background:#b995a0dc;
+    background:#ff2c6bdc;
     transform:scale(1.03);
 }
 
@@ -118,7 +120,7 @@
 }
 
 .login-link span{
-    color:brown;
+    color:rgb(248, 248, 248);
     cursor:pointer;
     font-weight:bold;
 }
