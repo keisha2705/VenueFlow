@@ -72,7 +72,7 @@ body{
 }
 
 .login-right h1{
-    color:#7a4b37;
+    color:#c9beba;
     font-size:50px;
     font-weight:400;
     margin-bottom:40px;
@@ -80,7 +80,7 @@ body{
 
 .login-right label{
     margin-bottom:8px;
-    color:#222;
+    color:#e1d2d2;
     font-size:18px;
 }
 
@@ -95,7 +95,7 @@ body{
 }
 
 .login-right input:focus{
-    border-bottom:2px solid #7a4b37;
+    border-bottom:2px solid #511a65;
 }
 
 .login-right button[type="submit"]{
@@ -103,7 +103,7 @@ body{
     padding:12px;
     border:none;
     border-radius:30px;
-    background:#7a4b37;
+    background:#4d1b60;
     color:white;
     font-size:17px;
     cursor:pointer;
@@ -121,7 +121,7 @@ body{
 }
 
 .login-right span{
-    color:#7a4b37;
+    color:#521a67;
     cursor:pointer;
     font-weight:bold;
 }
@@ -136,7 +136,7 @@ body{
     margin-top:15px;
     background:none;
     border:none;
-    color:#7a4b37;
+    color:#440f47;
     cursor:pointer;
     font-size:15px;
 }
