@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AuthPage from "./Pages/AuthPage";
 import ProtectedRoute from  "./Components/ProtectedRoutes";
+// import LOGO from  './public/LOGO.png'
 
 function App() {
   return (
