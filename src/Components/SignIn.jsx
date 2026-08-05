@@ -32,8 +32,6 @@ function SignIn({ showSignup }) {
                 throw new Error(data.message);
             }
 
-            
-
             // Save user information using a token so that backend has prove the user is logged in by firebase
             const token = await userCredential.user.getIdToken();
             localStorage.setItem("token", token);
@@ -102,10 +100,7 @@ function SignIn({ showSignup }) {
                         <span onClick={showSignup}>Sign Up</span>
                     </p>
 
-                    <button
-                        type="button"
-                        onClick={() => navigate("/forgot-password")}
-                    >
+                    <button type="button" onClick={() => navigate("/forgot-password")}>
                         Forgot Password?
                     </button>
                 </form>
