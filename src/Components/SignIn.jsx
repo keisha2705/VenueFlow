@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styling/SignIn.css";
 
-function Signin({ showSignup }) {
+function SignIn({ showSignup }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(""); 
