@@ -18,7 +18,7 @@ body{
     justify-content:center;
     align-items:center;
     padding:20px;
-    background:linear-gradient(to bottom, #6f1f94, #0f040f);
+    background:#ffffff;
 }
 
 /* LEFT PANEL */
@@ -26,10 +26,7 @@ body{
 .login-left{
     width:45%;
     height:90%;
-    background:linear-gradient(to bottom, #8f47a1, #1b121b);
-    backdrop-filter: blur(1px);
-    /* filter: blur(1px); */
-    /* -webkit-filter: blur(1px);   */
+    background:linear-gradient(135deg,#5a3428,#7b4633,#8f573f);
     border-radius:18px;
     color:#f5dfcf;
     padding:50px;
