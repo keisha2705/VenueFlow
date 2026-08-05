@@ -1,16 +1,17 @@
 import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ children, role }) {
-    // Simulate user authentication (replace with actual user context)
+    const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user"));
-    if (!user) {
+// means user is not logged in
+    if (!token || !user) {
         return <Navigate to="/" />;
-    } else if (user.role !== role) {
+    }
+// User is logged in but has the wrong role
+    if (role && user.role !== role) {
         return <Navigate to="/*" />;
     }
-    return (
-        children
-    )
+    return children;
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;

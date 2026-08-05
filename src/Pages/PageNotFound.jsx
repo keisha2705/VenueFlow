@@ -7,7 +7,7 @@ function PageNotFound () {
         <>
           <div className="whole-thing">
             <h1>404</h1>
-            <h2 className="four"> Oh My Potholes! What are you doing here </h2>
+            <h2 className="four"> Oh My Events! What are you doing here </h2>
           </div>
 
           <div className="redirect">
