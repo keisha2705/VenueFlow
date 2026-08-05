@@ -52,6 +52,7 @@ function SignUp() {
   return (
     <div className="signup-page">
       <div className="left-side">
+
          <div className="Logo">
             <p>ENVTR</p>
         </div>
