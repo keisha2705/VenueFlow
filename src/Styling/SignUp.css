@@ -5,28 +5,32 @@
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.signup-page{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background: linear-gradient(to bottom, #30006d, #ff00ff);
-    padding:40px;
+.signup-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #30006d, #000000);
+  padding: 40px;
 }
 
-.left-side{
-    width:50%;
-    height:80%;
-    background-color: rgba(255, 255, 255, 0.4);
-   -webkit-backdrop-filter: blur(15px);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:40px;
-    border-radius: 20px;
+.left-side {
+  width: 50%;
+  height: 80%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  border-radius: 20px;
 }
 
 .left-side h1 {
@@ -36,8 +40,8 @@
 }
 
 .Logo p {
-  display:flex;
-    /* padding-bottom:10px;  */
+  display: flex;
+  /* padding-bottom:10px;  */
 }
 
 .left-side p {
@@ -70,7 +74,7 @@
   font-weight: 800;
 }
 
-.signup-form h4{
+.signup-form h4 {
   color: white;
 }
 
@@ -84,6 +88,11 @@
   font-size: 16px;
   padding: 10px 5px;
   margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .signup-form input::placeholder {
@@ -151,4 +160,14 @@
   .signup-form {
     width: 90%;
   }
+
+
+  .signup-form h1 {
+  color: rgb(255, 251, 251);
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: large;
+  font-weight: 800;
+}
+
 }

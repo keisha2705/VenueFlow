@@ -63,7 +63,7 @@ function SignUp({showLogin}) {
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
           
           <h4>Password</h4>
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+          <input type="password" placeholder="Minimum of 8 characters" value={password} onChange={(e) => setPassword(e.target.value)}/>
 
           <h4>Confirm Password</h4>
           <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
