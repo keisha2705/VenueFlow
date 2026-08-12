@@ -9,7 +9,7 @@ import ForgotPassword from "./Pages/ForgotPassword"
 import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
 import BookingPage from "./Pages/BookingPage";
-
+// import SuperAdmin from "./Pages/SuperAdmin"
 
 function App() {
   return (
@@ -49,8 +49,12 @@ function App() {
             <ProtectedRoute roles={["manager"]}>
              <ManageVenues />
           </ProtectedRoute>
-    }
-/>
+    }/>  
+          {/* <Route path="/superAdmin" element={
+            <ProtectedRoute roles={["superAdmin"]}>
+             <SuperAdmin />
+          </ProtectedRoute>
+    }/> */}
 
         </Routes>
       </BrowserRouter>
