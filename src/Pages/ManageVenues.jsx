@@ -43,7 +43,7 @@ async function handleSubmit(event) {
     try {
         if (!auth.currentUser) {
             alert("You are not logged in!");
-            return;
+            return
         }
         const token = await auth.currentUser.getIdToken();
         const venue = { name, description, address, capacity: Number(capacity), rows: Number(rows), seatsPerRow: Number(seatsPerRow)};

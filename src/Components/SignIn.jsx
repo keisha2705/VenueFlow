@@ -59,7 +59,7 @@ function SignIn({ showSignup }) {
     <div className="login-container">
       <div className="login-left">
         <div className="logo">
-            <img src="./LOGO.png" alt="logo" width="300" height="300" />
+          <img src="./LOGO.png" alt="logo" width="300" height="300" />
         </div>
 
         <h2>WELCOME BACK</h2>
@@ -70,36 +70,19 @@ function SignIn({ showSignup }) {
           <h1>LOGIN</h1>
 
           <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="eg. Zach123@gmail.com"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
+          <input type="email" name="email" placeholder="eg. Zach123@gmail.com" value={email} onChange={(event) => setEmail(event.target.value)}/>
 
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="eg. Zach1234567"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
+          <input type="password" name="password" placeholder="eg. Zach1234567" value={password} onChange={(event) => setPassword(event.target.value)}/>
 
           <button type="submit">Login</button>
+          <p className="text"> Don't have an account? <span onClick={showSignup}>Sign Up</span></p>
 
-          <p className="text">
-            Don't have an account? <span onClick={showSignup}>Sign Up</span>
-          </p>
-
-          <button type="button" onClick={() => navigate("/forgot-password")}>
-            Forgot Password?
-          </button>
+          <button type="button" onClick={() => navigate("/forgot-password")}> Forgot Password?</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default SignIn;
+export default SignIn
