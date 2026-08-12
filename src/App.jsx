@@ -11,7 +11,6 @@ import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
 
 
-
 function App() {
   return (
     <>
@@ -50,8 +49,19 @@ function App() {
             <ProtectedRoute roles={["manager"]}>
              <ManageVenues />
           </ProtectedRoute>
+<<<<<<< HEAD
+
     }
 />
+=======
+    }/>  
+          {/* <Route path="/superAdmin" element={
+            <ProtectedRoute roles={["superAdmin"]}>
+             <SuperAdmin />
+          </ProtectedRoute>
+    }/> */}
+>>>>>>> fb4c9070f01fa29ecbcceedb35b292ee338a0572
+
 
         </Routes>
       </BrowserRouter>
