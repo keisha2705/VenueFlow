@@ -6,6 +6,7 @@ import ProtectedRoute from  "./Components/ProtectedRoutes";
 import Admin from "./Pages/Admin";
 import PageNotFound from "./Pages/PageNotFound"
 import ForgotPassword from "./Pages/ForgotPassword"
+import BookingPage from  "./Pages/BookingPage"
 
 function App() {
   return (
