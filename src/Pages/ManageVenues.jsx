@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "../lib/firebase";
 
 function ManageVenues() {
+    const [venues, setVenues] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [editingVenue, setEditingVenue] = useState(null);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [address, setAddress] = useState("");
@@ -10,19 +12,43 @@ function ManageVenues() {
     const [rows, setRows] = useState("");
     const [seatsPerRow, setSeatsPerRow] = useState("");
 
+    useEffect(() => {
+    getVenues();
+}, []);
+    async function getVenues() {
+    try {
+        if (!auth.currentUser) {
+            alert("You are not logged in!");
+            return;
+        }
+        const token = await auth.currentUser.getIdToken();
+
+        const response = await fetch("http://localhost:3000/venues", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        setVenues(data);
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    }
+}
+
 async function handleSubmit(event) {
     event.preventDefault();
 
     try {
         if (!auth.currentUser) {
-            alert("Heya, You are not logged in!");
+            alert("You are not logged in!");
             return;
         }
 
         const token = await auth.currentUser.getIdToken();
-        console.log("Firebase user:", auth.currentUser);
-        console.log("Token exists:", !!token);
-        console.log("Token:", token);
 
         const venue = {
             name,
@@ -33,38 +59,97 @@ async function handleSubmit(event) {
             seatsPerRow: Number(seatsPerRow)
         };
 
-        const response = await fetch("http://localhost:3000/venues", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify(venue)
-        });
+        let response;
+
+        if (editingVenue) {
+            // UPDATE existing venue
+            response = await fetch(
+                `http://localhost:3000/venues/${editingVenue._id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(venue)
+                }
+            );
+        } else {
+            // CREATE new venue
+            response = await fetch(
+                "http://localhost:3000/venues",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(venue)
+                }
+            );
+        }
 
         const data = await response.json();
-
         if (!response.ok) {
             throw new Error(data.message);
         }
+        if (editingVenue) {
+            alert("Venue updated successfully!");
+        } else {
+            alert("Venue created successfully!");
+        }
 
-        // console.log(data);
-
-        alert("Venue created successfully!");
-
+        await getVenues();
         setName("");
         setDescription("");
         setAddress("");
         setCapacity("");
         setRows("");
         setSeatsPerRow("");
-
+        setEditingVenue(null);
         setShowForm(false);
 
     } catch (error) {
         console.error(error);
         alert(error.message);
     }
+}
+
+async function deleteVenue(id) {
+    try {
+        if (!auth.currentUser) {
+            alert("You are not logged in!");
+            return;
+        }
+        const token = await auth.currentUser.getIdToken();
+        const response = await fetch(`http://localhost:3000/venues/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message);
+        }
+        alert("Venue deleted successfully!");
+        getVenues();
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    }
+}
+
+function editVenue(venue) {
+    setEditingVenue(venue);
+    setName(venue.name);
+    setDescription(venue.description);
+    setAddress(venue.address);
+    setCapacity(venue.capacity);
+    setRows(venue.rows);
+    setSeatsPerRow(venue.seatsPerRow);
+
+    setShowForm(true);
 }
 
     return (
@@ -152,7 +237,27 @@ async function handleSubmit(event) {
 
                 </form>
             )}
+
+            <h2>Your Venues</h2>
+
+{venues.length === 0 ? (
+    <p>No venues have been created yet.</p>
+) : (
+    venues.map((venue) => (
+        <div key={venue._id}>
+            <h3>{venue.name}</h3>
+            <p>{venue.description}</p>
+            <p>Address: {venue.address}</p>
+            <p>Capacity: {venue.capacity}</p>
+            <p>Rows: {venue.rows}</p>
+            <p>Seats per row: {venue.seatsPerRow}</p>
+
+            <button onClick={() => editVenue(venue)}> Edit </button>
+            <button onClick={() => deleteVenue(venue._id)}> Delete </button>
         </div>
+    ))
+)}
+ </div>
 
     );
 }
