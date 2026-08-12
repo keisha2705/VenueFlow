@@ -29,7 +29,7 @@ export default function SeatSelection({ eventId = "101" }) { // Pass eventId dyn
 
   const handleSeatClick = async (seatId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/events/${eventId}/reserve-seat`, {
+      const response = await fetch(`http://localhost:3000/api/events/${eventId}/reserve-seat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ seatId, userId })
@@ -55,7 +55,7 @@ export default function SeatSelection({ eventId = "101" }) { // Pass eventId dyn
     }
   };
 
-  if (!eventDetails) return <div className="loading">Initializing Event Map Matrix...</div>;
+ 
 
   return (
     <div className="booking-container">

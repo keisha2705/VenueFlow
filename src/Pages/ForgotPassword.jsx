@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../lib/firebase";
+import  "../Styling/forgotPassword.css";
 
 function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -15,15 +16,15 @@ function ForgotPassword() {
     };
 
     return (
-        <div>
-            <h1>Forgot Password</h1>
+        <div className = "Container">
+            <h1 className = "text">Forgot Password</h1>
 
-            <form onSubmit={handleResetPassword}>
+            <form onSubmit={handleResetPassword} className="form-Container">
                 <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <button type="submit"> Send Reset Email </button>
+                <button type="submit"  className= "send-container"> Send Reset Email </button>
             </form>
         </div>
-    );
+    ); 
 }
 
 export default ForgotPassword

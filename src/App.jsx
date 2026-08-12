@@ -6,9 +6,9 @@ import Manager from "./Pages/Manager";
 import PageNotFound from "./Pages/PageNotFound"
 import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword"
+import BookingPage from  "./Pages/BookingPage"
 import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
-import BookingPage from "./Pages/BookingPage";
 
 
 function App() {
@@ -49,8 +49,10 @@ function App() {
             <ProtectedRoute roles={["manager"]}>
              <ManageVenues />
           </ProtectedRoute>
+
     }
 />
+
 
         </Routes>
       </BrowserRouter>
