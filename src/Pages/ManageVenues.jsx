@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { auth } from "../lib/firebase";
+import GoogleMap from "../Components/GoogleMap"
 
 function ManageVenues() {
     const [venues, setVenues] = useState([]);
@@ -11,6 +12,9 @@ function ManageVenues() {
     const [capacity, setCapacity] = useState("");
     const [rows, setRows] = useState("");
     const [seatsPerRow, setSeatsPerRow] = useState("");
+    const [location, setLocation] = useState("");
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
 
     useEffect(() => {
     getVenues();
@@ -46,7 +50,10 @@ async function handleSubmit(event) {
             return
         }
         const token = await auth.currentUser.getIdToken();
-        const venue = { name, description, address, capacity: Number(capacity), rows: Number(rows), seatsPerRow: Number(seatsPerRow)};
+        const venue = { 
+            name, description, address, capacity: Number(capacity),
+            rows: Number(rows), seatsPerRow: Number(seatsPerRow), location, latitude, longitude
+        };
         let response;
         if (editingVenue) {
             //editing the existing venue
@@ -54,10 +61,7 @@ async function handleSubmit(event) {
                 `http://localhost:3000/venues/${editingVenue._id}`,
                 {
                     method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
                     body: JSON.stringify(venue)
                 }
             );
@@ -67,10 +71,7 @@ async function handleSubmit(event) {
                 "http://localhost:3000/venues",
                 {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
                     body: JSON.stringify(venue)
                 }
             );
@@ -94,6 +95,9 @@ async function handleSubmit(event) {
         setSeatsPerRow("");
         setEditingVenue(null);
         setShowForm(false);
+        setLocation("");
+        setLatitude(null);
+        setLongitude(null);
     } catch (error) {
         console.error(error);
         alert(error.message);
@@ -132,6 +136,9 @@ function editVenue(venue) {
     setCapacity(venue.capacity);
     setRows(venue.rows);
     setSeatsPerRow(venue.seatsPerRow);
+    setLocation(venue.location || "");
+    setLatitude(venue.latitude || null);
+    setLongitude(venue.longitude || null);
     setShowForm(true);
 }
     return (
@@ -146,47 +153,45 @@ function editVenue(venue) {
                     <input type="text" value={name} onChange={(event) => setName(event.target.value)} required/>
 
                     <label>Description</label>
-                    <textarea value={description} onChange={(event) =>
-                            setDescription(event.target.value)
-                        }
+                    <textarea value={description} onChange={(event) => setDescription(event.target.value)}
                         required
                     />
                     <label>Address</label>
-                    <input type="text" value={address} onChange={(event) =>
-                            setAddress(event.target.value)
-                        }
+                    <input type="text" value={address} onChange={(event) =>setAddress(event.target.value)}
                         required
                     />
+                    <GoogleMap latitude={latitude} longitude={longitude} onPlaceSelected={(place) => {
+                      setLocation(place.name);
+                      setAddress(place.address);
+                      setLatitude(place.latitude);
+                      setLongitude(place.longitude);}}/>
+
                     <label>Capacity</label>
-                    <input type="number" value={capacity} onChange={(event) =>
-                            setCapacity(event.target.value)
-                        }
+                    <input type="number" value={capacity} onChange={(event) => setCapacity(event.target.value)}
                         required
                     />
                     <label>Number of Rows</label>
-                    <input type="number" value={rows} onChange={(event) =>
-                            setRows(event.target.value)
-                        }
+                    <input type="number" value={rows} onChange={(event) => setRows(event.target.value)}
                         required
                     />
                     <label>Seats Per Row</label>
-                    <input type="number" value={seatsPerRow} onChange={(event) =>
-                            setSeatsPerRow(event.target.value)
-                        }
+                    <input type="number" value={seatsPerRow} onChange={(event) => setSeatsPerRow(event.target.value)}
                         required
                     />
-                    <button type="submit"> Create Venues</button>
+                    <button type="submit"> Create Venue</button>
                     <button type="button" onClick={() => setShowForm(false)}> Cancel</button>
                 </form>
             )}
-            <h1>Your Venues</h1>
+            <h1>Your created Venues</h1>
         {venues.length === 0 ? (
-    <p>Hi there is currently no venues created</p>) 
+        <p>Hi there is currently no venues created</p>) 
     : ( venues.map((venue) => (
         <div key={venue._id}>
             <h2>{venue.name}</h2>
             <p>{venue.description}</p>
             <p>Address: {venue.address}</p>
+            <p>Location: {venue.location}</p>
+            <p>Coordinates: {venue.latitude}, {venue.longitude}</p>
             <p>Capacity: {venue.capacity}</p>
             <p>Rows: {venue.rows}</p>
             <p>Seats per row: {venue.seatsPerRow}</p>
