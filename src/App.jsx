@@ -9,6 +9,7 @@ import ForgotPassword from "./Pages/ForgotPassword"
 import BookingPage from  "./Pages/BookingPage"
 import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
+import AboutUs from './Pages/AboutUs';
 
 
 function App() {
@@ -55,6 +56,12 @@ function App() {
              <SuperAdmin />
           </ProtectedRoute>
     }/> */}
+
+      <Route path="/About" element={
+          <ProtectedRoute roles={["user", "manager"]}>
+            <AboutUs />
+            </ProtectedRoute>
+        }/>
 
 
         </Routes>
