@@ -2,8 +2,8 @@ import React from 'react'
 
 function UserDashboard() {
   return (
-    <div>
-       <h1 style={{ color: 'blue' }}> HI USER </h1>
+    <div container>
+       <h1 className='logo'> NOVUS</h1>
     </div>
   )
 }
