@@ -46,10 +46,6 @@ function ManageVenues() {
 async function handleSubmit(event) {
     event.preventDefault();
     try {
-        if (!auth.currentUser) {
-            alert("You are not logged in!");
-            return
-        }
         const token = await auth.currentUser.getIdToken();
         const venue = { 
             name, description, address, capacity: Number(capacity),
@@ -106,10 +102,6 @@ async function handleSubmit(event) {
 }
 async function deleteVenue(id) {
     try {
-        if (!auth.currentUser) {
-            alert("You are not logged in!");
-            return
-        }
         const token = await auth.currentUser.getIdToken();
         const response = await fetch(`http://localhost:3000/venues/${id}`, {
             method: "DELETE",
