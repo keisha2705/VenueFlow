@@ -7,7 +7,6 @@ function Manager() {
             <div className="manager-container">
                 <div className="manager-header">
                     <h1>Manager Dashboard</h1>
-                    <p>Welcome Back Manager</p>
                 </div>
 
                 <div className="manager-cards">

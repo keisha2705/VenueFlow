@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { auth } from "../lib/firebase";
+import "../Styling/ManageEvents.css"
 
 function ManageEvents() {
     const [venues, setVenues] = useState([]);
@@ -148,71 +149,94 @@ async function deleteEvent(id) {
     }
 }
     return (
-        <div>
+       <div className="events-page">
+        <div className="events-container">
+        <div className="events-header">
             <h1>Manage Events</h1>
-            <p>Create and manage your events.</p>
-            <form onSubmit={handleSubmit}>
-                <h2>{editingEvent ? "Edit Event" : "Create Event"}</h2>
-                
-                <label>Event Name</label>
-                <input type="text" value={name} onChange={(event) => setName(event.target.value)} required/>
+        </div>
 
+        <div className="event-form-card">
+           <h2>{editingEvent ? "Edit Event" : "Create Event"}</h2>
+            <form onSubmit={handleSubmit}>
+            <div className="form-group">
+                <label>Event Name</label>
+                    <input type="text" value={name} onChange={(event) => setName(event.target.value)} required/>
+            </div>
+            <div className="form-group">
                 <label>Description</label>
                 <textarea value={description} onChange={(event) => setDescription(event.target.value)}required/>
-
+            </div>
+            <div className="form-group">
                 <label>Venue</label>
-                <select value={venueId} onChange={(event) =>setVenueId(event.target.value)}required>
+                    <select value={venueId} onChange={(event) =>setVenueId(event.target.value)}required>
+                    <option value="">Select a venue</option>
+                        {venues.map((venue) => (
+                        <option key={venue._id} value={venue._id}>{venue.name}</option>))}
+                    </select>
+                </div>
 
-                <option value="">Select a venue</option>
-                    {venues.map((venue) => (
-                     <option key={venue._id} value={venue._id}> {venue.name}</option>
-                    ))}
-                </select>
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Date</label>
+                        <input type="date" value={date} onChange={(event) =>setDate(event.target.value)}required/>
+                    </div>
+                    <div className="form-group">
+                        <label>Start Time</label>
+                        <input type="time" value={startTime} onChange={(event) => setStartTime(event.target.value)}required/>
+                    </div>
 
-                <label>Date</label>
-                <input type="date" value={date} onChange={(event) => setDate(event.target.value)} required/>
+                </div>
 
-                <label>Start Time</label>
-                <input type="time" value={startTime} onChange={(event) => setStartTime(event.target.value)}required />
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Ticket Sales</label>
+                        <input type="number" value={ticketSales} onChange={(event) => setTicketSales(event.target.value)}required/>
+                    </div>
 
-                <label>Ticket Sales</label>
-                <input type="number" value={ticketSales} onChange={(event) =>setTicketSales(event.target.value)}required/>
-
-                <label>Ticket Sales Closing Date</label>
-                <input type="date" value={ticketSalesClosingDate} onChange={(event) =>setTicketSalesClosingDate(event.target.value)}required/>
-
-                <button type="submit"> {editingEvent ? "Update Event" : "Create Event"}</button>
-
+                    <div className="form-group">
+                        <label>Ticket Sales Closing Date</label>
+                        <input type="date" value={ticketSalesClosingDate} onChange={(event) => setTicketSalesClosingDate(event.target.value)}required/>
+                    </div>
+                </div>
+                <button className="event-submit-button" type="submit"> {editingEvent ? "Update Event": "Create Event"}</button>
             </form>
-           <h2>Your Events</h2>
+        </div>
 
-{events.length === 0 ? (
-    <p>No events have been created yet.</p>
-) : (
-    events.map((event) => {
-        //this finds the venue that matches the events venueId and returns it in literal words and not numbers and letetrs
-        const venue = venues.find(
-            (venue) => venue._id === event.venueId
-        );
-        return (
-            <div key={event._id}>
-                <h3>{event.name}</h3>
-                <p>{event.description}</p>
-                <p>Date: {event.date}</p>
-                <p>Start Time: {event.startTime}</p>
-                <p>Ticket Sales: {event.ticketSales}</p>
-                <p> Ticket Sales Closing Date:{" "} {event.ticketSalesClosingDate}</p>
-                <p> Venue:{" "} {venue ? venue.name : "Venue not found"}</p>
-                <p> Address:{" "} {venue ? venue.address : "Address not found"}</p>
-                <p> Capacity:{" "} {venue ? venue.capacity : "Capacity not found"}</p>
-                <button onClick={() => editEvent(event)}>Edit</button>
-                <button onClick={() => deleteEvent(event._id)}>Delete</button>
-            </div> 
-        );
-    })
-)}
+        <div className="your-events-section">
+            <h2>Your Events</h2>
+            {events.length === 0 ? (
+                <div className="no-events">
+                    <p>No events have been created yet.</p>
+                </div>
+            ) : (
+        <div className="events-grid">
+            {events.map((event) => {
+                const venue = venues.find((venue) =>venue._id === event.venueId);
+                return (
+                    <div className="event-card" key={event._id}>
+                    <div className="event-card-content">
+                        <h3>{event.name}</h3>
+                        <p className="event-description">{event.description}</p>
+                        <div className="event-details">
+                            <p><strong>Date:</strong>{event.date}</p>
+                            <p><strong>Start Time:</strong>{event.startTime}</p>
+                            <p><strong>Ticket Sales:</strong>{event.ticketSales}</p>
+                            <p><strong>Ticket Sales Closing Date:</strong>{event.ticketSalesClosingDate}</p>
+                            <p><strong>Venue:</strong>{venue ? venue.name : "Venue not found"}</p>
+                            <p><strong>Address:</strong>{venue ? venue.address : "Address not found"}</p>
+                            <p><strong>Capacity:</strong>{venue ? venue.capacity : "Capacity not found"}</p>
+                        </div>
+                        <div className="event-actions">
+                            <button className="edit-button" onClick={() =>editEvent(event)}>Edit</button>
+                            <button className="delete-button" onClick={() =>deleteEvent(event._id)}>Delete</button>
+                        </div>
+                    </div>
+                    </div>
+            )})}
+        </div>)}
+        </div>
     </div>
-  );
+</div>
+  )
 }
-
 export default ManageEvents
