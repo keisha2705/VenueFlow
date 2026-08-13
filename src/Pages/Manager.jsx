@@ -7,15 +7,15 @@ function Manager() {
             <div className="manager-container">
                 <div className="manager-header">
                     <h1>Manager Dashboard</h1>
-                    <p>Welcome Back Manager</p>
                 </div>
 
                 <div className="manager-cards">
-                    {/* <div className="manager-card">
+                    <div className="manager-card">
                         <h2>Events</h2>
                         <p> View and manage all available events.</p>
-                        <button onClick={() => navigate("/events")} className="manager-button"> View Events </button>
-                    </div> */}
+                        {/* <button onClick={() => navigate("/events")} className="manager-button"> View Events </button> */}
+                        <button onClick={() => navigate("/manager/events")} className="manager-button">Manage Events</button>
+                    </div>
 
                     <div className="manager-card">
                         <h2>Bookings</h2>
@@ -24,7 +24,7 @@ function Manager() {
                     </div>
 
                     <div className="manager-card">
-                        <h2>Events</h2>
+                        <h2>Venues</h2>
                         <p> Add, edit and manage your event venues. </p>
                         <button onClick={() => navigate("/manager/venues")} className="manager-button" > Manage Venues </button>
                     </div>
