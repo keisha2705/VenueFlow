@@ -13,6 +13,7 @@ function ManageEvents() {
     const [startTime, setStartTime] = useState("");
     const [ticketSales, setTicketSales] = useState("");
     const [ticketSalesClosingDate, setTicketSalesClosingDate] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
 
     useEffect(() => {
         getVenues();
@@ -27,9 +28,7 @@ function ManageEvents() {
             }
             const token = await auth.currentUser.getIdToken();
             const response = await fetch("http://localhost:3000/venues",
-              {
-                headers: {Authorization: `Bearer ${token}`}
-              }
+              {headers: {Authorization: `Bearer ${token}`}}
             );
             const data = await response.json();
             if (!response.ok) {
@@ -44,10 +43,6 @@ function ManageEvents() {
 
     async function getEvents() {
     try {
-        if (!auth.currentUser) {
-            alert("You are not logged in!");
-            return
-        }
         const token = await auth.currentUser.getIdToken();
         const response = await fetch("http://localhost:3000/events",
             {
@@ -67,12 +62,8 @@ function ManageEvents() {
 async function handleSubmit(event) {
     event.preventDefault();
     try {
-        if (!auth.currentUser) {
-            alert("You are not logged in!");
-            return
-        }
         const token = await auth.currentUser.getIdToken();
-        const eventData = { name, description, venueId, date, startTime, ticketSales: Number(ticketSales), ticketSalesClosingDate};
+        const eventData = { name, description, venueId, date, startTime, ticketSales: Number(ticketSales), ticketSalesClosingDate, imageUrl};
         let response;
         if (editingEvent) {
             //updating an event only if it exists
@@ -103,6 +94,7 @@ async function handleSubmit(event) {
             alert("Event created successfully!");
         }
         await getEvents();
+
         setName("");
         setDescription("");
         setVenueId("");
@@ -111,6 +103,7 @@ async function handleSubmit(event) {
         setTicketSales("");
         setTicketSalesClosingDate("");
         setEditingEvent(null);
+        setImageUrl("");
     } catch (error) {
         console.error(error);
         alert(error.message);
@@ -120,10 +113,6 @@ async function handleSubmit(event) {
 
 async function deleteEvent(id) {
     try {
-        if (!auth.currentUser) {
-            alert("You are not logged in!");
-            return
-        }
         const confirmDelete = window.confirm(
             "Are you sure you want to delete this event?"
         );
@@ -196,6 +185,8 @@ async function deleteEvent(id) {
                     <div className="form-group">
                         <label>Ticket Sales Closing Date</label>
                         <input type="date" value={ticketSalesClosingDate} onChange={(event) => setTicketSalesClosingDate(event.target.value)}required/>
+                        <label>Event Image URL</label>
+                        <input type="url" value={imageUrl} onChange={(event) => setImageUrl(event.target.value)} placeholder="https://example.com/j-act.jpg" required/>
                     </div>
                 </div>
                 <button className="event-submit-button" type="submit"> {editingEvent ? "Update Event": "Create Event"}</button>
@@ -216,6 +207,7 @@ async function deleteEvent(id) {
                     <div className="event-card" key={event._id}>
                     <div className="event-card-content">
                         <h3>{event.name}</h3>
+                        {event.imageUrl && (<img src={event.imageUrl} alt={event.name} width="300"/>)}
                         <p className="event-description">{event.description}</p>
                         <div className="event-details">
                             <p><strong>Date:</strong>{event.date}</p>
