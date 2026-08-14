@@ -9,7 +9,9 @@ import ForgotPassword from "./Pages/ForgotPassword"
 import BookingPage from  "./Pages/BookingPage"
 import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
-import ManageEvents from "./Pages/ManageEvents";
+import AboutUs from './Pages/AboutUs';
+import ManageEvents from "./Pages/ManageEvents"
+
 
 function App() {
   return (
@@ -31,7 +33,7 @@ function App() {
           </ProtectedRoute>
           }/>
 {/* normal user booking for an event */}
-        <Route path="/bookings" element={
+        <Route path="/booking" element={
           <ProtectedRoute roles={["user", "manager"]}>
             <BookingPage />
             </ProtectedRoute>
@@ -60,7 +62,14 @@ function App() {
              <SuperAdmin />
           </ProtectedRoute>
     }/> */}
-  
+
+      <Route path="/About" element={
+          <ProtectedRoute roles={["user", "manager"]}>
+            <AboutUs />
+            </ProtectedRoute>
+        }/>
+
+
         </Routes>
       </BrowserRouter>
 

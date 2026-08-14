@@ -1,0 +1,181 @@
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+  position: absolute;
+
+  top: 40px;
+  left: 30px;
+  right: 100px;
+
+  height: 48px;
+
+  border-radius: 17px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 22px;
+
+  z-index: 100;
+}
+
+/* ================================
+   GLASS EFFECT
+================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 8px 30px rgba(30, 0, 70, 0.2);
+}
+
+/* ================================
+   LOGO
+================================ */
+
+/* .logo {
+  width: 70px;
+
+  font-size: 28px;
+  font-weight: bold;
+
+  color: #120020;
+
+  display: flex;
+  align-items: center;
+} */
+
+/* ================================
+   LINKS
+================================ */
+
+.nav-links {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding-left: 15px;
+  padding-right: 10px;
+}
+
+.nav-links a {
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
+  transition: all 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: #e8caff;
+
+  transform: translateY(-2px);
+}
+
+
+
+.profile-button {
+  position: absolute;
+
+  top: -8px;
+  right: -55px;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    0 5px 15px rgba(30, 0, 60, 0.3);
+}
+
+/* Profile head */
+
+.profile-head {
+  width: 11px;
+  height: 11px;
+
+  background: #08000d;
+
+  border-radius: 50%;
+
+  margin-top: 7px;
+}
+
+/* Profile body */
+
+.profile-body {
+  width: 23px;
+  height: 13px;
+
+  background: #08000d;
+
+  border-radius: 15px 15px 0 0;
+
+  margin-top: 3px;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .navbar {
+    right: 30px;
+  }
+
+  .nav-links {
+    gap: 18px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  .logo {
+    width: 45px;
+  }
+}
+
+@media (max-width: 650px) {
+  .navbar {
+    left: 15px;
+    right: 15px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}

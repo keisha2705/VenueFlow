@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { auth } from "../lib/firebase";
 import GoogleMap from "../Components/GoogleMap"
-import "../Styling/ManageVenues.css"
+import "../Styling/ManageVenues.css";
+import Navbar from '../Components/Navbar';
 
 function ManageVenues() {
     const [venues, setVenues] = useState([]);
@@ -136,6 +137,7 @@ function editVenue(venue) {
 }
 return (
     <div className="venues-page">
+        <Navbar/>
         <div className="venues-container">
 
             <div className="venues-header">
