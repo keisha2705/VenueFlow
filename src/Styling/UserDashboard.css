@@ -1,7 +1,7 @@
 .home {
   min-height: 100vh;
   background: white;
-  color: white;
+  color: rgb(0, 0, 0);
   overflow-x: hidden;
 }
 

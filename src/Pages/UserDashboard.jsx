@@ -16,9 +16,7 @@ function UserDashboard() {
         if (!response.ok) {
           throw new Error('Failed to fetch events');
         }
-
         const data = await response.json();
-
         setEvents(data);
       } catch (error) {
         console.error('Error fetching events:', error);
@@ -32,68 +30,37 @@ function UserDashboard() {
   }, []);
 
   return (
-    <div className="home">
+  <div className="home">
+    <Navbar />
+    <section className="hero">
+      <h1 className="hero-title">NOVUS</h1>
+      <p className="hero-text"> Find concerts, fashion shows, and experiences in your city. Browse by category,
+        <br />
+        save your favorites, and book in seconds.
+      </p>
+    </section>
 
-      <Navbar />
-
-     
-      <section className="hero">
-
-        <h1 className="hero-title">
-          NOVUS
-        </h1>
-
-        <p className="hero-text">
-          Find concerts, fashion shows, and experiences in your city.
-          Browse by category,
-          <br />
-          save your favorites, and book in seconds.
-        </p>
-
-      </section>
-
-
-      {/* EVENTS */}
-      <section className="events-container">
-
-        {loading && (
-          <p className="loading">
-            Loading events...
-          </p>
-        )}
-
-        {error && (
-          <p className="error">
-            {error}
-          </p>
-        )}
-
-        {!loading && !error && events.length === 0 && (
-          <p className="no-events">
-            No events available yet.
-          </p>
-        )}
-
-        {!loading && !error && events.length > 0 && (
-          <>
-            <EventSection
-              title="Music"
-              category="Music"
-              events={events}
-            />
-
-            <EventSection
-              title="Fashion Shows"
-              category="Fashion"
-              events={events}
-            />
-          </>
-        )}
-
-      </section>
-
-    </div>
-  );
+    <section className="events-container">
+      {loading && (<p className="loading">Loading events...</p>)}
+      {error && (<p className="error">{error}</p>)}
+      {!loading && !error && events.length === 0 && (<p className="no-events">No events available yet.</p>)}
+      {!loading && !error && events.length > 0 && (
+        <>
+          {events.map((event) => (
+            <div key={event._id}>
+              {event.imageUrl && (
+                <img src={event.imageUrl} alt={event.name}/>
+              )}
+              <h2>{event.name}</h2>
+              <p>{event.description}</p>
+              <p>Date: {event.date}</p>
+              <p>Start Time: {event.startTime}</p>
+            </div>
+          ))}
+        </>
+      )}
+    </section>
+  </div>
+)
 }
-
-export default UserDashboard;
+export default UserDashboard
