@@ -1,0 +1,130 @@
+.manager-page {
+    /* border: 2px solid red; */
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg,#21002f 0%,#3d0061 45%,#08000d 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: white;
+}
+
+.manager-container {
+    width: 100%;
+    /* border: 2px solid red; */
+    /* height: 270px; */
+    /* max-width: 1100px; */
+    padding: 80px;
+    background: rgba(42, 0, 61, 0.6);
+    /* border: 1px solid rgba(190, 92, 255, 0.35); */
+    border-radius: 24px;
+    box-shadow: 0 0 10px rgba(142, 0, 255, 0.5), 
+    inset 0 0 0px rgba(153, 0, 255, 0.5);
+}
+
+.manager-header {
+    /* border: 2px solid red; */
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.manager-header h1 {
+    font-size: 42px;
+    color: #f2dcff;
+}
+
+.manager-header p {
+    margin-top: 15px;
+    color: #c9a9d8;
+}
+
+.manager-cards {
+    /* border: 2px solid red; */
+    display: flex; 
+    justify-content: space-around;
+}
+
+.manager-card {
+    /* border: 2px solid red; */
+    padding: 30px;
+    background: rgba(57, 0, 83, 0.55);
+    border: 1px solid rgba(185, 82, 255, 0.3);
+    border-radius: 18px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.manager-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(190, 86, 255, 0.75);
+    box-shadow:0 10px 35px rgba(133, 0, 255, 0.25);
+}
+
+.manager-card h2 {
+    margin: 14px 0;
+    font-size: 25px;
+    color: #f4e4ff;
+}
+
+.manager-card p {
+    height: 50px;
+    margin-bottom: 25px;
+    color: #bd9ccb;
+    font-size: 15px;
+    line-height: 2;
+}
+
+.manager-button {
+    /* border: 2px solid red; */
+    width: 100%;
+    padding: 13px 20px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient( 90deg, #8b19ff,#6500d9);
+    color: white;
+    font-size: 15px;
+    /* font-weight: bold; */
+    cursor: pointer;
+    transition:transform 0.2s ease, box-shadow 0.2s ease,
+}
+
+.manager-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient( 90deg, #9d32ff,#7610ee);
+    box-shadow: 0 0 20px rgba(144, 0, 255, 0.55);
+}
+
+.manager-button:active {
+    transform: translateY(0);
+}
+
+@media screen and (max-width: 850px) {
+    .manager-container {
+        padding: 35px;
+    }
+    .manager-cards {
+        grid-template-columns: 1fr;
+    }
+    .manager-header h1 {
+        font-size: 34px;
+    }
+}
+
+@media (max-width: 500px) {
+    .manager-page {
+        padding: 20px;
+    }
+    .manager-container {
+        padding: 25px 20px;
+    }
+    .manager-header h1 {
+        font-size: 29px;
+    }
+    .manager-header p {
+        font-size: 14px;
+    }
+    .manager-card {
+        padding: 25px 20px;
+    }
+}

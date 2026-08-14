@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../Styling/BookingPage.css";
+import Navbar from '../Components/Navbar';
 
 export function SeatSelection({ eventId = "101" }) {
   const [eventDetails, setEventDetails] = useState(null);
@@ -61,6 +62,7 @@ export function SeatSelection({ eventId = "101" }) {
 
   return (
     <div className="booking-container">
+      <Navbar/>
       <div className="card-interface">
         <div className="grid-section">
           <h3>Select Your Seats</h3>

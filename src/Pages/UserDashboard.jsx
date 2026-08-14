@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Components/Navbar';
-// import EventSection from '../Components/EventSection';
+import ManageEvents from '../Pages/ManageEvents.jsx';
 import '../Styling/UserDashboard.css';
 
 function UserDashboard() {
@@ -36,7 +36,7 @@ function UserDashboard() {
 
       <Navbar />
 
-      {/* HERO */}
+     
       <section className="hero">
 
         <h1 className="hero-title">

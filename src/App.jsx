@@ -10,6 +10,7 @@ import BookingPage from  "./Pages/BookingPage"
 import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
 import AboutUs from './Pages/AboutUs';
+import ManageEvents from "./Pages/ManageEvents"
 
 
 function App() {
@@ -19,19 +20,19 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthPage />} />
           < Route path="/forgot-password" element = {<ForgotPassword />} />
-
+{/* normal user home page */}
         <Route path="/user" element={
           <ProtectedRoute roles={["user", "manager"]}>
             <UserDashboard />
             </ProtectedRoute>
         }/>
-
+{/* this is for normal user */}
         <Route path="/events" element={
           <ProtectedRoute roles={["user", "manager"]}>
               <Events />
           </ProtectedRoute>
           }/>
-
+{/* normal user booking for an event */}
         <Route path="/bookings" element={
           <ProtectedRoute roles={["user", "manager"]}>
             <BookingPage />
@@ -51,6 +52,11 @@ function App() {
              <ManageVenues />
           </ProtectedRoute>
     }/>  
+        <Route path="/manager/events" element={
+        <ProtectedRoute roles={["manager"]}>
+          <ManageEvents />
+        </ProtectedRoute>
+    }/>
           {/* <Route path="/superAdmin" element={
             <ProtectedRoute roles={["superAdmin"]}>
              <SuperAdmin />

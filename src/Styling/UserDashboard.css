@@ -1,14 +1,11 @@
 .home {
   min-height: 100vh;
-
   background: white;
-
   color: white;
-
   overflow-x: hidden;
 }
 
-/* HERO */
+
 
 .hero {
   min-height: 700px;
@@ -26,11 +23,7 @@
   letter-spacing: -8px;
   color: #5a009f;
   -webkit-text-stroke: 1px rgba(190, 105, 255, 0.35);
-  text-shadow:
-    2px 2px 0 #6e0ab7,
-    4px 4px 0 #6505ac,
-    6px 6px 0 #59009d,
-    8px 8px 12px rgba(38, 0, 70, 0.45);
+  text-shadow:8px 8px 12px rgba(38, 0, 70, 0.45);
 }
 
 .hero-text {
