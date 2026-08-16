@@ -11,7 +11,7 @@ export function SeatSelection({ eventId = "101" }) {
     const fetchLayoutData = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/api/events/${eventId}/seats`,
+          `http://localhost:3000/events/${eventId}/seats`,
         );
         const data = await res.json();
         setEventDetails(data);
@@ -31,13 +31,13 @@ export function SeatSelection({ eventId = "101" }) {
   const handleSeatClick = async (seatId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/events/${eventId}/reserve-seat`,
+        `http://localhost:3000/events/${eventId}/book-seat`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ seatId, userId }),
         },
-      );
+      )
 
       const data = await response.json();
 
