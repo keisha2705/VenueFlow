@@ -9,8 +9,10 @@ import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
-import AboutUs from "./Pages/AboutUs";
-import ManageEvents from "./Pages/ManageEvents";
+import AboutUs from './Pages/AboutUs';
+import ManageEvents from "./Pages/ManageEvents"
+import SuperAdmin from './Pages/SuperAdmin';
+
 
 function App() {
   return (
@@ -58,27 +60,21 @@ function App() {
 
           <Route path="*" element={<PageNotFound />} />
 
-          <Route
-            path="/manager/venues"
-            element={
-              <ProtectedRoute roles={["manager"]}>
-                <ManageVenues />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/manager/events"
-            element={
-              <ProtectedRoute roles={["manager"]}>
-                <ManageEvents />
-              </ProtectedRoute>
-            }
-          />
-          {/* <Route path="/superAdmin" element={
+          <Route path="/manager/venues" element={
+            <ProtectedRoute roles={["manager"]}>
+             <ManageVenues />
+          </ProtectedRoute>
+    }/>  
+        <Route path="/manager/events" element={
+        <ProtectedRoute roles={["manager"]}>
+          <ManageEvents />
+        </ProtectedRoute>
+    }/>
+          <Route path="/superAdmin" element={
             <ProtectedRoute roles={["superAdmin"]}>
              <SuperAdmin />
           </ProtectedRoute>
-    }/> */}
+    }/>
 
           <Route
             path="/About"
