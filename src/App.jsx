@@ -11,6 +11,7 @@ import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents"
+import SuperAdmin from './Pages/SuperAdmin';
 
 
 function App() {
@@ -57,11 +58,11 @@ function App() {
           <ManageEvents />
         </ProtectedRoute>
     }/>
-          {/* <Route path="/superAdmin" element={
+          <Route path="/superAdmin" element={
             <ProtectedRoute roles={["superAdmin"]}>
              <SuperAdmin />
           </ProtectedRoute>
-    }/> */}
+    }/>
 
       <Route path="/About" element={
           <ProtectedRoute roles={["user", "manager"]}>
