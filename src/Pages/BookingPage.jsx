@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Styling/BookingPage.css";
-import Navbar from '../Components/Navbar';
+import Navbar from "../Components/Navbar";
+import { useParams } from "react-router-dom";
 
 export function SeatSelection({ eventId = "101" }) {
   const [eventDetails, setEventDetails] = useState(null);
@@ -8,18 +9,25 @@ export function SeatSelection({ eventId = "101" }) {
   const userId = "user_client_abc123";
 
   useEffect(() => {
+    if (!eventId) return;
+
     const fetchLayoutData = async () => {
       try {
         const res = await fetch(
           `http://localhost:3000/events/${eventId}/seats`,
         );
         const data = await res.json();
-        setEventDetails(data);
 
-        const matchingHolds = data.seats
-          .filter((s) => s.status === "locked" && s.lockedBy === userId)
-          .map((s) => s.id);
-        setSelectedSeats(matchingHolds);
+        //  Ensure data.seats exists before calling methods on it
+        if (data && Array.isArray(data.seats)) {
+          setEventDetails(data);
+          const matchingHolds = data.seats
+            .filter((s) => s.status === "locked" && s.lockedBy === userId)
+            .map((s) => s.id);
+          setSelectedSeats(matchingHolds);
+        } else {
+          console.error("Invalid data structure received:", data);
+        }
       } catch (err) {
         console.error("Layout error", err);
       }
@@ -37,7 +45,7 @@ export function SeatSelection({ eventId = "101" }) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ seatId, userId }),
         },
-      )
+      );
 
       const data = await response.json();
 
@@ -46,7 +54,6 @@ export function SeatSelection({ eventId = "101" }) {
         return;
       }
 
-      // Optimistically toggle seat UI selection state without full layout reload
       if (data.action === "locked") {
         setSelectedSeats((prev) => [...prev, seatId]);
       } else {
@@ -62,7 +69,7 @@ export function SeatSelection({ eventId = "101" }) {
 
   return (
     <div className="booking-container">
-      <Navbar/>
+      <Navbar />
       <div className="card-interface">
         <div className="grid-section">
           <h3>Select Your Seats</h3>
@@ -100,7 +107,11 @@ export function SeatSelection({ eventId = "101" }) {
 }
 
 function BookingPage() {
-  return <SeatSelection eventId="101" />;
+  // Grab the dynamic parameter from the URL path (matching /bookings/:id or /bookings/:_id)
+  const { id } = useParams();
+
+  // Pass the dynamic id into SeatSelection
+  return <SeatSelection eventId={id} />;
 }
 
 export default BookingPage;
