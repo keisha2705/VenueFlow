@@ -5,7 +5,7 @@ import Navbar from '../Components/Navbar';
 
 function ManageEvents() {
   const formRef = useRef(null);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
   const [venues, setVenues] = useState([]);
   const [events, setEvents] = useState([]);
   const [editingEvent, setEditingEvent] = useState(null);
@@ -127,7 +127,8 @@ function ManageEvents() {
     setTimeout(() => {formRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "start",
-    })}, 100);
+    });
+}, 100);
 }
   async function deleteEvent(id) {
     try {
