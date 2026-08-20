@@ -13,23 +13,12 @@ export function SeatSelection({ eventId }) {
   // const userId = "user_client_abc123"; 
 
    useEffect(() => {
-    if (!eventId) return;
-
+    if (!eventId) return
     const fetchLayoutData = async () => {
       try {
         const token = localStorage.getItem("token"); 
-
-        const res = await fetch(
-          `http://localhost:3000/events/${eventId}/seats`,
-          {
-            headers: {
-              "Authorization": `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const res = await fetch(`http://localhost:3000/events/${eventId}/seats`,{headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json"}});
         const data = await res.json();
-
         if (data && Array.isArray(data.seats)) {
           setEventDetails(data);
           const matchingHolds = data.seats
@@ -43,24 +32,15 @@ export function SeatSelection({ eventId }) {
         console.error("Layout error", err);
       }
     };
-
     fetchLayoutData();
-  },  [eventId, selectedSeats.length]);
-
+  }, [eventId, selectedSeats.length]);
 
   const handleSeatClick = async (seatId) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/events/${eventId}/book-seat`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ seatId, userId }),
-        }
-      );
-
+      const response = await fetch(`http://localhost:3000/events/${eventId}/book-seat`,
+        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ seatId, userId }),}
+    );
       const data = await response.json();
-
       if (!response.ok) {
         alert(data.message);
         return;
@@ -76,7 +56,7 @@ export function SeatSelection({ eventId }) {
     }
   };
 
-  // New explicit trigger hitting your updated POST /bookings endpoint
+  // a trigger hitting your updated POST /bookings endpoint
   const handleFinalCheckout = async () => {
     if (selectedSeats.length === 0) {
       alert("Please select at least one seat before confirming.");
@@ -181,5 +161,4 @@ function BookingPage() {
   const { id } = useParams();
   return <SeatSelection eventId={id} />;
 }
-
-export default BookingPage;
+export default BookingPage
