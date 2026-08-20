@@ -8,7 +8,7 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
-import Events from "./Pages/Events";
+// import Events from "./Pages/Events";
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents"
 import SuperAdmin from './Pages/SuperAdmin';
@@ -33,14 +33,14 @@ function App() {
             }
           />
           {/* this is for normal user */}
-          <Route
+          {/* <Route
             path="/events"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
                 <Events />
               </ProtectedRoute>
             }
-          />
+          /> */}
           {/* normal user booking for an event */}
           <Route
             path="/bookings/:id"
