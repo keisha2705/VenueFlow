@@ -1,0 +1,321 @@
+/* * {
+  box-sizing: border-box;
+}
+
+.application-page {
+  min-height: 100vh;
+  background: #f5f3f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.application-card {
+  width: 100%;
+  max-width: 750px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+.application-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.application-header h1 {
+  margin: 0 0 10px;
+  color: #18121f;
+  font-size: 32px;
+}
+
+.application-header p {
+  margin: 0;
+  color: #6b6472;
+  font-size: 15px;
+}
+
+.application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #18121f;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #d8d2df;
+  border-radius: 9px;
+  padding: 13px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #ffffff;
+  color: #18121f;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #9b95a2;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #7b2cbf;
+  box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-button {
+  border: none;
+  border-radius: 9px;
+  padding: 14px 20px;
+  margin-top: 5px;
+  background: #7b2cbf;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+  background: #5a189a;
+  transform: translateY(-1px);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 650px) {
+  .application-card {
+    padding: 28px 22px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .application-header h1 {
+    font-size: 26px;
+  }
+} */
+
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+
+.application-page {
+  min-height: 100vh;
+  background: #10051a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Main card */
+.application-card {
+  width: 100%;
+  /* max-width: 750px; */
+  background: #160b20;
+  border: 1px solid #4b1f68;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.6),
+    0 0 35px rgba(123, 44, 191, 0.12);
+}
+
+/* Header */
+.application-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.application-header h1 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+.application-header p {
+  margin: 0;
+  color: #b9a8c4;
+  font-size: 15px;
+}
+
+/* Form */
+.application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #e9d5ff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Inputs */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #4b1f68;
+  border-radius: 9px;
+  padding: 13px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #0d0712;
+  color: #ffffff;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #76627f;
+}
+
+/* Input focus */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #a855f7;
+  background: #12091a;
+  box-shadow:
+    0 0 0 3px rgba(168, 85, 247, 0.15),
+    0 0 15px rgba(168, 85, 247, 0.12);
+}
+
+/* Select dropdown */
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group select option {
+  background: #160b20;
+  color: #ffffff;
+}
+
+/* Textarea */
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Submit button */
+.submit-button {
+  border: 1px solid #a855f7;
+  border-radius: 9px;
+  padding: 14px 20px;
+  margin-top: 5px;
+
+  background: linear-gradient(
+    135deg,
+    #7b2cbf,
+    #a855f7
+  );
+
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 20px rgba(123, 44, 191, 0.35);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.submit-button:hover {
+  background: linear-gradient(
+    135deg,
+    #9d4edd,
+    #c084fc
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 25px rgba(168, 85, 247, 0.45);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .application-page {
+    padding: 25px 15px;
+  }
+
+  .application-card {
+    padding: 28px 22px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .application-header h1 {
+    font-size: 26px;
+  }
+}

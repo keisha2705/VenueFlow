@@ -12,6 +12,8 @@ import Events from "./Pages/Events";
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents"
 import SuperAdmin from './Pages/SuperAdmin';
+import ApplicationForm from './Pages/ApplicationForm';
+// import emailjs from "./pages/@emailjs/browser";
 
 
 function App() {
@@ -84,7 +86,16 @@ function App() {
               </ProtectedRoute>
             }
           />
-        </Routes>
+
+           <Route
+            path="/Application"
+            element={
+              <ProtectedRoute roles={["user"]}>
+                <ApplicationForm />
+              </ProtectedRoute>
+            }
+          />
+          </Routes>
       </BrowserRouter>
     </>
   );

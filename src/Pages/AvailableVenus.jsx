@@ -8,4 +8,16 @@
 // HomePage(Different Venues)
 // About Page/Contact Us
 
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import ProtectedRoute from "./Components/ProtectedRoute";
+
+export function AvailableVenues() {
+    return(
+        <div>hello</div>
+    );
+}
+
+export default AvailableVenues;
+
 
