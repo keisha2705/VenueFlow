@@ -11,6 +11,7 @@ import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
 import AboutUs from "./Pages/AboutUs";
 import ManageEvents from "./Pages/ManageEvents";
+import BookingHistory from './Pages/BookingHistory'; // Safely imported
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          
           {/* normal user home page */}
           <Route
             path="/user"
@@ -28,6 +30,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
           {/* this is for normal user */}
           <Route
             path="/events"
@@ -37,12 +40,24 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* normal user booking for an event */}
+          
+          {/* normal user booking for a specific event id */}
           <Route
             path="/bookings/:id"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
                 <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* 🛠️ FIXED: Added the missing Booking History route. 
+              Protected it so only logged-in users and managers can see it. */}
+          <Route
+            path="/BookingHistory"
+            element={
+              <ProtectedRoute roles={["user", "manager"]}>
+                <BookingHistory />
               </ProtectedRoute>
             }
           />
@@ -56,8 +71,6 @@ function App() {
             }
           />
 
-          <Route path="*" element={<PageNotFound />} />
-
           <Route
             path="/manager/venues"
             element={
@@ -66,6 +79,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
           <Route
             path="/manager/events"
             element={
@@ -74,6 +88,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           {/* <Route path="/superAdmin" element={
             <ProtectedRoute roles={["superAdmin"]}>
              <SuperAdmin />
@@ -81,13 +96,16 @@ function App() {
     }/> */}
 
           <Route
-            path="/About"
+            path="/about"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
                 <AboutUs />
               </ProtectedRoute>
             }
           />
+
+          {/* This wildcard 404 catcher MUST stay at the very bottom of the tree */}
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </>
