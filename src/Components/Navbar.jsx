@@ -18,7 +18,6 @@ function Navbar() {
         <a href="/application">Application Form</a>
         <a href="/">Dashboard</a>
         <a href="/about">About Us</a>
-        <a href="booking">BookingPage</a>
       </div>
 
       {/* Profile */}

@@ -11,6 +11,8 @@ import ManageVenues from "./Pages/ManageVenues";
 import Events from "./Pages/Events";
 import AboutUs from "./Pages/AboutUs";
 import ManageEvents from "./Pages/ManageEvents";
+import AvailableVenus from "./Pages/AvailableVenus";
+
 
 function App() {
   return (
@@ -28,12 +30,12 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* this is for normal user */}
+          
           <Route
             path="/events"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
-                <Events />
+                <AvailableVenus/>
               </ProtectedRoute>
             }
           />

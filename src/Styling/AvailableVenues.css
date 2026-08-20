@@ -1,0 +1,123 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.Hero-image{
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+ background-image: url("/assets/hero.jpg");
+  display: flex;
+  flex-direction: column;     
+  justify-content: center;   
+  align-items: center;       
+  text-align: center;        
+  padding: 20px;  
+ 
+  
+}
+
+.text{
+  
+ font-size: 4rem;            
+  font-weight: 800;           
+  color: #ffffff;            
+  margin-bottom: 1rem;       
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); 
+}
+
+.buttons{
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(135deg,#16001f,#25003d,#100014);
+  color: rgb(44, 4, 4);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 20px;
+  /* text-align: end; */
+}
+
+.Hero-Two{
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+ background-image: url("/assets/hero3.avif");
+  display: flex;
+  flex-direction: column;     
+  justify-content: center;   
+  align-items: center;       
+  text-align: center;        
+  padding: 20px;   
+  border-radius: 20px; 
+}
+
+
+/* Clean Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 1. Main Section Container */
+.content-wrapper {
+    display: flex;
+  width: 100%;
+  min-height: 70vh;
+  flex-wrap: wrap;
+}
+
+
+.left-side {
+    width: 100%;
+}
+
+.left-side img {
+   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 9px;       
+}
+
+.right-side {
+   flex: 1;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  padding: 60px;
+  background: #f8f8f8;
+  border-radius: 10px;    
+}
+
+
+.right-side p {
+  font-size: 17px;
+  line-height: 3;
+}
+
+@media (min-width: 768px) {
+    .content-wrapper {
+        flex-direction: row;   
+    }
+
+    .left-side {
+        width: 50%;            /* Strict 50% split for the image container */
+        flex-shrink: 0;
+    }
+
+    .right-side {
+        width: 50%;            /* Strict 50% split for the text container */
+        padding-left: 20px;    /* Adds clear layout spacing right before the text starts */
+        flex-shrink: 0;
+    }
+}
