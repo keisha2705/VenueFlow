@@ -7,7 +7,7 @@ function Navbar() {
 
       {/* Logo */}
       <div className="logo">
-        eshek
+        <img src="/assets/LOGO.png"/>
       </div>
 
     
@@ -18,11 +18,6 @@ function Navbar() {
         <a href="/application">Application Form</a>
         <a href="/">Dashboard</a>
         <a href="/about">About Us</a>
-      </div>
-
-      {/* Profile */}
-      <div className="profile-button">
-       pfp
       </div>
 
     </nav>

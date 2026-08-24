@@ -12,7 +12,7 @@ import Events from "./Pages/Events";
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents"
 import SuperAdmin from './Pages/SuperAdmin';
-
+import AvailableVenues from "./Pages/AvailableVenus";
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
             path="/events"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
-                <AvailableVenus/>
+                <AvailableVenues/>
               </ProtectedRoute>
             }
           />
