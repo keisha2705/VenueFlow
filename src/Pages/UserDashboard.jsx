@@ -41,7 +41,7 @@ function UserDashboard() {
       
     
       <section className="hero">
-        <h1 className="hero-title">NOVUS</h1>
+        <h1 className="hero-title">NOVUS.</h1>
         <p className="hero-text">
           Find concerts, fashion shows, and experiences in your city.
           Browse by category, save your favorites, and book in seconds.

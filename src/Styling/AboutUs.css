@@ -5,7 +5,7 @@
 }
 
 .about-hero {
-  min-height: 600px;
+  min-height:100vh;
   display: flex;
   align-items: center;
   padding: 180px 8% 100px;
