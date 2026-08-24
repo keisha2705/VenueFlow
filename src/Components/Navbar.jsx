@@ -13,8 +13,8 @@ function Navbar() {
         <a href="/application">Application Form</a>
         <a href="/">Dashboard</a>
         <a href="/about">About Us</a>
-        <a href="booking">Booking Page</a>
       </div>
+
     </nav>
   )
 }

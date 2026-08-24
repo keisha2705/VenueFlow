@@ -12,6 +12,7 @@ import ManageVenues from "./Pages/ManageVenues";
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents"
 import SuperAdmin from './Pages/SuperAdmin';
+import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
 // import emailjs from "./pages/@emailjs/browser";
 
@@ -32,12 +33,12 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* this is for normal user */}
-          {/* <Route
+          
+          <Route
             path="/events"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
-                <Events />
+                <AvailableVenues/>
               </ProtectedRoute>
             }
           /> */}
