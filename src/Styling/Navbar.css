@@ -1,4 +1,3 @@
-
 .navbar {
   position: absolute;
 
@@ -18,9 +17,7 @@
   z-index: 100;
 }
 
-/* ================================
-   GLASS EFFECT
-================================ */
+
 
 .glass {
   background: rgba(255, 255, 255, 0.1);
@@ -35,11 +32,9 @@
     0 8px 30px rgba(30, 0, 70, 0.2);
 }
 
-/* ================================
-   LOGO
-================================ */
 
-/* .logo {
+
+.logo {
   width: 70px;
 
   font-size: 28px;
@@ -49,11 +44,9 @@
 
   display: flex;
   align-items: center;
-} */
+}
 
-/* ================================
-   LINKS
-================================ */
+
 
 .nav-links {
   display: flex;
@@ -118,7 +111,6 @@
     0 5px 15px rgba(30, 0, 60, 0.3);
 }
 
-/* Profile head */
 
 .profile-head {
   width: 11px;
@@ -144,9 +136,6 @@
   margin-top: 3px;
 }
 
-/* ================================
-   RESPONSIVE
-================================ */
 
 @media (max-width: 900px) {
   .navbar {

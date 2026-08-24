@@ -8,9 +8,10 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
+import AboutUs from "./Pages/AboutUs";
+import ManageEvents from "./Pages/ManageEvents";
+import BookingHistory from './Pages/BookingHistory';
 // import Events from "./Pages/Events";
-import AboutUs from './Pages/AboutUs';
-import ManageEvents from "./Pages/ManageEvents"
 import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          
           {/* normal user home page */}
           <Route
             path="/user"
@@ -48,6 +50,14 @@ function App() {
             element={
               <ProtectedRoute roles={["user", "manager"]}>
                 <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/BookingHistory"
+            element={
+              <ProtectedRoute roles={["user", "manager"]}>
+                <BookingHistory />
               </ProtectedRoute>
             }
           />
@@ -80,14 +90,13 @@ function App() {
     }/>
 
           <Route
-            path="/About"
+            path="/about"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
                 <AboutUs />
               </ProtectedRoute>
             }
           />
-
            <Route
             path="/Application"
             element={
@@ -97,6 +106,7 @@ function App() {
             }
           />
           </Routes>
+
       </BrowserRouter>
     </>
   );
