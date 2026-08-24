@@ -30,7 +30,7 @@ function App() {
           <Route
             path="/user"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <UserDashboard />
               </ProtectedRoute>
             }
@@ -39,7 +39,7 @@ function App() {
           <Route
             path="/events"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <AvailableVenues/>
               </ProtectedRoute>
             }
@@ -48,7 +48,7 @@ function App() {
           <Route
             path="/bookings/:id"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager","superAdmin"]}>
                 <BookingPage />
               </ProtectedRoute>
             }
@@ -56,7 +56,7 @@ function App() {
           <Route
             path="/BookingHistory"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <BookingHistory />
               </ProtectedRoute>
             }
@@ -65,7 +65,7 @@ function App() {
           <Route
             path="/manager"
             element={
-              <ProtectedRoute roles={["manager"]}>
+              <ProtectedRoute roles={["manager","superAdmin"]}>
                 <Manager />
               </ProtectedRoute>
             }
@@ -74,12 +74,12 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
 
           <Route path="/manager/venues" element={
-            <ProtectedRoute roles={["manager"]}>
+            <ProtectedRoute roles={["manager", "superAdmin"]}>
              <ManageVenues />
           </ProtectedRoute>
     }/>  
         <Route path="/manager/events" element={
-        <ProtectedRoute roles={["manager"]}>
+        <ProtectedRoute roles={["manager", "superAdmin"]}>
           <ManageEvents />
         </ProtectedRoute>
     }/>
@@ -92,7 +92,7 @@ function App() {
           <Route
             path="/about"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <AboutUs />
               </ProtectedRoute>
             }
@@ -100,7 +100,7 @@ function App() {
            <Route
             path="/Application"
             element={
-              <ProtectedRoute roles={["user"]}>
+              <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
                 <ApplicationForm />
               </ProtectedRoute>
             }

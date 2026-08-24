@@ -10,13 +10,13 @@
 .hero {
   min-height: 100vh;
   padding: 230px 30px 100px;
-   background: linear-gradient(135deg,#16001f,#25003d,#100014);  
+  background: linear-gradient(135deg,#16001f,#25003d,#100014);  
   
 }
 
 .hero-title {
   margin: 0;
-  font-size: 3000%;
+  font-size: 2000%;
   line-height: 0.8;
   text-align: center;
   font-weight: 900;
