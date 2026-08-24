@@ -8,11 +8,14 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
-import Events from "./Pages/Events";
+// import Events from "./Pages/Events";
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents"
 import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
+import ApplicationForm from './Pages/ApplicationForm';
+// import emailjs from "./pages/@emailjs/browser";
+
 
 function App() {
   return (
@@ -38,7 +41,7 @@ function App() {
                 <AvailableVenues/>
               </ProtectedRoute>
             }
-          />
+          /> */}
           {/* normal user booking for an event */}
           <Route
             path="/bookings/:id"
@@ -84,7 +87,16 @@ function App() {
               </ProtectedRoute>
             }
           />
-        </Routes>
+
+           <Route
+            path="/Application"
+            element={
+              <ProtectedRoute roles={["user"]}>
+                <ApplicationForm />
+              </ProtectedRoute>
+            }
+          />
+          </Routes>
       </BrowserRouter>
     </>
   );

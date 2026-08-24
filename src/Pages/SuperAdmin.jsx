@@ -13,7 +13,7 @@ function SuperAdmin() {
   const [role, setRole] = useState("manager");
 
   useEffect(() => {
-    getUsers()
+    getUsers();
   }, []);
 
   async function getUsers() {
