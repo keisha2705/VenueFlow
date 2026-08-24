@@ -4,7 +4,7 @@ import '../Styling/Navbar.css';
 function Navbar() {
   return (
     <nav className="navbar glass">
-      <div className="logo"><img src="./LOGO.png"/></div>
+      <div className="logo"><img src="/assets/LOGO.png"/></div>
 
       <div className="nav-links">
         <a href="/user">Home</a>
@@ -13,8 +13,8 @@ function Navbar() {
         <a href="/application">Application Form</a>
         <a href="/">Dashboard</a>
         <a href="/about">About Us</a>
+        <a href="/booking">Booking Page</a>
       </div>
-
     </nav>
   )
 }
