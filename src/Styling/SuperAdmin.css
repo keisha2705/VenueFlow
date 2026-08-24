@@ -1,231 +1,482 @@
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Poppins, sans-serif;
-}
-
 .superadmin-container {
+    /* border: 2px solid red; */
     min-height: 100vh;
-    background: #f5f5f5;
-    padding: 30px 50px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 35px 45px 50px;
+    background: #f0e7f8;
+    color: #22222b;
 }
 
-/* title */
 .superadmin-container h1 {
-    color: #5D1578;
-    font-size: 35px;
-    margin-bottom: 10px;
+    /* border: 2px solid red; */
+    margin: 65px 0 7px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #050505;
 }
 
-.superadmin-container p {
-    color: #555;
-    margin-bottom: 30px;
-}
-
-/* logout button*/
-.superadmin-container > button {
-    background: #7016A3;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    padding: 10px 25px;
+.superadmin-container > p {
+    margin: 0 0 28px;
     font-size: 15px;
-    cursor: pointer;
-    float: right;
-    margin-top: -65px;
-}
-
-.superadmin-container button:hover {
-    background: #4f0f74;
+    color: #1c1c1d;
 }
 
 .superadmin-container h2 {
-    color: #333;
-    font-size: 25px;
-    margin-bottom: 15px;
+    margin: 0 0 15px;
+    font-size: 19px;
+    font-weight: 650;
+    color: #292934;
 }
 
-
-table {
+.superadmin-container table {
     width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border: 1px solid #e8e5ee;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 12px rgba(60, 40, 90, 0.04);
+    /* table-layout: fixed; */
 }
 
-thead {
-    background: #7016A3;
-    color: white;
+.superadmin-container thead {
+    background: #ffffff;
 }
 
-th {
-    padding: 15px;
+.superadmin-container th {
+    padding: 14px 18px;
     text-align: left;
-    font-size: 16px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: none;
+    color: #656470;
+    border-bottom: 1px solid #e9e7ef;
 }
 
-td {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    color: #333;
+.superadmin-container th:nth-child(1) {
+    width: 25%;
 }
 
-tbody tr:hover {
-    background: #f3eafa;
+.superadmin-container th:nth-child(2) {
+    width: 32%;
 }
 
-tbody tr:last-child td {
+.superadmin-container th:nth-child(3) {
+    width: 17%;
+}
+
+.superadmin-container th:nth-child(4) {
+    width: 26%;
+}
+
+.superadmin-container td {
+    padding: 14px 18px;
+    font-size: 12px;
+    color: #33333d;
+    border-bottom: 1px solid #ebe9f0;
+    vertical-align: middle;
+}
+
+.superadmin-container tbody tr:nth-child(even) {
+    background: #faf7ff;
+}
+
+.superadmin-container tbody tr:nth-child(odd) {
+    background: #ffffff;
+}
+.superadmin-container tbody tr:hover {
+    background: #f4effd;
+    transition: background 0.15s ease;
+}
+
+.superadmin-container tbody tr:last-child td {
     border-bottom: none;
 }
-
-td:last-child {
-    font-weight: bold;
-    color: #7016A3;
+.superadmin-container tbody tr td[colspan] {
+    padding: 35px 20px;
+    text-align: center;
+    color: #9996a3;
+    font-size: 12px;
 }
 
-/* The modal part (button)*/
-.add-button {
-    /* border: 2px solid red; */
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-    width: 60px;
-    height: 60px;
-    /* border: none; */
-    border-radius: 50%;
-    background: #7016A3;
-    color: white;
-    font-size: 32px;
+.superadmin-container td:nth-child(3) {
+    font-weight: 600;
+}
+
+.superadmin-container td:nth-child(3) {
+    color: #7d48b4;
+}
+/* Action */
+.superadmin-container th:nth-child(4),.superadmin-container td:nth-child(4) {
+    text-align: left;
+}
+
+.superadmin-container td:nth-child(4) span {
+    color: #aaa7b2;
+    font-size: 11px;
+}
+.remove-role-button {
+    border: 1px solid #e5dfe9;
+    background: #ffffff;
+    color: #55515d;
+    padding: 6px 12px;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 600;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* z-index: 100; */
+}
+
+.remove-role-button:hover {
+    background: #f4eefe;
+    border-color: #d8b9ef;
+    color: #713ba1;
+    transform: translateY(-1px);
+}
+
+.remove-role-button:active {
+    transform: translateY(0);
+}
+
+.add-button {
+    position: fixed;
+    right: 42px;
+    bottom: 35px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: #c967e8;
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 300;
+    line-height: 44px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(174, 79, 213, 0.25);
 }
 
 .add-button:hover {
-    background: #4f0f74;
+    background: #b856d8;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(174, 79, 213, 0.32);
 }
 
-/* the modal (popup) part */
+.add-button:active {
+    transform: translateY(0);
+}
+
+.profile-button {
+    position: fixed;
+    top: 30px;
+    right: 42px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid #e4ddea;
+    background: #ffffff;
+    color: #55505f;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(70, 50, 90, 0.08);
+    z-index: 20;
+}
+
+.profile-button:hover {
+    background: #f4eafa;
+    color: #8b43ae;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(70, 50, 90, 0.12);
+}
+
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    inset: 0;
+    background: rgba(38, 30, 48, 0.32);
     display: flex;
-    justify-content: center;
     align-items: center;
-    /* z-index: 1000; */
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
 }
 
 .modal {
-    width: 420px;
-    background: white;
+    width: 100%;
+    max-width: 430px;
+    box-sizing: border-box;
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    background: #ffffff;
+    border: 1px solid #e8e2ed;
+    border-radius: 14px;
+    box-shadow: 0 18px 50px rgba(55, 35, 75, 0.18);
 }
 
 .modal h2 {
-    color: #5D1578;
-    margin-bottom: 10px;
+    margin: 0 0 8px;
+    font-size: 21px;
+    color: #292631;
 }
 
 .modal p {
-    color: #666;
-    margin-bottom: 25px;
+    margin: 0 0 23px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #8b8791;
 }
 
 .modal label {
     display: block;
-    margin-top: 15px;
-    margin-bottom: 6px;
-    font-weight: bold;
+    margin: 0 0 7px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #55515d;
 }
 
-.modal input, .modal select {
+.modal input,.modal select {
     width: 100%;
-    height: 45px;
-    border: 2px solid #ddd;
-    border-radius: 25px;
-    padding: 0 15px;
-    font-size: 15px;
+    box-sizing: border-box;
+    height: 39px;
+    margin-bottom: 17px;
+    padding: 0 12px;
+    border: 1px solid #e1dce6;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #33313a;
+    font-size: 12px;
     outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.modal input:focus,
-.modal select:focus {
-    border-color: #7016A3;
+.modal input::placeholder {
+    color: #aaa6af;
 }
 
-.modal button {
-    margin-top: 25px;
-    height: 45px;
+.modal input:focus,.modal select:focus {
+    border-color: #c879e5;
+    box-shadow: 0 0 0 3px rgba(200, 121, 229, 0.12);
+}
+
+.modal button:not(.cancel) {
+    width: 100%;
+    height: 39px;
     border: none;
-    border-radius: 25px;
-    padding: 0 25px;
-    background: #7016A3;
-    color: white;
-    font-size: 15px;
+    border-radius: 7px;
+    background: #c967e8;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
     cursor: pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
 }
 
-.modal button:hover {
-    background: #4f0f74;
+.modal button:not(.cancel):hover {
+    background: #b856d8;
+    transform: translateY(-1px);
 }
 
-.modal button + button {
-    margin-left: 10px;
-    background: #777;
+.modal .cancel {
+    width: 100%;
+    height: 39px;
+    margin-top: 9px;
+    border: 1px solid #e1dce6;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #696571;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.modal button + button:hover {
-    background: #555;
+.modal .cancel:hover {
+    background: #f8f6fa;
+    border-color: #d6d0dc;
 }
 
-@media screen and (max-width: 768px) {
+.profile-modal {
+    width: 100%;
+    max-width: 390px;
+    box-sizing: border-box;
+    padding: 32px;
+    background: #ffffff;
+    border: 1px solid #e7e1ed;
+    border-radius: 15px;
+    box-shadow: 0 18px 50px rgba(55, 35, 75, 0.18);
+    text-align: center;
+    animation: modalAppear 0.2s ease-out;
+}
+
+.profile-icon-large {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4e9fb;
+    border: 1px solid #ead8f3;
+    font-size: 31px;
+}
+
+.profile-modal h2 {
+    margin: 0 0 25px;
+    font-size: 21px;
+    color: #292631;
+}
+
+.profile-info {
+    width: 100%;
+    margin-bottom: 23px;
+    border: 1px solid #ebe6ef;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;}
+
+.profile-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 15px;
+    background: #ffffff;
+    border-bottom: 1px solid #eeeaf2;
+}
+
+.profile-row:last-child {
+    border-bottom: none;
+}
+
+.profile-row:nth-child(even) {
+    background: #faf7ff;
+}
+
+.profile-row strong {
+    flex-shrink: 0;
+    font-size: 11px;
+    color: #77727f;
+}
+
+.profile-row span {
+    max-width: 65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+    color: #37343d;
+    text-align: right;
+}
+
+.profile-role {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #f2e7ff;
+    color: #7c42b2;
+    font-size: 10px ;
+    font-weight: 600;
+}
+
+.profile-modal .cancel {
+    width: 100%;
+    height: 39px;
+    border: 1px solid #e0dbe5;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #68636f;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.profile-modal .cancel:hover {
+    background: #f8f5fa;
+    border-color: #d3cbd9;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media screen and (max-width: 800px) {
+
     .superadmin-container {
-        padding: 25px 20px;
+        padding: 25px 20px 45px;
     }
+
     .superadmin-container h1 {
-        font-size: 28px;
+        font-size: 25px;
     }
-    .superadmin-container > button {
-        float: none;
-        margin-top: 0;
-        margin-bottom: 25px;
+
+    .profile-button {
+        top: 22px;
+        right: 20px;
     }
-    table {
-        font-size: 14px;
+
+    .superadmin-container table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
-    th, td {
-        padding: 10px;
+
+    .superadmin-container th,.superadmin-container td {
+        padding: 12px 14px;
+    }
+
+    .add-button {
+        right: 22px;
+        bottom: 22px;
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 520px) {
+
     .superadmin-container {
-        padding: 20px 15px;
+        padding: 20px 12px 40px;
     }
+
     .superadmin-container h1 {
-        font-size: 24px;
+        padding-right: 50px;
+        font-size: 22px;
     }
-    .superadmin-container p {
-        font-size: 14px;
+
+    .superadmin-container > p {
+        font-size: 11px;
     }
+
     .superadmin-container h2 {
-        font-size: 20px;
+        font-size: 17px;
     }
-    table {
-        font-size: 12px;
+
+    .modal,.profile-modal {
+        padding: 24px 20px;
     }
-    th, td {
-        padding: 8px;
+
+    .profile-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
     }
-} 
+
+    .profile-row span {
+        max-width: 100%;
+        text-align: left;
+    } 
+}
