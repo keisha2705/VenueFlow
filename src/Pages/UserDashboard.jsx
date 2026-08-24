@@ -53,7 +53,6 @@ function UserDashboard() {
           <h2 className="section-heading">Featured Experiences</h2>
         </div>
 
-<br></br>
         {error && <p className="error">{error}</p>}
         {!loading && !error && events.length === 0 && (
           <p className="no-events">No events available right now.</p>

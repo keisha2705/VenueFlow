@@ -40,16 +40,11 @@ function SignIn({ showSignup }) {
       const token = await userCredential.user.getIdToken();
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("userRole", data.role);
 
       alert("Welcome Back!");
-
-      if (data.role === "user") {
-        navigate("/user");
-      } else if (data.role === "manager") {
-        navigate("/manager");
-      } else if (data.role === "superAdmin") {
-        navigate("/superAdmin");
-      }
+    navigate("/user")
+    
     } catch (error) {
       alert(error.message);
     }
