@@ -100,10 +100,6 @@ button {
     margin-top: 10px;
 }
 
-.searching{
-    border: 2px solid red;
-}
-
 .primary-button,.secondary-button {
     padding: 12px 25px;
     border-radius: 7px;
@@ -134,15 +130,15 @@ button {
 }
 
 .venues-grid {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: grid;
     grid-template-columns:repeat(3, 1fr);
     gap: 25px;
 }
 .venue-card {
-  border: 2px solid red;
+  /* border: 2px solid red; */
     background: rgba(35, 0, 50, 0.85);
-    /* border: 1px solid #662092; */
+    border: 1px solid #662092;
     border-radius: 15px;
     padding: 25px;
 }

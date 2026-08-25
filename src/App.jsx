@@ -8,9 +8,10 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
+import AboutUs from "./Pages/AboutUs";
+import ManageEvents from "./Pages/ManageEvents";
+import BookingHistory from './Pages/BookingHistory';
 // import Events from "./Pages/Events";
-import AboutUs from './Pages/AboutUs';
-import ManageEvents from "./Pages/ManageEvents"
 import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
@@ -24,11 +25,12 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          
           {/* normal user home page */}
           <Route
             path="/user"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <UserDashboard />
               </ProtectedRoute>
             }
@@ -37,7 +39,7 @@ function App() {
           <Route
             path="/events"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <AvailableVenues/>
               </ProtectedRoute>
             }
@@ -46,8 +48,16 @@ function App() {
           <Route
             path="/bookings/:id"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager","superAdmin"]}>
                 <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/BookingHistory"
+            element={
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+                <BookingHistory />
               </ProtectedRoute>
             }
           />
@@ -55,7 +65,7 @@ function App() {
           <Route
             path="/manager"
             element={
-              <ProtectedRoute roles={["manager"]}>
+              <ProtectedRoute roles={["manager","superAdmin"]}>
                 <Manager />
               </ProtectedRoute>
             }
@@ -64,12 +74,12 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
 
           <Route path="/manager/venues" element={
-            <ProtectedRoute roles={["manager"]}>
+            <ProtectedRoute roles={["manager", "superAdmin"]}>
              <ManageVenues />
           </ProtectedRoute>
     }/>  
         <Route path="/manager/events" element={
-        <ProtectedRoute roles={["manager"]}>
+        <ProtectedRoute roles={["manager", "superAdmin"]}>
           <ManageEvents />
         </ProtectedRoute>
     }/>
@@ -80,23 +90,23 @@ function App() {
     }/>
 
           <Route
-            path="/About"
+            path="/about"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <AboutUs />
               </ProtectedRoute>
             }
           />
-
            <Route
             path="/Application"
             element={
-              <ProtectedRoute roles={["user"]}>
+              <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
                 <ApplicationForm />
               </ProtectedRoute>
             }
           />
           </Routes>
+
       </BrowserRouter>
     </>
   );
