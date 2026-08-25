@@ -52,9 +52,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-
-          {/* 🛠️ FIXED: Added the missing Booking History route. 
-              Protected it so only logged-in users and managers can see it. */}
           <Route
             path="/BookingHistory"
             element={
