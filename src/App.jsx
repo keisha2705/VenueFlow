@@ -89,20 +89,16 @@ function App() {
           </ProtectedRoute>
     }/>
 
-          <Route
-            path="/about"
-            element={
-              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
-                <AboutUs />
-              </ProtectedRoute>
+          <Route path="/about" element={
+            <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+              <AboutUs />
+            </ProtectedRoute>
             }
           />
-           <Route
-            path="/Application"
-            element={
-              <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
-                <ApplicationForm />
-              </ProtectedRoute>
+           <Route path="/Application" element={
+            <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
+              <ApplicationForm />
+            </ProtectedRoute>
             }
           />
           </Routes>

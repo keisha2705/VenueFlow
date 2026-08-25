@@ -1,5 +1,5 @@
 import { APIProvider, Map, AdvancedMarker, useMapsLibrary} from "@vis.gl/react-google-maps";
-import { useEffect, useRef } from "react";
+import { useState,useEffect, useRef } from "react";
 
 function PlaceSearch({ onPlaceSelected }) {
     const places = useMapsLibrary("places");
@@ -14,10 +14,6 @@ function PlaceSearch({ onPlaceSelected }) {
         );
         autocomplete.addListener("place_changed", () => {
             const place = autocomplete.getPlace();
-            if (!place.geometry || !place.geometry.location) {
-                alert("Please select a location from the suggestions.");
-                return;
-            }
             const selectedPlace = {
                 name: place.name,
                 address: place.formatted_address,
@@ -34,15 +30,26 @@ function PlaceSearch({ onPlaceSelected }) {
 }
 
 function GoogleMap({ latitude, longitude, onPlaceSelected}) {
-    const position = latitude !== null && longitude !== null
-            ? {
-                lat: latitude,
-                lng: longitude
-            }
-            : {
-                lat: -33.9249,
-                lng: 18.4241
-            };
+    const position = latitude !== null && longitude !== null? {lat: latitude,lng: longitude}
+    : {lat: -33.9249,lng: 18.4241}
+    
+    const [userLocation, setUserLocation] = useState(null);
+useEffect(() => {
+  if (!navigator.geolocation) {
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      setUserLocation({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    },
+    (error) => {
+      console.error("Location error:", error);
+    }
+  );
+}, []);
 
     return (
         <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
