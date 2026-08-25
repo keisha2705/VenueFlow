@@ -25,13 +25,13 @@
   height: 80px;
 }
 
-.logo {
+.logopic {
   display: flex;
   align-items: center;
   height: 100%;
 }
 
-.logo img {
+.logopic img {
   height: 100px;
   width: auto;
   object-fit: contain;

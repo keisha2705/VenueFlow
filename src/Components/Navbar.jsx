@@ -38,7 +38,7 @@ function Navbar() {
   return (
     <>
       <nav className="navbar glass">
-        <div className="logo"><img src="/assets/LOGO.png"/></div>
+        <div className="logopic"><img src="/assets/LOGO.png"/></div>
         <div className="nav-links">
           <Link to="/user">Home</Link>
           <Link to="/events">All Events</Link>

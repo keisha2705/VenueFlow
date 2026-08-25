@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import "../Styling/ApplicationForm.css";
+import Navbar from "../Components/Navbar"
 
 export function ApplicationForm() {
   const [formData, setFormData] = useState({
@@ -53,7 +54,7 @@ export function ApplicationForm() {
   return (
 
     <div className="application-ppage">
-            {/* <Navbar /> */}
+      <Navbar />
       <div className="application-card">
         <div className="application-header">
           <h1>Manager Application</h1>
