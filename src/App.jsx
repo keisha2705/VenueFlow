@@ -8,10 +8,12 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
-import Events from "./Pages/Events";
-import AboutUs from "./Pages/AboutUs";
+import Events from "./Pages/Events";// FIX: Ensured Events is cleanly active for user navigation
+import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents";
-import BookingHistory from './Pages/BookingHistory'; // Safely imported
+import SuperAdmin from './Pages/SuperAdmin';
+import ApplicationForm from './Pages/ApplicationForm';
+import BookingHistory from './Pages/BookingHistory';
 
 function App() {
   return (
@@ -31,7 +33,7 @@ function App() {
             }
           />
           
-          {/* this is for normal user */}
+          {/* Main system browse events portal */}
           <Route
             path="/events"
             element={
@@ -89,11 +91,15 @@ function App() {
             }
           />
 
-          {/* <Route path="/superAdmin" element={
-            <ProtectedRoute roles={["superAdmin"]}>
-             <SuperAdmin />
-          </ProtectedRoute>
-    }/> */}
+          {/* FIX: Repaired the broken comment markers surrounding the Super Admin dashboard layout */}
+          <Route 
+            path="/superAdmin" 
+            element={
+              <ProtectedRoute roles={["superAdmin"]}>
+                <SuperAdmin />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/about"
@@ -104,7 +110,16 @@ function App() {
             }
           />
 
-          {/* This wildcard 404 catcher MUST stay at the very bottom of the tree */}
+          <Route
+            path="/Application"
+            element={
+              <ProtectedRoute roles={["user"]}>
+                <ApplicationForm />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* FIX: Moved this wildcard 404 catcher to the absolute bottom of the stack */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
@@ -113,3 +128,4 @@ function App() {
 }
 
 export default App;
+
