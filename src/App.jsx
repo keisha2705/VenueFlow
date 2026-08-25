@@ -41,7 +41,7 @@ function App() {
                 <AvailableVenues/>
               </ProtectedRoute>
             }
-          /> */}
+          /> 
           {/* normal user booking for an event */}
           <Route
             path="/bookings/:id"
