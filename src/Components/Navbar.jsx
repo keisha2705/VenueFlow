@@ -1,91 +1,84 @@
-// import React from 'react';
-// import '../Styling/Navbar.css';
-// import logoImg from '../assets/LOGO.png'; // Import the logo image
-
-// function Navbar() {
-//   // takes logged in info from local storage and assigns it to the userRole variable. If there's no logged-in user, it defaults to "user".
-//   const userRole = localStorage.getItem("userRole") || "user";
-
-//   return (
-//     <nav className="navbar glass">
-// {/* 
-//       Logo
-//       <div className="logo">
-//         eshek
-//         <img src="../public/LOGO.png" alt="Logo" className="logo-image" />
-//       </div> */}
-
-//       {/* Logo */}
-//       <div className="logo">
-//         <img src="/LOGO.png" alt="Logo" className="logo-image" />
-//       </div>
-
-
-//       {/* Navigation Options Links */}
-//       <div className="nav-links">
-//         <a href="/user">Home</a>
-//         <a href="/events">All Events</a>
-//         <a href="/coming-soon">Coming Soon</a>
-//         <a href="/application">Application Form</a>
-//         <a href="/BookingHistory">Booking History</a>
-//         {/*  CONDITIONAL RENDERING BLOCK */}
-//         {(userRole === "superAdmin" || userRole === "manager") && (
-//           <a href="/">Dashboard</a>
-//         )}
-        
-//         <a href="/about">About Us</a>
-//         <a href="booking">BookingPage</a>
-//       </div>
-
-//       {/* Profile */}
-//       <div className="profile-button">
-//         pfp
-//       </div>
-
-//     </nav>
-//   );
-// }
-
-// export default Navbar;
-
-
-import React from 'react';
-import '../Styling/Navbar.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { auth } from "../lib/firebase";
+import "../Styling/Navbar.css";
 
 function Navbar() {
-  // takes logged in info from local storage and assigns it to the userRole variable. If there's no logged-in user, it defaults to "user".
-  const userRole = localStorage.getItem("userRole") || "user";
+  const userRole = localStorage.getItem("userRole");
+  const [showProfile, setShowProfile] = useState(false);
+  const [profile, setProfile] = useState(null);
+
+  async function getProfile() {
+    try {
+      const token = await auth.currentUser.getIdToken();
+      const uid = auth.currentUser.uid;
+      const response = await fetch(`http://localhost:3000/users/${uid}`,
+        {
+          method: "GET",
+          headers: {Authorization: `Bearer ${token}`},
+        }
+      )
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      setProfile(data);
+      setShowProfile(true);
+    } catch (error) {
+      console.error("Error getting profile:", error);
+      alert(error.message);
+    }
+  }
+
+  function closeProfile() {
+    setShowProfile(false);
+  }
 
   return (
-    <nav className="navbar glass">
-      {/* Logo */}
-      <div className="logo">
-        <img src="/LOGO.png" alt="Logo" className="logo-image" />
-      </div>
+    <>
+      <nav className="navbar glass">
+        <div className="logo"><img src="/assets/LOGO.png"/></div>
+        <div className="nav-links">
+          <Link to="/user">Home</Link>
+          <Link to="/events">All Events</Link>
+          <Link to="/application">Application Form</Link>
+          <Link to="/BookingHistory">Booking History</Link>
+          {userRole === "manager" && (<Link to="/manager">Manage</Link>)}
+          {userRole === "superAdmin" && (<Link to="/superAdmin">Admin</Link>)}
+          <Link to="/about">About Us</Link>
+        </div>
+        <button type="button" className="profile-button" onClick={getProfile} title="View Profile"><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></button>
+      </nav>
 
-      {/* Navigation Options Links */}
-      <div className="nav-links">
-        <a href="/user">Home</a>
-        <a href="/events">All Events</a>
-        <a href="/coming-soon">Coming Soon</a>
-        <a href="/Application">Application Form</a>
-        <a href="/BookingHistory">Booking History</a>
-        
-        {/* CONDITIONAL RENDERING BLOCK */}
-        {(userRole === "superAdmin" || userRole === "manager") && (
-          <a href="/superAdmin">Dashboard</a>
-        )}
-        
-        <a href="/about">About Us</a>
-        <a href="/bookings/active">BookingPage</a>
-      </div>
+      {showProfile && profile && (
+        <div className="modal-overlay" onClick={closeProfile}>
+          <div className="profile-modal" onClick={(event) => event.stopPropagation()}>
+            <div><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></div>
+            <h2>My Profile ^_^</h2>
+            <div className="profile-info">
+              <div className="profile-row">
+                <b>Name:</b>
+                <span>{profile.username || "Not provided"}</span>
+              </div>
 
-      {/* Profile Wrapper Component */}
-      <div className="profile-button">
-        pfp
-      </div>
-    </nav>
-  );
+              <div className="profile-row">
+                <b>Email:</b>
+                <span>{profile.email || "Not provided"}</span>
+              </div>
+
+              <div className="profile-row">
+                <b>Role:</b>
+                <span className="profile-role">{profile.role || "User"}</span>
+              </div>
+            </div>
+
+            <button type="button" className="cancel" onClick={closeProfile}>Close</button>
+          </div>
+        </div>
+      )}
+    </>
+  )
 }
 
-export default Navbar;
+export default Navbar

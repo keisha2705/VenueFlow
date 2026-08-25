@@ -12,6 +12,7 @@ import Events from "./Pages/Events";// FIX: Ensured Events is cleanly active for
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents";
 import SuperAdmin from './Pages/SuperAdmin';
+import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
 import BookingHistory from './Pages/BookingHistory';
 
@@ -27,27 +28,25 @@ function App() {
           <Route
             path="/user"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <UserDashboard />
               </ProtectedRoute>
             }
           />
           
-          {/* Main system browse events portal */}
           <Route
             path="/events"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
-                <Events />
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+                <AvailableVenues/>
               </ProtectedRoute>
             }
-          />
-          
-          {/* normal user booking for a specific event id */}
+          /> 
+          {/* normal user booking for an event */}
           <Route
             path="/bookings/:id"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager","superAdmin"]}>
                 <BookingPage />
               </ProtectedRoute>
             }
@@ -55,7 +54,7 @@ function App() {
           <Route
             path="/BookingHistory"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <BookingHistory />
               </ProtectedRoute>
             }
@@ -64,7 +63,7 @@ function App() {
           <Route
             path="/manager"
             element={
-              <ProtectedRoute roles={["manager"]}>
+              <ProtectedRoute roles={["manager","superAdmin"]}>
                 <Manager />
               </ProtectedRoute>
             }
@@ -73,7 +72,7 @@ function App() {
           <Route
             path="/manager/venues"
             element={
-              <ProtectedRoute roles={["manager"]}>
+              <ProtectedRoute roles={["manager", "superAdmin"]}>
                 <ManageVenues />
               </ProtectedRoute>
             }
@@ -82,7 +81,7 @@ function App() {
           <Route
             path="/manager/events"
             element={
-              <ProtectedRoute roles={["manager"]}>
+              <ProtectedRoute roles={["manager", "superAdmin"]}>
                 <ManageEvents />
               </ProtectedRoute>
             }
@@ -101,16 +100,15 @@ function App() {
           <Route
             path="/about"
             element={
-              <ProtectedRoute roles={["user", "manager"]}>
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <AboutUs />
               </ProtectedRoute>
             }
           />
-
-          <Route
+           <Route
             path="/Application"
             element={
-              <ProtectedRoute roles={["user"]}>
+              <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
                 <ApplicationForm />
               </ProtectedRoute>
             }
@@ -119,6 +117,7 @@ function App() {
           {/* FIX: Moved this wildcard 404 catcher to the absolute bottom of the stack */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
+
       </BrowserRouter>
     </>
   );

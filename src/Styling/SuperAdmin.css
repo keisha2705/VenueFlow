@@ -4,8 +4,8 @@
     width: 100%;
     box-sizing: border-box;
     padding: 35px 45px 50px;
-    background: #f0e7f8;
-    color: #22222b;
+    background: #e9e9ebab;
+    /* color: #efeffd; */
 }
 
 .superadmin-container h1 {
@@ -13,27 +13,27 @@
     margin: 65px 0 7px;
     font-size: 30px;
     font-weight: 700;
-    color: #050505;
+    color: #1a1919;
 }
 
 .superadmin-container > p {
     margin: 0 0 28px;
     font-size: 15px;
-    color: #1c1c1d;
+    color: #3f3f41;
 }
 
 .superadmin-container h2 {
     margin: 0 0 15px;
     font-size: 19px;
     font-weight: 650;
-    color: #292934;
+    color: #000000;
 }
 
 .superadmin-container table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
-    background: #ffffff;
+
     border: 1px solid #e8e5ee;
     border-radius: 12px;
     overflow: hidden;
@@ -42,7 +42,7 @@
 }
 
 .superadmin-container thead {
-    background: #ffffff;
+    background: #fffefe;
 }
 
 .superadmin-container th {
@@ -51,7 +51,7 @@
     font-size: 10px;
     font-weight: 700;
     text-transform: none;
-    color: #656470;
+    color: #232324;
     border-bottom: 1px solid #e9e7ef;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .superadmin-container tbody tr:nth-child(even) {
-    background: #faf7ff;
+    background: #e6c8f0;
 }
 
 .superadmin-container tbody tr:nth-child(odd) {
@@ -147,7 +147,7 @@
     height: 44px;
     border: none;
     border-radius: 50%;
-    background: #c967e8;
+    background: rgba(86, 38, 126, 0.842);
     color: #ffffff;
     font-size: 25px;
     font-weight: 300;
@@ -164,32 +164,6 @@
 
 .add-button:active {
     transform: translateY(0);
-}
-
-.profile-button {
-    position: fixed;
-    top: 30px;
-    right: 42px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1px solid #e4ddea;
-    background: #ffffff;
-    color: #55505f;
-    font-size: 17px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(70, 50, 90, 0.08);
-    z-index: 20;
-}
-
-.profile-button:hover {
-    background: #f4eafa;
-    color: #8b43ae;
-    transform: translateY(-1px);
-    box-shadow: 0 5px 14px rgba(70, 50, 90, 0.12);
 }
 
 .modal-overlay {
