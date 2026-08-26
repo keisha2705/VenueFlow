@@ -34,10 +34,6 @@ function App() {
             }
           />
           
-<<<<<<< HEAD
-          {/* Main system browse events portal */}
-=======
->>>>>>> a4acb3710c342cb26e88ce95fac97ff625ff61b3
           <Route
             path="/events"
             element={
@@ -92,17 +88,6 @@ function App() {
             }
           />
 
-<<<<<<< HEAD
-          {/* FIX: Repaired the broken comment markers surrounding the Super Admin dashboard layout */}
-          <Route 
-            path="/superAdmin" 
-            element={
-              <ProtectedRoute roles={["superAdmin"]}>
-                <SuperAdmin />
-              </ProtectedRoute>
-            }
-          />
-=======
           <Route path="/manager/venues" element={
             <ProtectedRoute roles={["manager", "superAdmin"]}>
              <ManageVenues />
@@ -118,38 +103,25 @@ function App() {
              <SuperAdmin />
           </ProtectedRoute>
     }/>
->>>>>>> a4acb3710c342cb26e88ce95fac97ff625ff61b3
 
-          <Route
-            path="/about"
-            element={
-              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
-                <AboutUs />
-              </ProtectedRoute>
+          <Route path="/about" element={
+            <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+              <AboutUs />
+            </ProtectedRoute>
             }
           />
-<<<<<<< HEAD
 
-          <Route
-=======
-           <Route
->>>>>>> a4acb3710c342cb26e88ce95fac97ff625ff61b3
-            path="/Application"
-            element={
-              <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
-                <ApplicationForm />
-              </ProtectedRoute>
+           <Route path="/Application" element={
+            <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
+              <ApplicationForm />
+            </ProtectedRoute>
+
             }
           />
-<<<<<<< HEAD
 
           {/* FIX: Moved this wildcard 404 catcher to the absolute bottom of the stack */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-=======
-          </Routes>
-
->>>>>>> a4acb3710c342cb26e88ce95fac97ff625ff61b3
       </BrowserRouter>
     </>
   );

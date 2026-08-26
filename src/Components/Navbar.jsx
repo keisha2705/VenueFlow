@@ -7,35 +7,47 @@ function Navbar() {
   const userRole = localStorage.getItem("userRole") || "user";
 
   return (
-     <>
-    <nav className="navbar glass">
-      {/* Logo */}
-      <div className="logo">
-        <img src="./logo1.png" alt="Logo" className="logo-image" />
-      </div>
+    <>
+      <nav className="navbar glass">
+        <div className="logopic"><img src="/assets/LOGO.png"/></div>
+        <div className="nav-links">
+          <Link to="/user">Home</Link>
+          <Link to="/events">All Events</Link>
+          <Link to="/application">Application Form</Link>
+          <Link to="/BookingHistory">Booking History</Link>
+          {userRole === "manager" && (<Link to="/manager">Manage</Link>)}
+          {userRole === "superAdmin" && (<Link to="/superAdmin">Admin</Link>)}
+          <Link to="/about">About Us</Link>
+        </div>
+        <button type="button" className="profile-button" onClick={getProfile} title="View Profile"><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></button>
+      </nav>
 
-      {/* Navigation Options Links */}
-      <div className="nav-links">
-        <a href="/user">Home</a>
-        <a href="/events">All Events</a>
-        <a href="/Application">Application Form</a>
-        
-        
-        {/* CONDITIONAL RENDERING BLOCK */}
-        {(userRole === "superAdmin" || userRole === "manager") && (
-          <a href="/superAdmin">Dashboard</a>
-        )}
-        
-        <a href="/about">About Us</a>
-        <a href="/BookingHistory">User Profile</a>
-      </div>
+      {showProfile && profile && (
+        <div className="modal-overlay" onClick={closeProfile}>
+          <div className="profile-modal" onClick={(event) => event.stopPropagation()}>
+            <div><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></div>
+            <h2>My Profile ^_^</h2>
+            <div className="profile-info">
+              <div className="profile-row">
+                <b>Name:</b>
+                <span>{profile.username || "Not provided"}</span>
+              </div>
 
-      {/* Profile Wrapper Component */}
-    
-    </nav>
-      {/* <div className="profile-button">
-        pfp
-      </div> */}
+              <div className="profile-row">
+                <b>Email:</b>
+                <span>{profile.email || "Not provided"}</span>
+              </div>
+
+              <div className="profile-row">
+                <b>Role:</b>
+                <span className="profile-role">{profile.role || "User"}</span>
+              </div>
+            </div>
+
+            <button type="button" className="cancel" onClick={closeProfile}>Close</button>
+          </div>
+        </div>
+      )}
     </>
   )
 }
