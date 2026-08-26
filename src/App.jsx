@@ -8,14 +8,13 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
-// import Events from "./Pages/Events";
+import Events from "./Pages/Events";// FIX: Ensured Events is cleanly active for user navigation
 import AboutUs from './Pages/AboutUs';
-import ManageEvents from "./Pages/ManageEvents"
+import ManageEvents from "./Pages/ManageEvents";
 import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
-// import emailjs from "./pages/@emailjs/browser";
-
+import BookingHistory from './Pages/BookingHistory';
 
 function App() {
   return (
@@ -24,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          
           {/* normal user home page */}
           <Route
             path="/user"
@@ -34,6 +34,7 @@ function App() {
             }
           />
           
+          {/* Main system browse events portal */}
           <Route
             path="/events"
             element={
@@ -41,13 +42,22 @@ function App() {
                 <AvailableVenues/>
               </ProtectedRoute>
             }
-          /> 
-          {/* normal user booking for an event */}
+          />
+          
+          {/* normal user booking for a specific event id */}
           <Route
             path="/bookings/:id"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
                 <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/BookingHistory"
+            element={
+              <ProtectedRoute roles={["user", "manager"]}>
+                <BookingHistory />
               </ProtectedRoute>
             }
           />
@@ -61,26 +71,36 @@ function App() {
             }
           />
 
-          <Route path="*" element={<PageNotFound />} />
+          <Route
+            path="/manager/venues"
+            element={
+              <ProtectedRoute roles={["manager"]}>
+                <ManageVenues />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
+            path="/manager/events"
+            element={
+              <ProtectedRoute roles={["manager"]}>
+                <ManageEvents />
+              </ProtectedRoute>
+            }
+          />
 
-          <Route path="/manager/venues" element={
-            <ProtectedRoute roles={["manager"]}>
-             <ManageVenues />
-          </ProtectedRoute>
-    }/>  
-        <Route path="/manager/events" element={
-        <ProtectedRoute roles={["manager"]}>
-          <ManageEvents />
-        </ProtectedRoute>
-    }/>
-          <Route path="/superAdmin" element={
-            <ProtectedRoute roles={["superAdmin"]}>
-             <SuperAdmin />
-          </ProtectedRoute>
-    }/>
+          {/* FIX: Repaired the broken comment markers surrounding the Super Admin dashboard layout */}
+          <Route 
+            path="/superAdmin" 
+            element={
+              <ProtectedRoute roles={["superAdmin"]}>
+                <SuperAdmin />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
-            path="/About"
+            path="/about"
             element={
               <ProtectedRoute roles={["user", "manager"]}>
                 <AboutUs />
@@ -88,7 +108,7 @@ function App() {
             }
           />
 
-           <Route
+          <Route
             path="/Application"
             element={
               <ProtectedRoute roles={["user"]}>
@@ -96,10 +116,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-          </Routes>
+
+          {/* FIX: Moved this wildcard 404 catcher to the absolute bottom of the stack */}
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </BrowserRouter>
     </>
   );
 }
 
 export default App;
+

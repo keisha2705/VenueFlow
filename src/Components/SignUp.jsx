@@ -47,7 +47,7 @@ function SignUp({showLogin}) {
     <div className="signup-page">
       <div className="left-side">
          <div className="Logo">
-            <p><img src="./LOGO.png" alt="logo" width="300" height="300" /></p>
+            <p><img src="./logo1.png" alt="logo" width="300" height="300" /></p>
         </div>
         <h1>WELCOME</h1>
       </div>
