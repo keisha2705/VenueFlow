@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import '../Styling/CheckoutPage.css';
 
 function Checkout() {
-  const [paymentStatus, setPaymentStatus] = useState("idle");
-
-  // Temporary booking information
+  
+  // BOOKING INFORMATION
   const booking = {
     venue: "Main Event Hall",
     date: "25 August 2026",
@@ -12,25 +12,75 @@ function Checkout() {
     price: 250,
   };
 
+  // PAYMENT STATES
+  const [paymentStatus, setPaymentStatus] = useState("idle");
+  const [showModal, setShowModal] = useState(false);
+  const [paymentReference, setPaymentReference] = useState("");
+
+  // PAYSTACK PAYMENT
   const handlePayment = () => {
     setPaymentStatus("processing");
 
-    // Paystack integration will go here
-    console.log("Starting payment...");
+    const paystackPublicKey =
+      import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+
+    if (!paystackPublicKey) {
+      alert("Paystack public key is missing.");
+      setPaymentStatus("idle");
+      return;
+    }
+
+    const handler = window.PaystackPop.setup({
+      key: paystackPublicKey,
+
+      email: "customer@example.com",
+
+      // Paystack expects the amount in kobo/cents.
+      // R250 = 25000
+      amount: booking.price * 100,
+
+      currency: "ZAR",
+
+      callback: function (response) {
+        console.log("Payment successful:", response);
+
+        setPaymentReference(response.reference);
+
+        setPaymentStatus("success");
+
+        // Show success modal
+        setShowModal(true);
+      },
+
+      onClose: function () {
+        console.log("Payment window closed");
+
+        if (paymentStatus !== "success") {
+          setPaymentStatus("idle");
+        }
+      },
+    });
+
+    handler.openIframe();
   };
 
   return (
     <div className="checkout-page">
 
-      {/* Header */}
+      {/*  
+          HEADER
+        */}
       <header className="checkout-header">
         <h1>Checkout</h1>
-        <p>Complete your booking</p>
+        <p>Complete your venue booking</p>
       </header>
+
 
       <main className="checkout-container">
 
-        {/* Left side - Booking Information */}
+        {/*  
+            BOOKING DETAILS
+        */}
         <section className="booking-section">
 
           <h2>Booking Details</h2>
@@ -61,7 +111,10 @@ function Checkout() {
 
         </section>
 
-        {/* Right side - Payment */}
+
+        {/* 
+            PAYMENT
+         */}
         <section className="payment-section">
 
           <h2>Payment</h2>
@@ -85,7 +138,11 @@ function Checkout() {
               <strong>R{booking.price}</strong>
             </div>
 
-            {/* Payment status */}
+
+            {/* 
+                PAYMENT STATUS
+            */}
+
             {paymentStatus === "processing" && (
               <div className="payment-message">
                 Processing payment...
@@ -104,7 +161,11 @@ function Checkout() {
               </div>
             )}
 
-            {/* Pay button */}
+
+            {/* 
+                PAY BUTTON
+             */}
+
             <button
               className="pay-button"
               onClick={handlePayment}
@@ -115,6 +176,7 @@ function Checkout() {
                 : `Pay R${booking.price}`}
             </button>
 
+
             <p className="secure-payment">
               🔒 Secure payment powered by Paystack
             </p>
@@ -124,6 +186,62 @@ function Checkout() {
         </section>
 
       </main>
+
+
+      {/* 
+          SUCCESS MODAL
+       */}
+
+      {showModal && (
+        <div className="modal-overlay">
+
+          <div className="payment-modal">
+
+            <div className="success-icon">
+              ✓
+            </div>
+
+            <h2>Payment Successful!</h2>
+
+            <p>
+              Your payment has been completed successfully.
+            </p>
+
+            <div className="payment-details">
+
+              <p>
+                <strong>Venue:</strong>{" "}
+                {booking.venue}
+              </p>
+
+              <p>
+                <strong>Seat:</strong>{" "}
+                {booking.seat}
+              </p>
+
+              <p>
+                <strong>Amount:</strong>{" "}
+                R{booking.price}
+              </p>
+
+              <p>
+                <strong>Reference:</strong>{" "}
+                {paymentReference}
+              </p>
+
+            </div>
+
+            <button
+              className="continue-button"
+              onClick={() => setShowModal(false)}
+            >
+              Continue
+            </button>
+
+          </div>
+
+        </div>
+      )}
 
     </div>
   );

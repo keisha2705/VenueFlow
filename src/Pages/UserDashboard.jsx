@@ -41,7 +41,7 @@ function UserDashboard() {
       
     
       <section className="hero">
-        <h1 className="hero-title">NOVUS</h1>
+        <h1 className="hero-title">NOVUS.</h1>
         <p className="hero-text">
           Find concerts, fashion shows, and experiences in your city.
           Browse by category, save your favorites, and book in seconds.
@@ -53,7 +53,6 @@ function UserDashboard() {
           <h2 className="section-heading">Featured Experiences</h2>
         </div>
 
-<br></br>
         {error && <p className="error">{error}</p>}
         {!loading && !error && events.length === 0 && (
           <p className="no-events">No events available right now.</p>

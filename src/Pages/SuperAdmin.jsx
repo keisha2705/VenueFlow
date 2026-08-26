@@ -7,13 +7,11 @@ import Navbar from "../Components/Navbar";
 function SuperAdmin() {
   const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
-  const [profile, setProfile] = useState(null);
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("manager");
 
   useEffect(() => {
-    getUsers()
+    getUsers();
   }, []);
 
   async function getUsers() {
@@ -34,33 +32,7 @@ function SuperAdmin() {
       alert(error.message);
     }
   }
-// this is for that small person thing at the top for it to get the users info
-  async function getProfile() {
-    try {
-      if (!auth.currentUser) {
-        alert("You are not logged in.");
-        return
-      }
-      // getting the firebase token
-      const token = await auth.currentUser.getIdToken();
-      //getting Firebase uid
-      const uid = auth.currentUser.uid;
-      //this gets the user's information from MongoDB
-      const response = await fetch(`http://localhost:3000/users/${uid}`,{ method: "GET", headers: {Authorization: `Bearer ${token}`}});
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
-      //storing profile information
-      setProfile(data);
-      //the profile modal
-      setShowProfile(true);
 
-    } catch (error) {
-      console.error("Error getting profile:", error);
-      alert(error.message);
-    }
-  }
 // function to promote user
   async function handlePromote() {
     if (!email.trim()) {
@@ -125,17 +97,9 @@ function SuperAdmin() {
     setRole("manager");
   }
 
-  function closeProfile() {
-    setShowProfile(false);
-  }
-
   return (
     <div className="superadmin-container">
       <Navbar />
-      <button type="button" className="profile-button" onClick={getProfile} title="View Profile">
-        <img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/>
-      </button>
-
       <h1>SUPER ADMIN</h1>
       <p>Manage users and their roles.</p>
 
@@ -189,35 +153,6 @@ function SuperAdmin() {
 
             <button type="button" onClick={handlePromote}>Promote</button>
             <button type="button" className="cancel" onClick={closeModal}>Cancel</button>
-          </div>
-        </div>
-      )}
-
-{/* the profile modal */}
-      {showProfile && profile && (
-        <div className="modal-overlay" onClick={closeProfile}>
-          <div className="profile-modal" onClick={(event) => event.stopPropagation()}>
-          <div>
-            <img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/>
-          </div>
-            <h2>My Profile ^_^</h2>
-            <div className="profile-info">
-              <div className="profile-row">
-              <b>Name:</b>
-                <span>{profile.username || "Not provided"}</span>
-              </div>
-              <div className="profile-row">
-                <b>Email:</b>
-                <span>{profile.email || "Not provided"}</span>
-              </div>
-
-              <div className="profile-row">
-                <b>Role:</b>
-                <span className="profile-role">{profile.role}</span>
-              </div>
-            </div>
-
-            <button type="button" className="cancel" onClick={closeProfile}>Close</button>
           </div>
         </div>
       )}

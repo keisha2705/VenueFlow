@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "../Styling/Manager.css"
+import NavBar from "../Components/Navbar"
 function Manager() {
     const navigate = useNavigate();
  return (
         <div className="manager-page">
             <div className="manager-container">
+                <NavBar />
                 <div className="manager-header">
                     <h1>Manager Dashboard</h1>
                 </div>
