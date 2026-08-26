@@ -8,7 +8,7 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
-import Events from "./Pages/Events";// FIX: Ensured Events is cleanly active for user navigation
+import Events from "./Pages/Events";
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents";
 import SuperAdmin from './Pages/SuperAdmin';
@@ -16,10 +16,17 @@ import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
 import BookingHistory from './Pages/BookingHistory';
 
+// 1. ADD THIS NAVBAR IMPORT AT THE TOP
+import Navbar from "./Components/Navbar"; 
+
 function App() {
   return (
     <>
       <BrowserRouter>
+        
+        {/* 2. PLACE THE NAVBAR HERE SO IT SHOWS ON ALL PAGES */}
+        <Navbar />
+
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -87,7 +94,6 @@ function App() {
             }
           />
 
-          {/* FIX: Repaired the broken comment markers surrounding the Super Admin dashboard layout */}
           <Route 
             path="/superAdmin" 
             element={
@@ -114,7 +120,6 @@ function App() {
             }
           />
 
-          {/* FIX: Moved this wildcard 404 catcher to the absolute bottom of the stack */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
 
