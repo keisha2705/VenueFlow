@@ -1,16 +1,44 @@
-// import React from 'react';
-import '../Styling/Navbar.css';
-import {Link} from "react-router-dom"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { auth } from "../lib/firebase";
+import "../Styling/Navbar.css";
 
 function Navbar() {
- 
-  // takes logged in info from local storage and assigns it to the userRole variable. If there's no logged-in user, it defaults to "user".
-  const userRole = localStorage.getItem("userRole") || "user";
+  const userRole = localStorage.getItem("userRole");
+  const [showProfile, setShowProfile] = useState(false);
+  const [profile, setProfile] = useState(null);
+
+  async function getProfile() {
+    try {
+      const token = await auth.currentUser.getIdToken();
+      const uid = auth.currentUser.uid;
+      const response = await fetch(`http://localhost:3000/users/${uid}`,
+        {
+          method: "GET",
+          headers: {Authorization: `Bearer ${token}`},
+        }
+      )
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      setProfile(data);
+      setShowProfile(true);
+    } catch (error) {
+      console.error("Error getting profile:", error);
+      alert(error.message);
+    }
+  }
+
+  function closeProfile() {
+    setShowProfile(false);
+  }
 
   return (
     <>
       <nav className="navbar glass">
-        <div className="logopic"><img src="./logo1.png" alt="Logo" className="logo-image" /></div>
+        <div className="logo"><img src="./logo1.png"/></div>
         <div className="nav-links">
           <Link to="/user">Home</Link>
           <Link to="/events">All Events</Link>
@@ -53,4 +81,4 @@ function Navbar() {
   )
 }
 
-export default Navbar;
+export default Navbar

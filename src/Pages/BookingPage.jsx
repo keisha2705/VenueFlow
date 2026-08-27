@@ -122,7 +122,7 @@ export function SeatSelection({ eventId }) {
     }
   };
 
-  // 2. DYNAMIC MAP GENERATOR FUNCTION
+  //dynamic generation
   // This builds the full interactive seat matrix array from rows and columns on the fly
   const renderSeatingMatrix = () => {
     const seatsMatrix = [];
