@@ -118,6 +118,10 @@ export function ApplicationForm() {
           <button type="submit" className="submit-button">
             Submit Application
           </button>
+
+         <div>
+             {/* <button className="button">Go back </button> */}
+          </div>
         </form>
       </div>
     </div>
