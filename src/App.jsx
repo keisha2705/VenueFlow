@@ -1,21 +1,18 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AuthPage from "./Pages/AuthPage";
 import ProtectedRoute from "./Components/ProtectedRoutes";
 import Manager from "./Pages/Manager";
-import PageNotFound from "./Pages/PageNotFound";
 import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
-import Events from "./Pages/Events";// FIX: Ensured Events is cleanly active for user navigation
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents";
 import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
 import BookingHistory from './Pages/BookingHistory';
-
+import Checkout from "./Pages/Checkout";
 function App() {
   return (
     <>
