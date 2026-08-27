@@ -69,17 +69,37 @@ button {
 }
 
 .form-group input,.form-group textarea,.form-group select, .location-search {
-    /* border: 2px solid red; */
-    background: #16001f;
-    color: white;
-    /* border: 1px solid #682092; */
-    border-radius: 6px;
-    padding: 12px;
-    font-size: 15px;
-    outline: none;
+    /* border: 2px solid red !important; */
+    background: #16001f !important;
+    color: white !important;
+    border: 1px solid #682092 !important;
+    padding: 12px !important;
+    font-size: 15px !important;
+    outline: none !important;
 }
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus {
-    border-color: #a13cff;
+
+.location-search{
+    padding: 10px;
+}
+.typing{
+    padding: 10px;
+    width: 80%;
+}
+
+.searching{
+    padding: 8px;
+    background: linear-gradient( 90deg, #941cff, #6d00df);
+    border-radius: 4px;
+    border: none;
+    color: white; 
+}
+
+.location-suggestions{
+   cursor: pointer;
+}
+
+.location-suggestions :hover{
+   background-color: #330d4b;
 }
 
 .map-section {
