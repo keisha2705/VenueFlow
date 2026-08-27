@@ -68,7 +68,7 @@ button {
     font-size: 15px;
 }
 
-.form-group input,.form-group textarea,.form-group select {
+.form-group input,.form-group textarea,.form-group select, .location-search {
     /* border: 2px solid red; */
     background: #16001f;
     color: white;
