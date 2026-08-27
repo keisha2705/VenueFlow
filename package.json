@@ -12,9 +12,11 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@vis.gl/react-google-maps": "^1.9.0",
-    "firebase": "^12.18.0",
+    "firebase": "^12.17.0",
+    "leaflet": "^1.9.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-leaflet": "^5.0.0",
     "react-paystack": "^6.0.0",
     "react-router-dom": "^7.11.0"
   },

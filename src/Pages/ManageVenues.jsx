@@ -1,9 +1,37 @@
 import { useState, useEffect } from "react";
 import { auth } from "../lib/firebase";
-import GoogleMap from "../Components/GoogleMap"
 import "../Styling/ManageVenues.css";
 import Navbar from '../Components/Navbar';
 import {useNavigate} from "react-router-dom"
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl:"https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+    iconUrl:"https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+    shadowUrl:"https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+})
+
+function LocationMarker({ setLatitude, setLongitude }) {
+    useMapEvents({
+    click(event) {
+        setLatitude(event.latlng.lat);
+        setLongitude(event.latlng.lng);
+    }
+})
+  return null
+}
+
+function MapMover({ latitude, longitude }) {
+    const map = useMap()
+    useEffect(() => {
+        if (latitude !== null && longitude !== null) {
+            map.setView([latitude, longitude], 15)
+        }
+    }, [latitude, longitude, map]);
+    return null
+}
 
 function ManageVenues() {
     const navigate = useNavigate();
@@ -19,6 +47,7 @@ function ManageVenues() {
     const [location, setLocation] = useState("");
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
+    const [searchLocation, setSearchLocation] = useState("");
 
     useEffect(() => {
     getVenues();
@@ -44,6 +73,34 @@ function ManageVenues() {
     } catch (error) {
         console.error(error);
         alert(error.message);
+    }
+}
+
+async function searchForLocation() {
+    if (!searchLocation.trim()) {
+        alert("Please enter a location to search.");
+        return
+    }
+    try {
+        const apiKey = import.meta.env.VITE_GEOAPIFY_API_KEY;
+        const response = await fetch(`https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(searchLocation)}&apiKey=${apiKey}`)
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || "Location search failed.");
+        }
+        if (!data.features || data.features.length === 0) {
+            alert("Location not found.");
+            return
+        }
+        const result = data.features[0];
+        const [longitude, latitude] = result.geometry.coordinates;
+        setLatitude(latitude);
+        setLongitude(longitude);
+        setLocation(result.properties.name || searchLocation);
+        setAddress(result.properties.formatted || searchLocation)
+    } catch (error) {
+        console.error("Geoapify search error:", error);
+        alert("Could not find that location.");
     }
 }
 
@@ -164,16 +221,29 @@ return (
                             <input type="text" value={address} onChange={(event) =>setAddress(event.target.value)}required/>
                         </div>
 
-                        <div className="map-section">
-                            <label className="searching">Search Venue Location</label>
-                            <GoogleMap  latitude={latitude} longitude={longitude} onPlaceSelected={(place) => {
-                                    setLocation(place.name);
-                                    setAddress(place.address);
-                                    setLatitude(place.latitude);
-                                    setLongitude(place.longitude);
-                                }}
-                            />
+                    <div className="map-section">
+                        <label className="searching">Search Venue Location</label>
+                        <div className="location-search">
+                            <input type="text" placeholder="Search for a venue or address..." value={searchLocation} onChange={(event) => setSearchLocation(event.target.value)}/>
+                            <button type="button" onClick={searchForLocation}>Search</button>
                         </div>
+
+                        <MapContainer center={[-30.5595, 22.9375]} zoom={5} style={{width: "100%",height: "400px"}}>
+                            <TileLayer attribution='&copy; OpenStreetMap contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                        <MapMover latitude={latitude} longitude={longitude}/>
+                        <LocationMarker setLatitude={setLatitude} setLongitude={setLongitude}/>
+                            <LocationMarker setLatitude={setLatitude} setLongitude={setLongitude}/>
+                            {latitude !== null && longitude !== null && (
+                                <Marker position={[latitude, longitude]}/>
+                            )}
+                        </MapContainer>
+                        {latitude !== null && longitude !== null && (
+                            <div>
+                                <p><b>Latitude:</b> {latitude}</p>
+                                <p><b>Longitude:</b> {longitude}</p>
+                            </div>
+                        )}
+                    </div>
                         <div className="form-row">
                             <div className="form-group">
                                 <label>Capacity</label>

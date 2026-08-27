@@ -156,6 +156,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   transition: color 0.2s;
+  font-size: large !important;
 }
 
 .login-right span:hover {
@@ -165,7 +166,7 @@ body {
 
 .text {
   color: rgba(255, 255, 255, 0.6);
-  font-size: 15px;
+  font-size: 17px !important;
 }
 
 
