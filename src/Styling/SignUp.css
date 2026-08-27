@@ -16,7 +16,7 @@
 }
 
 
-.left-sided {
+.left-side {
   width: 50%;
   height: 85%;
   background: rgba(149, 3, 207, 0.05); 
@@ -36,7 +36,7 @@
   padding: 50px;
 }
 
-.left-sided h1 {
+.left-side h1 {
   font-size: 80px;
   margin-bottom: 20px;
   letter-spacing: 1px;
@@ -50,13 +50,12 @@
   display: flex;
 }
 
-.left-sided p {
+.left-side p {
   font-size: 18px;
   line-height: 28px;
   color: rgba(255, 255, 255, 0.85);
   font-style: italic;
 }
-
 
 .right-side {
   width: 50%;
