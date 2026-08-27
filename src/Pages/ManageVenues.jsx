@@ -3,8 +3,10 @@ import { auth } from "../lib/firebase";
 import GoogleMap from "../Components/GoogleMap"
 import "../Styling/ManageVenues.css";
 import Navbar from '../Components/Navbar';
+import {useNavigate} from "react-router-dom"
 
 function ManageVenues() {
+    const navigate = useNavigate();
     const [venues, setVenues] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [editingVenue, setEditingVenue] = useState(null);
@@ -25,6 +27,7 @@ function ManageVenues() {
     try {
         if (!auth.currentUser) {
             alert("You are not logged in!");
+            navigate("/user")
             return
         }
         const token = await auth.currentUser.getIdToken();
@@ -48,15 +51,13 @@ async function handleSubmit(event) {
     event.preventDefault();
     try {
         const token = await auth.currentUser.getIdToken();
-        const venue = { 
-            name, description, address, capacity: Number(capacity),
-            rows: Number(rows), seatsPerRow: Number(seatsPerRow), location, latitude, longitude
-        };
+        const venue = { name, description, address, capacity: Number(capacity),
+        rows: Number(rows), seatsPerRow: Number(seatsPerRow), location, latitude, longitude
+        }
         let response;
         if (editingVenue) {
             //editing the existing venue
-            response = await fetch(
-                `http://localhost:3000/venues/${editingVenue._id}`,
+            response = await fetch(`http://localhost:3000/venues/${editingVenue._id}`,
                 {
                     method: "PUT",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
@@ -65,8 +66,7 @@ async function handleSubmit(event) {
             );
         } else {
             //creating a new venue
-            response = await fetch(
-                "http://localhost:3000/venues",
+            response = await fetch("http://localhost:3000/venues",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},

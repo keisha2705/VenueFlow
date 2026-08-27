@@ -6,17 +6,24 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
+import Events from "./Pages/Events";
 import AboutUs from './Pages/AboutUs';
 import ManageEvents from "./Pages/ManageEvents";
 import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
 import BookingHistory from './Pages/BookingHistory';
-import Checkout from "./Pages/Checkout";
+
+import Navbar from "./Components/Navbar"; 
+
 function App() {
   return (
     <>
       <BrowserRouter>
+        
+        {/* 2. PLACE THE NAVBAR HERE SO IT SHOWS ON ALL PAGES */}
+        <Navbar />
+
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -38,9 +45,8 @@ function App() {
                 <AvailableVenues/>
               </ProtectedRoute>
             }
-          />
-          
-          {/* normal user booking for a specific event id */}
+          /> 
+          {/* normal user booking for an event */}
           <Route
             path="/bookings/:id"
             element={
@@ -70,7 +76,7 @@ function App() {
           <Route
             path="/manager/venues"
             element={
-              <ProtectedRoute roles={["manager"]}>
+              <ProtectedRoute roles={["manager", "superAdmin"]}>
                 <ManageVenues />
               </ProtectedRoute>
             }
@@ -79,27 +85,20 @@ function App() {
           <Route
             path="/manager/events"
             element={
-              <ProtectedRoute roles={["manager"]}>
+              <ProtectedRoute roles={["manager", "superAdmin"]}>
                 <ManageEvents />
               </ProtectedRoute>
             }
           />
 
-          <Route path="/manager/venues" element={
-            <ProtectedRoute roles={["manager", "superAdmin"]}>
-             <ManageVenues />
-          </ProtectedRoute>
-    }/>  
-        <Route path="/manager/events" element={
-        <ProtectedRoute roles={["manager", "superAdmin"]}>
-          <ManageEvents />
-        </ProtectedRoute>
-    }/>
-          <Route path="/superAdmin" element={
-            <ProtectedRoute roles={["superAdmin"]}>
-             <SuperAdmin />
-          </ProtectedRoute>
-    }/>
+          <Route 
+            path="/superAdmin" 
+            element={
+              <ProtectedRoute roles={["superAdmin"]}>
+                <SuperAdmin />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/about"
@@ -117,7 +116,9 @@ function App() {
               </ProtectedRoute>
             }
           />
-          </Routes>
+
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
 
       </BrowserRouter>
     </>
