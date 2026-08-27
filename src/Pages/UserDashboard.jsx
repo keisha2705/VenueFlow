@@ -83,7 +83,8 @@ function UserDashboard() {
                     
                     <div className="card-event-footer">
                       <span>-{event.date}</span>
-                      <span>-{event.startTime}</span>
+                      <span>-{event.startTime}</span> <br/> <br/>
+                      <span>R{Number(event.ticketPrice).toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
@@ -96,4 +97,4 @@ function UserDashboard() {
   );
 }
 
-export default UserDashboard;
+export default UserDashboard
