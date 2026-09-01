@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../Styling/BookingHistory.css';
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/Navbar.jsx";
 
 function BookingHistory() {
   const [bookingHistory, setBookingHistory] = useState([]);

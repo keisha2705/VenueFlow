@@ -13,8 +13,10 @@ import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
 import BookingHistory from './Pages/BookingHistory';
+import PageNotFound from './Pages/PageNotFound';
 
-import Navbar from "./Components/Navbar"; 
+// 1. ADD THIS NAVBAR IMPORT AT THE TOP
+// import Navbar from "./Components/Navbar"; 
 
 function App() {
   return (
@@ -22,13 +24,21 @@ function App() {
       <BrowserRouter>
         
         {/* 2. PLACE THE NAVBAR HERE SO IT SHOWS ON ALL PAGES */}
-        <Navbar />
+        {/* <Navbar /> */}
 
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           
-          {/* normal user home page */}
+
+          <Route
+            path="/events"
+            element={
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+                <AvailableVenues/>
+              </ProtectedRoute>
+            }
+          /> 
           <Route
             path="/user"
             element={
@@ -38,14 +48,7 @@ function App() {
             }
           />
           
-          <Route
-            path="/events"
-            element={
-              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
-                <AvailableVenues/>
-              </ProtectedRoute>
-            }
-          /> 
+          
           {/* normal user booking for an event */}
           <Route
             path="/bookings/:id"

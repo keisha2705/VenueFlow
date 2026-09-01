@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../Styling/BookingPage.css";
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/Navbar.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 
 export function SeatSelection({ eventId }) {
