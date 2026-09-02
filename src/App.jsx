@@ -23,8 +23,7 @@ function App() {
     <>
       <BrowserRouter>
         
-        {/* 2. PLACE THE NAVBAR HERE SO IT SHOWS ON ALL PAGES */}
-        {/* <Navbar /> */}
+      
 
         <Routes>
           <Route path="/" element={<AuthPage />} />
@@ -103,20 +102,16 @@ function App() {
             }
           />
 
-          <Route
-            path="/about"
-            element={
-              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
-                <AboutUs />
-              </ProtectedRoute>
+          <Route path="/about" element={
+            <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+              <AboutUs />
+            </ProtectedRoute>
             }
           />
-           <Route
-            path="/Application"
-            element={
-              <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
-                <ApplicationForm />
-              </ProtectedRoute>
+           <Route path="/Application" element={
+            <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
+              <ApplicationForm />
+            </ProtectedRoute>
             }
           />
 

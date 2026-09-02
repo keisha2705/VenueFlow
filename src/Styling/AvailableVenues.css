@@ -4,15 +4,15 @@
   padding: 0;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  letter-spacing: -0.03em; /* Tight typography tracking */
-  border-radius: 0 !important; /* Forces a strict flat, sharp edge globally */
+  letter-spacing: -0.03em;
+  border-radius: 0 !important; 
   box-shadow: none !important; 
   text-shadow: none !important;
 }
 
 body, html {
-  background-color: #ffffff; /* Pure studio white background */
-  color: #000000;            /* Crisp high-contrast solid black ink */
+  background-color: #ffffff; 
+  color: #000000;            
   overflow-x: hidden;
 }
 
@@ -21,14 +21,11 @@ body, html {
   background-color: #ffffff;
 }
 
-/* ==========================================
-   2. IMMERSIVE COMPACT HERO BANNER
-   ========================================== */
 .honor-hero.full-viewport-bleed.light-hero {
   position: relative;
   min-height: 100vh;
   width: 100vw;
-  background-image: url("https://unsplash.com");
+  background-image: url("/assets/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -38,7 +35,7 @@ body, html {
   padding: 0 4%;
 }
 
-/* Pure clean white backdrop mist to keep the image sharp yet readable */
+
 .honor-hero.light-hero::before {
   content: "";
   position: absolute;
@@ -59,20 +56,20 @@ body, html {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 4px;
-  color: #25003d; /* Your brand purple used cleanly as an ink-label */
+  color: #25003d; 
   margin-bottom: 24px;
   background: transparent;
-  border-bottom: 2px solid #25003d; /* Minimal underline accent */
+  border-bottom: 2px solid #25003d; 
   padding-bottom: 4px;
 }
 
 .light-hero .hero-title {
-  font-size: 7.5rem; /* Massive high-end scale layout statement */
+  font-size: 7.5rem; 
   font-weight: 900;
   line-height: 0.95;
   color: #000000;
   margin-bottom: 30px;
-  text-transform: uppercase; /* Clean uniform tech label format */
+  text-transform: uppercase; 
 }
 
 .light-hero .hero-subtitle {
@@ -84,9 +81,7 @@ body, html {
   letter-spacing: 0px;
 }
 
-/* ==========================================
-   3. SHARP GEOMETRIC BUTTON BLOCKING
-   ========================================== */
+
 .hero-actions {
   display: flex;
   gap: 15px;
@@ -106,12 +101,12 @@ body, html {
 }
 
 .btn-primary-purple {
-  background: #000000; /* Solid architectural black */
+  background: #000000;
   color: #ffffff;
   border: none;
 }
 .btn-primary-purple:hover {
-  background: #25003d; /* Shifts smoothly into your brand accent purple on active hover */
+  background: #25003d;
 }
 
 .btn-secondary-dark {
@@ -124,42 +119,37 @@ body, html {
   color: #ffffff;
 }
 
-/* ==========================================
-   4. FULL-PAGE EDGE BANNER LAYOUTS 
-   ========================================== */
+
 .fullscreen-showcase-panel {
   position: relative;
   width: 100vw;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 0; /* Removed padding to maximize screen width layout fully */
+  padding: 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .music-panel-bg { 
-  background-image: url("https://unsplash.com"); 
+  background-image: url("/assets/img1vflow.webp"); 
 }
 .sports-panel-bg { 
-  background-image: url("https://unsplash.com"); 
+  background-image: url("/assets/pexels-gera-cejas-3616330-38553392.jpg"); 
 }
 
-/* Clear all translucent backings from the section containers */
 .fullscreen-showcase-panel::before {
   display: none;
 }
 
-/* ==========================================
-   5. SOLID WHITE GEOMETRIC TEXT BOXES
-   ========================================== */
+
 .showcase-immersive-box.light-box {
   position: relative;
   z-index: 2;
-  width: 45vw; /* Massive layout width blocking */
-  min-height: 100vh; /* Perfectly links with full screen height */
-  background: #ffffff; /* Solid stark white canvas panel */
+  width: 45vw;
+  min-height: 100vh; 
+  background: #ffffff; 
   padding: 10% 5%;
   display: flex;
   flex-direction: column;
@@ -169,14 +159,13 @@ body, html {
   -webkit-backdrop-filter: none;
 }
 
-/* Alternating placement boxes for a modern editorial layout rhythm */
 .left-aligned { margin-right: auto; border-right: 1px solid #111111; }
 .right-aligned { margin-left: auto; border-left: 1px solid #111111; }
 
 .light-box .content-tag {
   font-size: 11px;
   text-transform: uppercase;
-  color: #25003d; /* Clean purple accent identifier mapping */
+  color: #25003d;
   letter-spacing: 3px;
   font-weight: 800;
   margin-bottom: 24px;
@@ -198,9 +187,6 @@ body, html {
   margin-bottom: 40px;
 }
 
-/* ==========================================
-   6. SPLIT STARK FULL-PAGE STRIPS
-   ========================================== */
 .portal-giant-strip.light-portals {
   display: flex;
   width: 100vw;
@@ -222,12 +208,12 @@ body, html {
   content: "";
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(255, 255, 255, 0.9); /* Solid, flat minimal backing mask */
+  background: rgba(255, 255, 255, 0.9);
   z-index: 1;
 }
 
-.attend-fullscreen-bg { background-image: url("https://unsplash.com"); }
-.host-fullscreen-bg { background-image: url("https://unsplash.com"); }
+.attend-fullscreen-bg { background-image: url("/assets/pexels-yogendras31-5185591.jpg"); }
+.host-fullscreen-bg { background-image: url("/assets/pexels-anat-landa-2162599192-38446266.jpg"); }
 
 .giant-block-content {
   position: relative;
@@ -260,9 +246,6 @@ body, html {
   margin-bottom: 44px;
 }
 
-/* ==========================================
-   7. FULL-PAGE EDGE FOOTER HERO SHOWCASE
-   ========================================== */
 .featured-showcase-giant.light-footer-showcase {
   width: 100vw;
   min-height: 100vh;
@@ -308,9 +291,6 @@ body, html {
   margin-bottom: 30px;
 }
 
-/* ==========================================
-   8. MEDIA CONSTRAINTS BREAKPOINTS
-   ========================================== */
 @media (max-width: 1024px) {
   .light-hero .hero-title { font-size: 4.5rem; }
   .portal-giant-strip, .content-wrapper-giant, .fullscreen-showcase-panel { flex-direction: column; }

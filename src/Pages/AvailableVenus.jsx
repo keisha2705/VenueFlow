@@ -46,7 +46,7 @@ export function AvailableVenues() {
         </div>
       </section>
 
-      {/* 3. PREMIUM WHITE-CANVAS FEATURE SHOWCASE PANELS */}
+     
       <section className="fullscreen-showcase-panel light-panel music-panel-bg">
         <div className="showcase-immersive-box light-box left-aligned">
           <span className="content-tag">Live Showcases</span>
