@@ -14,7 +14,6 @@ function ManageEvents() {
   const [venueId, setVenueId] = useState("");
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
-  const [ticketPrice, setTicketPrice] = useState("");
   const [ticketSales, setTicketSales] = useState("");
   const [ticketSalesClosingDate, setTicketSalesClosingDate] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -65,10 +64,7 @@ function ManageEvents() {
     event.preventDefault();
     try {
       const token = await auth.currentUser.getIdToken();
-      const eventData = { name, description, venueId, date, startTime, 
-        ticketPrice: Number(ticketPrice),
-        ticketSales: Number(ticketSales), 
-        ticketSalesClosingDate, imageUrl,};
+      const eventData = { name, description, venueId, date, startTime, ticketSales: Number(ticketSales), ticketSalesClosingDate, imageUrl,};
       let response;
       if (editingEvent) {
         //updating an event only if it exists
@@ -122,7 +118,6 @@ function ManageEvents() {
     setVenueId(event.venueId);
     setDate(event.date);
     setStartTime(event.startTime);
-    setTicketPrice(event.ticketPrice);
     setTicketSales(event.ticketSales);
     setTicketSalesClosingDate(event.ticketSalesClosingDate);
     setImageUrl(event.imageUrl);
@@ -199,11 +194,6 @@ function ManageEvents() {
               </div>
             </div>
 
-            <div className="form-group">
-              <label>Ticket Price (R)</label>
-                <input type="number" min="0" value={ticketPrice} onChange={(event) => setTicketPrice(event.target.value)} required/>
-            </div>
-
             <div className="form-row">
               <div className="form-group">
                 <label>Ticket Sales</label>
@@ -246,7 +236,6 @@ function ManageEvents() {
                         <p> <strong>Date:</strong> {event.date}</p>
                         <p> <strong>Start Time:</strong> {event.startTime}</p>
                         <p> <strong>Ticket Sales:</strong> {event.ticketSales}</p>
-                        <p><strong>Ticket Price:</strong> R{Number(event.ticketPrice).toFixed(2)}</p>
                         <p> <strong>Ticket Sales Closing Date:</strong> {event.ticketSalesClosingDate}</p>
                         <p> <strong>Venue:</strong> {venue ? venue.name : "Venue not found"}</p>
                         <p> <strong>Address:</strong> {venue ? venue.address : "Address not found"}</p>
