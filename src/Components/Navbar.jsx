@@ -40,10 +40,10 @@ function Navbar() {
       <nav className="navbar glass">
         <div className="logo"><img src="./logo1.png"/></div>
         <div className="nav-links">
-          <Link to="/user">Home</Link>
-          <Link to="/events">All Events</Link>
+          <Link to="/events">Home</Link>
+          <Link to="/user">All Events</Link>
           <Link to="/application">Application Form</Link>
-          <Link to="/BookingHistory">Booking History</Link>
+          <Link to="/BookingHistory">User Profile</Link>
           {userRole === "manager" && (<Link to="/manager">Manage</Link>)}
           {userRole === "superAdmin" && (<Link to="/superAdmin">Admin</Link>)}
           <Link to="/about">About Us</Link>
@@ -76,7 +76,7 @@ function Navbar() {
             <button type="button" className="cancel" onClick={closeProfile}>Close</button>
           </div>
         </div>
-      )}
+      )} 
     </>
   )
 }
