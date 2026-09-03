@@ -140,7 +140,7 @@ function Checkout() {
             </button>
 
             <p className="secure-payment">
-              🔒 Secure payment powered by Paystack
+              Secure payment powered by Paystack
             </p>
           </div>
         </section>
