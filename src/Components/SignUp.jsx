@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../Styling/SignUp.css";
 import { auth } from "../lib/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { Navigate } from "react-router-dom";
 
 function SignUp({showLogin}) {
   const [username, setUsername] = useState("");
@@ -37,6 +38,7 @@ function SignUp({showLogin}) {
         throw new Error(data.message)
       }
        alert("Welcome to the Family!");
+       navigate("/events")
         setUsername(""); setEmail(""); setPassword(""); setConfirmPassword("");
       }catch (error) {
       alert(error.message)

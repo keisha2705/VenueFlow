@@ -86,15 +86,15 @@ function BookingHistory() {
                   <span style={{ fontSize: '12px', padding: '3px 8px', borderRadius: '4px', background: '#12a454' }}>
                     {booking.bookingStatus}
                   </span>
-                </div>
-  
+                </div> 
+
                 <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>{booking.event}</h3>
-                <p style={{ margin: '0 0 15px 0', color: '#141414', fontSize: '14px' }}>{booking.venue}</p>
+                <p style={{ margin: '0 0 15px 0', color: '#141414', fontSize: '14px' }}>{booking.venue}</p> 
 
                 <div style={{ borderTop: '1px solid #29292e', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
                   <span style={{ color: '#aaa' }}>Seats: {booking.selectedSeats?.length || 0}</span>
                   <span style={{ fontWeight: 'bold' }}>Total: R{booking.totalAmount}</span>
-                </div>
+                </div> 
 
               </div>
             ))}
