@@ -1,10 +1,19 @@
 .events-page {
-    min-height: 80vh;
-    background-color: white;
+    min-height: 100vh;
+    background: linear-gradient(135deg,#16001f,#25003d,#100014);
     padding: 40px 30px;
     color: white;
 }
 
+.events-container {
+    /* border: 2px solid red; */
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(43, 0, 62, 0.75);
+    border: 1px solid #5c1591;
+    border-radius: 20px;
+    padding: 45px;
+}
 .events-header {
     text-align: center;
     margin-bottom: 40px;
@@ -13,12 +22,12 @@
 .events-header h1 {
     font-size: 42px;
     margin: 0 0 10px;
-    color:rgb(0, 0, 0);
+    color: white;
 }
 
 .event-form-card {
     /* border: 2px solid red; */
-    background:white;
+    background: rgba(36, 0, 52, 0.9);
     border: 1px solid #4b335b;
     border-radius: 16px;
     padding: 30px;

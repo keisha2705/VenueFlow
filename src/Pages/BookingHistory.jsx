@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import '../Styling/BookingHistory.css';
-import Navbar from "../Components/Navbar.jsx";
 
 function BookingHistory() {
   const [bookingHistory, setBookingHistory] = useState([]);
 
-  const getLocalUser = () => {
-    try {
-      const storedUser = localStorage.getItem("user");
-      return storedUser ? JSON.parse(storedUser) : null;
-    } catch (error) {
-      console.error("Error parsing user from localStorage:", error);
-      return null;
-    }
-  };
-
-  const userData = getLocalUser();
-
   const userProfile = {
-    name: userData?.username || "Loading name...",
-    email: userData?.email || "Loading email..."
+    name: localStorage.getItem("username") || "Loading name...",
+    email: localStorage.getItem("userEmail") || "Loading email..."
   };
-
 
   // 3. Connect to the backend the moment the page opens on the screen
   useEffect(() => {
@@ -54,8 +40,8 @@ function BookingHistory() {
   }, []);
 
   return (
-    <div className="history-page-container" style={{ padding: '100px 30px 30px 30px', color: '#141414', background: '#d6d6e4', minHeight: '100vh' }}>
-      <Navbar/>
+    <div className="history-page-container" style={{ padding: '30px', color: '#141414', background: '#d6d6e4', minHeight: '100vh' }}>
+      
       <div className="user-profile-header" style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '40px' }}>
         <div className="user-icon" style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#691362', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
         </div>
@@ -87,7 +73,7 @@ function BookingHistory() {
                     {booking.bookingStatus}
                   </span>
                 </div>
-  
+
                 <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>{booking.event}</h3>
                 <p style={{ margin: '0 0 15px 0', color: '#141414', fontSize: '14px' }}>{booking.venue}</p>
 
