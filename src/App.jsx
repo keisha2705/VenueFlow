@@ -12,7 +12,8 @@ import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
 import BookingHistory from './Pages/BookingHistory';
-import Checkout from "./Pages/Checkout";
+import PaymentCallback from "./Pages/PaymentCallback";
+
 function App() {
   return (
     <>
@@ -54,6 +55,16 @@ function App() {
             element={
               <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
                 <BookingHistory />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Paystack redirects here after checkout to confirm the booking */}
+          <Route
+            path="/payment/callback"
+            element={
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+                <PaymentCallback />
               </ProtectedRoute>
             }
           />
@@ -125,4 +136,3 @@ function App() {
 }
 
 export default App;
-

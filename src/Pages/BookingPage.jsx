@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../Styling/BookingPage.css";
 import Navbar from "../Components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
+import Checkout from "./Checkout";
 
 export function SeatSelection({ eventId }) {
   const [eventDetails, setEventDetails] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [bookingLoading, setBookingLoading] = useState(false);
+  const [showCheckout, setShowCheckout] = useState(false);
   const navigate = useNavigate();
 
   const userId = localStorage.getItem("userId") || "user_client_abc123";
@@ -83,43 +84,15 @@ export function SeatSelection({ eventId }) {
     }
   };
 
-  const handleFinalCheckout = async () => {
+  const handleProceedToCheckout = () => {
     if (selectedSeats.length === 0) {
       alert("Please select at least one seat before confirming.");
       return;
     }
-
-    setBookingLoading(true);
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3000/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          eventId: eventId,
-          venueId: eventDetails.venueId,
-          selectedSeats: selectedSeats,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message || "Booking failed.");
-        return;
-      }
-
-      alert(`Success! Booking Confirmed.\nRef: ${data.bookingReference}`);
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Checkout fault:", err);
-      alert("Communication error during checkout creation.");
-    } finally {
-      setBookingLoading(false);
-    }
+    // Seats are already locked server-side via handleSeatClick above.
+    // Payment (and the actual booking creation) happens in Checkout,
+    // via /api/paystack/initialize -> Paystack -> /api/paystack/verify.
+    setShowCheckout(true);
   };
 
   // 2. DYNAMIC MAP GENERATOR FUNCTION
@@ -175,6 +148,16 @@ export function SeatSelection({ eventId }) {
     );
   }
 
+  if (showCheckout) {
+    return (
+      <Checkout
+        eventId={eventId}
+        venueId={eventDetails.venueId}
+        selectedSeats={selectedSeats}
+      />
+    );
+  }
+
   return (
     <div className="booking-container">
       <Navbar />
@@ -216,10 +199,10 @@ export function SeatSelection({ eventId }) {
 
           <button
             className="checkout-purple-btn"
-            onClick={handleFinalCheckout}
-            disabled={bookingLoading || selectedSeats.length === 0}
+            onClick={handleProceedToCheckout}
+            disabled={selectedSeats.length === 0}
           >
-            {bookingLoading ? "Processing Ticket..." : "Confirm & Book Tickets"}
+            Proceed to Payment
           </button>
         </div>
       </div>

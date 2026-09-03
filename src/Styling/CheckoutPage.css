@@ -4,8 +4,8 @@
 
 .checkout-page {
   min-height: 100vh;
-  background: #f7f5ff;
-  color: #17121f;
+  background: #0d0714;
+  color: #f4f0fa;
   font-family: Arial, sans-serif;
 }
 
@@ -15,21 +15,25 @@
 ======================================== */
 
 .checkout-header {
-  background: #6d28d9;
+  background: linear-gradient(180deg, #1a0d2e 0%, #0d0714 100%);
   color: white;
   text-align: center;
   padding: 45px 20px;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.25);
 }
 
 .checkout-header h1 {
   margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 38px;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .checkout-header p {
   margin-top: 10px;
   font-size: 16px;
+  color: #c3b6dd;
   opacity: 0.9;
 }
 
@@ -55,7 +59,8 @@
 
 .booking-section h2,
 .payment-section h2 {
-  color: #4c1d95;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #c9a8f5;
   margin-bottom: 18px;
   font-size: 24px;
 }
@@ -66,13 +71,13 @@
 ======================================== */
 
 .booking-card {
-  background: white;
+  background: #170f24;
   border-radius: 18px;
   padding: 28px;
 
-  box-shadow: 0 10px 30px rgba(76, 29, 149, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 
-  border: 1px solid #e9ddff;
+  border: 1px solid rgba(124, 58, 237, 0.25);
 }
 
 .booking-item {
@@ -82,7 +87,7 @@
 
   padding: 17px 0;
 
-  border-bottom: 1px solid #eee7ff;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.15);
 }
 
 .booking-item:last-child {
@@ -90,13 +95,14 @@
 }
 
 .booking-item span {
-  color: #777;
+  color: #9d8fb8;
   font-size: 15px;
 }
 
 .booking-item strong {
-  color: #24113f;
+  color: #f4f0fa;
   font-size: 16px;
+  text-align: right;
 }
 
 
@@ -105,13 +111,45 @@
 ======================================== */
 
 .payment-card {
-  background: white;
+  background: #170f24;
   border-radius: 18px;
   padding: 28px;
 
-  box-shadow: 0 10px 30px rgba(76, 29, 149, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 
-  border: 1px solid #e9ddff;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+}
+
+
+/* ========================================
+   FORM INPUTS
+======================================== */
+
+.checkout-input {
+  display: block;
+  width: 100%;
+
+  padding: 12px 14px;
+  margin-bottom: 16px;
+
+  background: #0d0714;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 10px;
+
+  color: #f4f0fa;
+  font-size: 15px;
+
+  transition: border-color 0.2s ease;
+}
+
+.checkout-input::placeholder {
+  color: #776a90;
+}
+
+.checkout-input:focus {
+  outline: none;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
 }
 
 
@@ -125,17 +163,17 @@
 
   margin-bottom: 18px;
 
-  color: #555;
+  color: #b9aecb;
 }
 
 .price-row span:last-child {
-  color: #24113f;
+  color: #f4f0fa;
   font-weight: 600;
 }
 
 .payment-card hr {
   border: none;
-  border-top: 1px solid #e8e0f5;
+  border-top: 1px solid rgba(124, 58, 237, 0.2);
 
   margin: 22px 0;
 }
@@ -146,7 +184,7 @@
 
   font-size: 20px;
 
-  color: #4c1d95;
+  color: #c9a8f5;
 
   margin-bottom: 25px;
 }
@@ -179,11 +217,12 @@
   background: #5b21b6;
   transform: translateY(-2px);
 
-  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
 }
 
 .pay-button:disabled {
-  background: #a78bfa;
+  background: #4c3a6b;
+  color: #a99ec2;
   cursor: not-allowed;
   transform: none;
 }
@@ -200,7 +239,7 @@
 
   font-size: 13px;
 
-  color: #777;
+  color: #9d8fb8;
 }
 
 
@@ -209,8 +248,8 @@
 ======================================== */
 
 .payment-message {
-  background: #f3e8ff;
-  color: #6b21a8;
+  background: rgba(124, 58, 237, 0.15);
+  color: #c9a8f5;
 
   padding: 12px;
 
@@ -222,8 +261,8 @@
 }
 
 .payment-success {
-  background: #f3e8ff;
-  color: #6d28d9;
+  background: rgba(124, 58, 237, 0.15);
+  color: #c9a8f5;
 
   padding: 12px;
 
@@ -237,8 +276,9 @@
 }
 
 .payment-error {
-  background: #f4f4f5;
-  color: #18181b;
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 
   padding: 12px;
 
@@ -259,7 +299,7 @@
 
   inset: 0;
 
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
 
   display: flex;
 
@@ -280,7 +320,8 @@
   width: 100%;
   max-width: 450px;
 
-  background: white;
+  background: #170f24;
+  border: 1px solid rgba(124, 58, 237, 0.25);
 
   border-radius: 20px;
 
@@ -288,7 +329,7 @@
 
   text-align: center;
 
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 
   animation: modalAppear 0.25s ease;
 }
@@ -332,13 +373,14 @@
 }
 
 .payment-modal h2 {
-  color: #4c1d95;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #c9a8f5;
 
   margin-bottom: 12px;
 }
 
 .payment-modal > p {
-  color: #666;
+  color: #b9aecb;
 
   line-height: 1.6;
 }
@@ -349,7 +391,8 @@
 ======================================== */
 
 .payment-details {
-  background: #f7f5ff;
+  background: #0d0714;
+  border: 1px solid rgba(124, 58, 237, 0.2);
 
   border-radius: 12px;
 
@@ -363,17 +406,12 @@
 .payment-details p {
   margin: 9px 0;
 
-  color: #444;
+  color: #d6cce8;
 }
 
 .payment-details strong {
-  color: #4c1d95;
+  color: #c9a8f5;
 }
-
-
-/* ========================================
-   CONTINUE BUTTON
-======================================== */
 
 .continue-button {
   width: 100%;
@@ -384,7 +422,7 @@
 
   border-radius: 10px;
 
-  background: #111;
+  background: #7c3aed;
 
   color: white;
 
@@ -398,13 +436,9 @@
 }
 
 .continue-button:hover {
-  background: #4c1d95;
+  background: #5b21b6;
 }
 
-
-/* ========================================
-   RESPONSIVE DESIGN
-======================================== */
 
 @media (max-width: 768px) {
 

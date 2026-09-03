@@ -1,250 +1,131 @@
 import React, { useState } from "react";
-import '../Styling/CheckoutPage.css';
+import "../Styling/CheckoutPage.css";
+// NOTE: adjust this import to wherever your Firebase app/auth instance
+// actually lives in this project (e.g. "../firebase" or "../lib/firebase").
+import { auth } from "../lib/firebase";
 
-function Checkout() {
-  
-  // BOOKING INFORMATION
-  const booking = {
-    venue: "Main Event Hall",
-    date: "25 August 2026",
-    time: "18:00",
-    seat: "A12",
-    price: 250,
-  };
+const Checkout = ({ eventId, venueId, selectedSeats }) => {
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // PAYMENT STATES
-  const [paymentStatus, setPaymentStatus] = useState("idle");
-  const [showModal, setShowModal] = useState(false);
-  const [paymentReference, setPaymentReference] = useState("");
+  const handlePayment = async () => {
+    setErrorMessage("");
+    setIsSubmitting(true);
+    try {
+      const currentUser = auth.currentUser;
+      if (!currentUser) {
+        setErrorMessage("You need to be logged in to pay.");
+        setIsSubmitting(false);
+        return;
+      }
+      const idToken = await currentUser.getIdToken();
 
-  // PAYSTACK PAYMENT
-  const handlePayment = () => {
-    setPaymentStatus("processing");
+      // The backend looks up the logged-in user and recalculates the price
+      // from the locked seats itself — it does NOT trust a client-sent amount.
+      const response = await fetch("http://localhost:3000/api/paystack/initialize", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({
+          eventId,
+          venueId,
+          selectedSeats,
+          // Paystack redirects the browser here after payment; this page
+          // should read the `reference` query param and call
+          // GET /api/paystack/verify/:reference to confirm the booking.
+          callbackUrl: `${window.location.origin}/payment/callback`,
+        }),
+      });
 
-    const paystackPublicKey =
-      import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+      const data = await response.json();
 
-    if (!paystackPublicKey) {
-      alert("Paystack public key is missing.");
-      setPaymentStatus("idle");
-      return;
+      if (!response.ok) {
+        setErrorMessage(data.message || "Could not start payment.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Hand off to Paystack's hosted checkout page.
+      window.location.href = data.authorization_url;
+    } catch (error) {
+      console.error("Payment initialization error:", error);
+      setErrorMessage("Something went wrong starting your payment.");
+      setIsSubmitting(false);
     }
-
-    const handler = window.PaystackPop.setup({
-      key: paystackPublicKey,
-
-      email: "customer@example.com",
-
-      // Paystack expects the amount in kobo/cents.
-      // R250 = 25000
-      amount: booking.price * 100,
-
-      currency: "ZAR",
-
-      callback: function (response) {
-        console.log("Payment successful:", response);
-
-        setPaymentReference(response.reference);
-
-        setPaymentStatus("success");
-
-        // Show success modal
-        setShowModal(true);
-      },
-
-      onClose: function () {
-        console.log("Payment window closed");
-
-        if (paymentStatus !== "success") {
-          setPaymentStatus("idle");
-        }
-      },
-    });
-
-    handler.openIframe();
   };
 
   return (
     <div className="checkout-page">
+      <div className="checkout-header">
+        <h1>Complete Your Booking</h1>
+        <p>You're one step away from securing your seats.</p>
+      </div>
 
-      {/*  
-          HEADER
-        */}
-      <header className="checkout-header">
-        <h1>Checkout</h1>
-        <p>Complete your venue booking</p>
-      </header>
-
-
-      <main className="checkout-container">
-
-        {/*  
-            BOOKING DETAILS
-        */}
-        <section className="booking-section">
-
-          <h2>Booking Details</h2>
-
+      <div className="checkout-container">
+        <div className="booking-section">
+          <h2>Your Selection</h2>
           <div className="booking-card">
-
             <div className="booking-item">
-              <span>Venue</span>
-              <strong>{booking.venue}</strong>
+              <span>Tickets</span>
+              <strong>{selectedSeats?.length || 0}</strong>
             </div>
-
             <div className="booking-item">
-              <span>Date</span>
-              <strong>{booking.date}</strong>
+              <span>Seats</span>
+              <strong>{selectedSeats?.join(", ") || "—"}</strong>
             </div>
-
             <div className="booking-item">
-              <span>Time</span>
-              <strong>{booking.time}</strong>
+              <span>Reference</span>
+              <strong>{eventId?.slice(-8).toUpperCase()}</strong>
             </div>
-
-            <div className="booking-item">
-              <span>Seat</span>
-              <strong>{booking.seat}</strong>
-            </div>
-
           </div>
+        </div>
 
-        </section>
-
-
-        {/* 
-            PAYMENT
-         */}
-        <section className="payment-section">
-
-          <h2>Payment</h2>
-
+        <div className="payment-section">
+          <h2>Payment Details</h2>
           <div className="payment-card">
+            <input
+              type="text"
+              value={name}
+              placeholder="Full name"
+              className="checkout-input"
+              onChange={(e) => setName(e.target.value)}
+            />
 
-            <div className="price-row">
-              <span>Ticket</span>
-              <span>R{booking.price}</span>
-            </div>
-
-            <div className="price-row">
-              <span>Booking fee</span>
-              <span>R0</span>
-            </div>
+            <input
+              type="tel"
+              value={phoneNumber}
+              placeholder="Phone Number"
+              className="checkout-input"
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
 
             <hr />
 
-            <div className="total-row">
-              <strong>Total</strong>
-              <strong>R{booking.price}</strong>
-            </div>
-
-
-            {/* 
-                PAYMENT STATUS
-            */}
-
-            {paymentStatus === "processing" && (
-              <div className="payment-message">
-                Processing payment...
-              </div>
+            {errorMessage && (
+              <div className="payment-error">{errorMessage}</div>
             )}
-
-            {paymentStatus === "success" && (
-              <div className="payment-success">
-                Payment successful!
-              </div>
-            )}
-
-            {paymentStatus === "failed" && (
-              <div className="payment-error">
-                Payment failed. Please try again.
-              </div>
-            )}
-
-
-            {/* 
-                PAY BUTTON
-             */}
 
             <button
-              className="pay-button"
+              type="button"
               onClick={handlePayment}
-              disabled={paymentStatus === "processing"}
+              disabled={isSubmitting}
+              className="pay-button"
             >
-              {paymentStatus === "processing"
-                ? "Processing..."
-                : `Pay R${booking.price}`}
+              {isSubmitting ? "Starting payment..." : "Pay Now"}
             </button>
-
 
             <p className="secure-payment">
-              🔒 Secure payment powered by Paystack
+              🔒 Payments are securely processed by Paystack.
             </p>
-
           </div>
-
-        </section>
-
-      </main>
-
-
-      {/* 
-          SUCCESS MODAL
-       */}
-
-      {showModal && (
-        <div className="modal-overlay">
-
-          <div className="payment-modal">
-
-            <div className="success-icon">
-              ✓
-            </div>
-
-            <h2>Payment Successful!</h2>
-
-            <p>
-              Your payment has been completed successfully.
-            </p>
-
-            <div className="payment-details">
-
-              <p>
-                <strong>Venue:</strong>{" "}
-                {booking.venue}
-              </p>
-
-              <p>
-                <strong>Seat:</strong>{" "}
-                {booking.seat}
-              </p>
-
-              <p>
-                <strong>Amount:</strong>{" "}
-                R{booking.price}
-              </p>
-
-              <p>
-                <strong>Reference:</strong>{" "}
-                {paymentReference}
-              </p>
-
-            </div>
-
-            <button
-              className="continue-button"
-              onClick={() => setShowModal(false)}
-            >
-              Continue
-            </button>
-
-          </div>
-
         </div>
-      )}
-
+      </div>
     </div>
   );
-}
+};
 
 export default Checkout;
