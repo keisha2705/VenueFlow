@@ -48,10 +48,10 @@ function Navbar() {
           {userRole === "superAdmin" && (<Link to="/superAdmin">Admin</Link>)}
           <Link to="/about">About Us</Link>
         </div>
-        {/* <button type="button" className="profile-button" onClick={getProfile} title="View Profile"><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></button> */}
+        <button type="button" className="profile-button" onClick={getProfile} title="View Profile"><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></button>
       </nav>
 
-      {/* {showProfile && profile && (
+      {showProfile && profile && (
         <div className="modal-overlay" onClick={closeProfile}>
           <div className="profile-modal" onClick={(event) => event.stopPropagation()}>
             <div><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></div>
@@ -76,7 +76,7 @@ function Navbar() {
             <button type="button" className="cancel" onClick={closeProfile}>Close</button>
           </div>
         </div>
-      )} */}
+      )} 
     </>
   )
 }
