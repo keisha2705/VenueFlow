@@ -119,7 +119,7 @@ const Checkout = ({ eventId, venueId, selectedSeats }) => {
             </button>
 
             <p className="secure-payment">
-               Payments are securely processed by Paystack.
+              🔒 Payments are securely processed by Paystack.
             </p>
           </div>
         </div>
