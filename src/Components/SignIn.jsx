@@ -11,7 +11,7 @@ function SignIn({ showSignup }) {
   const [password, setPassword] = useState("");
 
   const handleLogin = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (email === "" || password === "") {
       alert("Please fill in all fields.");
