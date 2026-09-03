@@ -4,14 +4,41 @@ import { auth } from "../lib/firebase";
 import "../Styling/Navbar.css";
 
 function Navbar() {
- 
-  // takes logged in info from local storage and assigns it to the userRole variable. If there's no logged-in user, it defaults to "user".
-  const userRole = localStorage.getItem("userRole") || "user";
+  const userRole = localStorage.getItem("userRole");
+  const [showProfile, setShowProfile] = useState(false);
+  const [profile, setProfile] = useState(null);
+
+  async function getProfile() {
+    try {
+      const token = await auth.currentUser.getIdToken();
+      const uid = auth.currentUser.uid;
+      const response = await fetch(`http://localhost:3000/users/${uid}`,
+        {
+          method: "GET",
+          headers: {Authorization: `Bearer ${token}`},
+        }
+      )
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      setProfile(data);
+      setShowProfile(true);
+    } catch (error) {
+      console.error("Error getting profile:", error);
+      alert(error.message);
+    }
+  }
+
+  function closeProfile() {
+    setShowProfile(false);
+  }
 
   return (
     <>
       <nav className="navbar glass">
-        <div className="logo"><img src="/logo1.png"/></div>
+        <div className="logo"><img src="./logo1.png"/></div>
         <div className="nav-links">
           <Link to="/events">Home</Link>
           <Link to="/user">All Events</Link>
@@ -21,10 +48,10 @@ function Navbar() {
           {userRole === "superAdmin" && (<Link to="/superAdmin">Admin</Link>)}
           <Link to="/about">About Us</Link>
         </div>
-        {/* <button type="button" className="profile-button" onClick={getProfile} title="View Profile"><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></button> */}
+        <button type="button" className="profile-button" onClick={getProfile} title="View Profile"><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></button>
       </nav>
 
-      {/* {showProfile && profile && (
+      {showProfile && profile && (
         <div className="modal-overlay" onClick={closeProfile}>
           <div className="profile-modal" onClick={(event) => event.stopPropagation()}>
             <div><img src="./Profile.webp" alt="Profile" className="profile-icon" width="40"/></div>
@@ -49,9 +76,9 @@ function Navbar() {
             <button type="button" className="cancel" onClick={closeProfile}>Close</button>
           </div>
         </div>
-      )} */}
+      )} 
     </>
   )
 }
 
-export default Navbar;
+export default Navbar
