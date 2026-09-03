@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "../Styling/BookingPage.css";
-import Navbar from "../Components/Navbar.jsx";
+import Navbar from "../Components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 
 export function SeatSelection({ eventId }) {
   const [eventDetails, setEventDetails] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [bookingLoading, setBookingLoading] = useState(false);
   const navigate = useNavigate();
-
-  const userId = localStorage.getItem("userId") || "user_client_abc123";
 
   useEffect(() => {
     if (!eventId) return;
     const fetchLayoutData = async () => {
       try {
         const token = localStorage.getItem("token");
-        // 1. Fetch data from your layout endpoint
         const res = await fetch(
           `http://localhost:3000/events/${eventId}/seats`,
           {
@@ -28,17 +24,8 @@ export function SeatSelection({ eventId }) {
         );
         const data = await res.json();
 
-        // Aligned check: Ensure we receive the core structural data fields from our joined collections
         if (data && data.rows && data.seatsPerRow) {
           setEventDetails(data);
-
-          // Fallback array if no bookings exist yet
-          const activeBookings = data.seats || [];
-
-          const matchingHolds = activeBookings
-            .filter((s) => s.status === "locked" && s.lockedBy === userId)
-            .map((s) => s.id);
-          setSelectedSeats(matchingHolds);
         } else {
           console.error(
             "Invalid structural configuration layout data received:",
@@ -50,7 +37,7 @@ export function SeatSelection({ eventId }) {
       }
     };
     fetchLayoutData();
-  }, [eventId, userId]);
+  }, [eventId]);
 
   const handleSeatClick = async (seatId) => {
     try {
@@ -63,7 +50,7 @@ export function SeatSelection({ eventId }) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ seatId, userId }),
+          body: JSON.stringify({ seatId }),
         },
       );
 
@@ -83,63 +70,43 @@ export function SeatSelection({ eventId }) {
     }
   };
 
-  const handleFinalCheckout = async () => {
+  // Hands off to the payment step instead of booking directly — the
+  // booking is only created after Paystack confirms payment, inside
+  // /api/paystack/verify on the backend.
+  const handleProceedToCheckout = () => {
     if (selectedSeats.length === 0) {
-      alert("Please select at least one seat before confirming.");
+      alert("Please select at least one seat before continuing.");
       return;
     }
 
-    setBookingLoading(true);
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3000/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          eventId: eventId,
-          venueId: eventDetails.venueId,
-          selectedSeats: selectedSeats,
-        }),
-      });
+    const pricePerSeat = eventDetails.ticketPrice || 0;
+    const totalPrice = pricePerSeat * selectedSeats.length;
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        alert(data.message || "Booking failed.");
-        return;
-      }
-
-      alert(`Success! Booking Confirmed.\nRef: ${data.bookingReference}`);
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Checkout fault:", err);
-      alert("Communication error during checkout creation.");
-    } finally {
-      setBookingLoading(false);
-    }
+    navigate("/checkout", {
+      state: {
+        eventId,
+        venueId: eventDetails.venueId,
+        selectedSeats,
+        eventName: eventDetails.name,
+        price: totalPrice,
+      },
+    });
   };
 
-  //dynamic generation
-  // This builds the full interactive seat matrix array from rows and columns on the fly
   const renderSeatingMatrix = () => {
     const seatsMatrix = [];
     const bookings = eventDetails.seats || [];
 
     for (let r = 1; r <= eventDetails.rows; r++) {
-      const rowLetter = String.fromCharCode(64 + r); // Converts 1 to 'A', 2 to 'B', etc.
+      const rowLetter = String.fromCharCode(64 + r);
 
       for (let c = 1; c <= eventDetails.seatsPerRow; c++) {
         const currentSeatId = `${rowLetter}${c}`;
 
-        // Look if there's an active status recorded for this specific coordinate inside MongoDB
         const bookingStatusRecord = bookings.find(
           (b) => b.id === currentSeatId,
         );
 
-        // If no booking record is present, the layout falls back safely to 'available'
         const currentStatus = bookingStatusRecord
           ? bookingStatusRecord.status
           : "available";
@@ -190,7 +157,6 @@ export function SeatSelection({ eventId }) {
               gap: "6px",
             }}
           >
-            {/* 3. Output the combined layout matrix template generation */}
             {renderSeatingMatrix()}
           </div>
         </div>
@@ -216,10 +182,10 @@ export function SeatSelection({ eventId }) {
 
           <button
             className="checkout-purple-btn"
-            onClick={handleFinalCheckout}
-            disabled={bookingLoading || selectedSeats.length === 0}
+            onClick={handleProceedToCheckout}
+            disabled={selectedSeats.length === 0}
           >
-            {bookingLoading ? "Processing Ticket..." : "Confirm & Book Tickets"}
+            Proceed to Payment
           </button>
         </div>
       </div>
