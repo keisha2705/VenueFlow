@@ -1,0 +1,219 @@
+@import url("https://googleapis.com");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.application-ppage {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #ffffff;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+.application-ppage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(to right, rgba(38, 4, 116, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(134, 117, 174, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 1;
+}
+
+.application-card {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.application-header {
+  animation: ultraSmoothLeft 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.application-form {
+  animation: ultraSmoothRight 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.1s;
+}
+
+.application-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.application-header h1 {
+  font-family: "Syncopate", sans-serif;
+  font-size: 56px;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0 0 24px 0;
+  letter-spacing: -2px;
+  line-height: 0.95;
+}
+
+.application-header h1::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #6b46c1;
+  margin-top: 24px;
+}
+
+.application-header p {
+  font-size: 15px;
+  font-weight: 400;
+  color: #6b46c1;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 360px;
+}
+
+.application-form {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px;
+  border-left: 1px solid #f3eefc;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 0px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #111111;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  border-radius: 0px !important;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #cbd5e1;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-bottom-color: #6b46c1;
+  padding-left: 12px;
+  background-color: #faf8ff;
+}
+
+.form-group textarea {
+  min-height: 80px;
+  resize: none;
+  line-height: 1.6;
+}
+
+.submit-button {
+  align-self: flex-start;
+  background-color: #111111;
+  color: #ffffff;
+  font-family: "Syncopate", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px 45px;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.submit-button:hover {
+  background-color: #6b46c1;
+  letter-spacing: 4px;
+  box-shadow: 0 20px 40px rgba(107, 70, 193, 0.2);
+}
+
+.submit-button:active {
+  transform: scale(0.97);
+}
+
+@keyframes ultraSmoothLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ultraSmoothRight {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 968px) {
+  .application-ppage {
+    height: auto;
+    min-height: 100vh;
+    padding: 60px 24px;
+  }
+
+  .application-card {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .application-header h1 {
+    font-size: 40px;
+  }
+
+  .application-form {
+    padding: 0;
+    border-left: none;
+  }
+}
