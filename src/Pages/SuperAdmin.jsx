@@ -1,122 +1,163 @@
-// import { useEffect, useState } from "react";
-// import "../Styling/SuperAdmin.css";
+import { useEffect, useState } from "react";
+import { auth } from "../lib/firebase";
+import "../Styling/SuperAdmin.css";
+import Navbar from "../Components/Navbar";
+// import Profile from "../public/Profile.webp;
 
-// function SuperAdmin() {
-//     // const {user, logout} = useAuth();
-//     const [users, setUsers] = useState([]);
-//     const [showModal, setShowModal] = useState(false)
-//     const [email, setEmail] = useState("");
-//     const [role, setRole] = useState("user");
+function SuperAdmin() {
+  const [users, setUsers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("manager");
 
-// useEffect(() => {
-//     async function getUsers() {
-//         try {
-//             const response = await fetch( "http://localhost:3000/users", { headers: { Authorization: `Bearer ${user.token}`}});
-//             const data = await response.json();
-//             // console.log("Users:", data);
-//             if (!response.ok) {
-//                 // console.log(data.message);
-//                 return
-//             } setUsers(data);
-//         } catch (error) {
-//             console.error("Error fetching users:", error);
-//         }
-//     }
-//     // if (user?.token) {
-//     //     getUsers();
-//     // }
-// }, []);
-// const handlePromote = async () => {
-//     if (!email) {
-//         alert("Please enter an email");
-//         return
-//     }
-//     if (!role) {
-//         alert("Please select a role");
-//         return
-//     }
-//     try {
-//         const response = await fetch("http://localhost:3000/users/promote",
-//             {
-//                 method: "PUT",
-//                 headers: { Authorization: `Bearer ${user.token}`,"Content-Type": "application/json"},
-//                 body: JSON.stringify({email: email,role: role})
-//             }
-//         );
-//         const data = await response.json();
-//         // console.log("Promotion response:", data);
-//         if (!response.ok) {
-//             alert(data.message);
-//             return
-//         }
-//         // Adding the promoted user to table
-//         setUsers((currentUsers) => [...currentUsers,data.user]);
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-//         setShowModal(false);
-//         setEmail("");
-//         setRole("user");
-//     } catch (error) {
-//         console.error(
-//             "Promotion error:",error
-//         );
+  async function getUsers() {
+    try {
+      if (!auth.currentUser) {
+        alert("You are not logged in.");
+        return
+      }
+      const token = await auth.currentUser.getIdToken();
+      const response = await fetch("http://localhost:3000/users",{ method: "GET", headers: {Authorization: `Bearer ${token}`}});
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      alert(error.message);
+    }
+  }
 
-//         alert("Unable to promote user.");
-//     }
-// };
+// function to promote user
+  async function handlePromote() {
+    if (!email.trim()) {
+      alert("Please enter an email.");
+      return
+    }
 
-// return (
-//           <div className="superadmin-container">
-//             <h1>Super Admin Dashboard</h1>
-//             <p>Welcome</p>
-//             <button> Logout</button>
+    if (!auth.currentUser) {
+      alert("You are not logged in.");
+      return;
+    }
+    try {
+      const token = await auth.currentUser.getIdToken();
+      const response = await fetch("http://localhost:3000/users/promote",{method: "PUT",headers: {"Content-Type": "application/json",Authorization: `Bearer ${token}`},
+        body: JSON.stringify({email: email.trim().toLowerCase(),role: role})});
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+      alert(data.message);
+      setShowModal(false);
+      setEmail("");
+      setRole("manager");
+      await getUsers();
 
-//             <h2>Users</h2>
-//             <table>
-//                 <thead>
-//                     <tr>
-//                         <th>Name</th>
-//                         <th>Email</th>
-//                         <th>Role</th>
-//                     </tr>
-//                 </thead>
+    } catch (error) {
+      console.error("Promotion error:", error);
+      alert(error.message);
+    }
+  }
+// remove a users special role back to user
+  async function handleRemoveRole(user) {
+    const confirmRemove = window.confirm(`Are you sure you want to remove ${user.email}'s ${user.role} role?`);
+    if (!confirmRemove) {
+      return
+    }
 
-//                 <tbody>
-//                     {users.map((user) => (
-//                         <tr key={user._id}>
-//                             <td>{user.name}</td>
-//                             <td>{user.email}</td>
-//                             <td>{user.role}</td>
-//                         </tr>
-//                     ))}
-//                 </tbody>
+    try {
+      if (!auth.currentUser) {
+        alert("You are not logged in.");
+        return
+      }
+      const token = await auth.currentUser.getIdToken();
+      const response = await fetch(`http://localhost:3000/users/${user._id}/demote`,{method: "PUT",
+          headers: {Authorization: `Bearer ${token}`,}}
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+      alert(data.message);
+      await getUsers();
+    } catch (error) {
+      console.error("Remove role error:", error);
+      alert(error.message);
+    }
+  }
 
-//             </table>
-//             <button className="add-button" onClick={()=>setShowModal(true)}> + </button>
-             
-//     {showModal && ( 
-//         <div className="modal-overlay">
-//         <div className="modal">
-//             <h2> Promote Users </h2>
+  function closeModal() {
+    setShowModal(false);
+    setEmail("");
+    setRole("manager");
+  }
 
-//             <p> Promote users by entering their email and selecting new roles</p>
-            
-//             <label>Email</label>
-//             <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Enter user email"/>
-            
-//             <label>Role</label>
+  return (
+    <div className="superadmin-container">
+      <Navbar />
+      <h1>SUPER ADMIN</h1>
+      <p>Manage users and their roles.</p>
 
-//             <select value={role} onChange={(event) => setRole(event.target.value)}>
-//             <option value="user"> User</option>
-//             {/* <option value="superAdmin"> SuperAdmin </option> */}
-//             <option value="municipality">Municipality </option>
-//             </select>
+      <h2>Users</h2>
 
-//             <button onClick={handlePromote}>Promote</button>
-//             <button className="cancel" onClick={() => setShowModal(false)}> Cancel </button>
-//         </div>
-//     </div>)}
-//     </div>
-// );
-// }
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
 
-// export default SuperAdmin
+        <tbody>
+          {/* if there are no user */}
+          {users.length === 0 ? (
+            <tr>
+              <td colSpan="4">No managers or superAdmins found.</td>
+            </tr>
+            ) : 
+            (users.map((user) => (
+              <tr key={user._id}>
+                <td>{user.username ||user.name ||"No name"}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+                {/* this will prevent superadmin from removing themselves */}
+                <td>{user.role === "superAdmin" ? (<span>No action</span>
+                  ) : (
+                <button type="button" className="remove-role-button" onClick={() =>handleRemoveRole(user)}>Remove Role</button>)}
+                </td>
+              </tr>)))}
+        </tbody>
+      </table>
+
+      <button type="button" className="add-button" onClick={() => setShowModal(true)}>+</button>
+      {/* promoting a user form */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Promote User</h2>
+            <p> Enter the email address of the user you want to promote.</p>
+            <label htmlFor="user-email">Email</label>
+            <input id="user-email" type="email" value={email} onChange={(event) =>setEmail(event.target.value)}placeholder="Enter user email"/>
+            <label htmlFor="user-role">Role</label>
+            <select id="user-role" value={role} onChange={(event) =>setRole(event.target.value)}>
+              <option value="user">User</option>
+              <option value="manager">Manager</option>
+            </select>
+
+            <button type="button" onClick={handlePromote}>Promote</button>
+            <button type="button" className="cancel" onClick={closeModal}>Cancel</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default SuperAdmin

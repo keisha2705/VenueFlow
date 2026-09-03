@@ -1,130 +1,122 @@
+@import url("https://googleapis.com");
+
+body {
+  margin: 0;
+  padding: 0;
+ 
+}
+
 .manager-page {
-    /* border: 2px solid red; */
-    min-height: 100vh;
-    width: 100%;
-    background: linear-gradient(135deg,#21002f 0%,#3d0061 45%,#08000d 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    color: white;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+   background-color: #ffffff !important; 
 }
 
 .manager-container {
-    width: 100%;
-    /* border: 2px solid red; */
-    /* height: 270px; */
-    /* max-width: 1100px; */
-    padding: 80px;
-    background: rgba(42, 0, 61, 0.6);
-    /* border: 1px solid rgba(190, 92, 255, 0.35); */
-    border-radius: 24px;
-    box-shadow: 0 0 10px rgba(142, 0, 255, 0.5), 
-    inset 0 0 0px rgba(153, 0, 255, 0.5);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 40px;
 }
 
+/* --- Clean Text-Only Header --- */
 .manager-header {
-    /* border: 2px solid red; */
-    text-align: center;
-    margin-bottom: 50px;
+  margin: 60px 0 80px 0;
 }
 
 .manager-header h1 {
-    font-size: 42px;
-    color: #f2dcff;
+  font-family: "Syncopate", sans-serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  color: #111111;
+  letter-spacing: -1px;
+  margin: 0;
 }
 
-.manager-header p {
-    margin-top: 15px;
-    color: #c9a9d8;
-}
-
+/* --- Row Layout (Replacing Cards entirely) --- */
 .manager-cards {
-    /* border: 2px solid red; */
-    display: flex; 
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column; /* Stack sections vertically instead of box blocks */
+  width: 100%;
+  gap: 0; 
 }
 
+/* --- Minimalist Linear Rows --- */
 .manager-card {
-    /* border: 2px solid red; */
-    padding: 30px;
-    background: rgba(57, 0, 83, 0.55);
-    border: 1px solid rgba(185, 82, 255, 0.3);
-    border-radius: 18px;
-    text-align: center;
-    box-sizing: border-box;
+  background: transparent !important;
+  border: none;
+  border-bottom: 1px solid #eaeaea; /* Fine minimal underline separator */
+  border-radius: 0px;
+  padding: 32px 10px;
+  display: flex;
+  flex-direction: row; /* Content sits cleanly side-by-side */
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: all 0.3s ease;
 }
 
+/* Subtle row hover feedback */
 .manager-card:hover {
-    transform: translateY(-7px);
-    border-color: rgba(190, 86, 255, 0.75);
-    box-shadow:0 10px 35px rgba(133, 0, 255, 0.25);
+  background-color: #faf9fe !important; /* Extremely soft purple mist tint */
+  border-bottom-color: #6b46c1;
+  padding-left: 20px;
 }
 
 .manager-card h2 {
-    margin: 14px 0;
-    font-size: 25px;
-    color: #f4e4ff;
+  font-family: "Syncopate", sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0;
+  width: 25%; /* Keeps titles structurally inline */
+  letter-spacing: 0px;
 }
 
 .manager-card p {
-    height: 50px;
-    margin-bottom: 25px;
-    color: #bd9ccb;
-    font-size: 15px;
-    line-height: 2;
+  font-size: 14px;
+  color: #777777;
+  margin: 0;
+  width: 50%;
 }
 
+/* --- Flat Action Buttons --- */
 .manager-button {
-    /* border: 2px solid red; */
-    width: 100%;
-    padding: 13px 20px;
-    border: none;
-    border-radius: 9px;
-    background: linear-gradient( 90deg, #8b19ff,#6500d9);
-    color: white;
-    font-size: 15px;
-    /* font-weight: bold; */
-    cursor: pointer;
-    transition:transform 0.2s ease, box-shadow 0.2s ease,
+  background: transparent;
+  color: #111111;
+  font-family: "Syncopate", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 2px solid #111111; /* Sleek underlined trigger action */
+  border-radius: 0px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
 }
 
 .manager-button:hover {
-    transform: translateY(-2px);
-    background: linear-gradient( 90deg, #9d32ff,#7610ee);
-    box-shadow: 0 0 20px rgba(144, 0, 255, 0.55);
+  color: #6b46c1;
+  border-bottom-color: #6b46c1;
+  letter-spacing: 2px;
+  box-shadow: none;
 }
 
-.manager-button:active {
-    transform: translateY(0);
-}
-
-@media screen and (max-width: 850px) {
-    .manager-container {
-        padding: 35px;
-    }
-    .manager-cards {
-        grid-template-columns: 1fr;
-    }
-    .manager-header h1 {
-        font-size: 34px;
-    }
-}
-
-@media (max-width: 500px) {
-    .manager-page {
-        padding: 20px;
-    }
-    .manager-container {
-        padding: 25px 20px;
-    }
-    .manager-header h1 {
-        font-size: 29px;
-    }
-    .manager-header p {
-        font-size: 14px;
-    }
-    .manager-card {
-        padding: 25px 20px;
-    }
+/* Responsive row collapsing for tablets */
+@media (max-width: 768px) {
+  .manager-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px 0;
+  }
+  .manager-card h2, .manager-card p {
+    width: 100%;
+  }
 }

@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
 
-function Events() {
+export default function Events() {
   return (
-    <div>
-      <h1>EVENTS</h1>
+    <div style={{ padding: "20px", textAlign: "center" }}>
+      <h2>Discover Events</h2>
+      <p>The events dashboard component layout is currently under construction.</p>
     </div>
-  )
+  );
 }
-
-export default Events

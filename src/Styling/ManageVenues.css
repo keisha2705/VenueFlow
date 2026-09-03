@@ -1,0 +1,332 @@
+@import url("https://googleapis.com");
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+.venues-page {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.venues-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  box-sizing: border-box;
+}
+
+.venues-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+  border-bottom: 1px solid #f3eefc;
+  padding-bottom: 24px;
+}
+
+.venues-header h1 {
+  font-family: "Syncopate", sans-serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  color: #111111;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.venue-form-container {
+  margin-bottom: 80px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 60px;
+  animation: smoothFadeDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.venue-form-container h2 {
+  font-family: "Syncopate", sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0 0 40px 0;
+}
+
+.venue-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label,
+.map-section label.searching {
+  font-size: 11px;
+  font-weight: 600;
+  color: #111111;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.location-search input {
+  width: 100%;
+  padding: 12px 0px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #111111;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  border-radius: 0px !important;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.form-group input:focus,
+.location-search input:focus {
+  border-bottom-color: #6b46c1;
+  padding-left: 12px;
+  background-color: #faf8ff;
+}
+
+.map-section {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.location-search {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.location-search input {
+  flex-grow: 1;
+}
+
+.location-search button {
+  background-color: transparent;
+  color: #111111;
+  font-family: "Syncopate", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 24px;
+  border: none;
+  border-bottom: 2px solid #111111;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.location-search button:hover {
+  color: #6b46c1;
+  border-bottom-color: #6b46c1;
+}
+
+.map-section p {
+  font-size: 13px;
+  color: #666666;
+  margin: 12px 0 0 0;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.primary-button {
+  background-color: #111111;
+  color: #ffffff;
+  font-family: "Syncopate", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 18px 45px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.primary-button:hover {
+  background-color: #6b46c1;
+  box-shadow: 0 10px 20px rgba(107, 70, 193, 0.15);
+}
+
+.secondary-button {
+  background-color: transparent;
+  color: #666666;
+  font-family: "Syncopate", sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 18px 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.secondary-button:hover {
+  color: #111111;
+  border-bottom-color: #111111;
+}
+
+.venues-list-section {
+  margin-top: 40px;
+}
+
+.venues-list-section h2 {
+  font-family: "Syncopate", sans-serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #111111;
+  margin-bottom: 40px;
+}
+
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+.venue-card {
+  background-color:whitesmoke; 
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  box-shadow: 0 10px 30px rgba(22, 0, 31, 0.25);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.venue-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(107, 70, 193, 0.3);
+}
+
+.venue-card h2 {
+  font-family: "Syncopate", sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: black;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.5px;
+}
+
+.venue-description {
+  font-size: 14px;
+  color: black; 
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.venue-details {
+  font-size: 13px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+}
+
+.venue-details strong {
+  color: #be69ff; 
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.venue-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: auto; 
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.edit-button,
+.delete-button {
+  background: transparent;
+  font-family: "Syncopate", sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.edit-button {
+  color: black;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.edit-button:hover {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+.delete-button {
+  color: #ff4d4d;
+  border-color: rgba(255, 77, 77, 0.2);
+}
+
+.delete-button:hover {
+  background-color: #ff4d4d;
+  color: #ffffff;
+}
+
+.no-venues {
+  padding: 40px 0;
+  color: #999999;
+  font-size: 15px;
+}
+
+@keyframes smoothFadeDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 968px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .venues-grid {
+    grid-template-columns: 1fr;
+  }
+}
