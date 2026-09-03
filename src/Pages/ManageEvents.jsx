@@ -30,7 +30,7 @@ function ManageEvents() {
         return
       }
       const token = await auth.currentUser.getIdToken();
-      const response = await fetch("http://localhost:3000/venues", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/venues`, {
       headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -47,7 +47,7 @@ function ManageEvents() {
   async function getEvents() {
     try {
       const token = await auth.currentUser.getIdToken();
-      const response = await fetch("http://localhost:3000/events", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/events`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -69,7 +69,7 @@ function ManageEvents() {
       if (editingEvent) {
         //updating an event only if it exists
         response = await fetch(
-          `http://localhost:3000/events/${editingEvent._id}`,
+          `${import.meta.env.VITE_API_URL}/events/${editingEvent._id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}`},
@@ -78,7 +78,7 @@ function ManageEvents() {
         )
       } else {
         //creating an event
-        response = await fetch("http://localhost:3000/events", {
+        response = await fetch(`${import.meta.env.VITE_API_URL}/events`, {
           method: "POST",
           headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
           body: JSON.stringify(eventData),
@@ -137,7 +137,7 @@ function ManageEvents() {
         return
       }
       const token = await auth.currentUser.getIdToken();
-      const response = await fetch(`http://localhost:3000/events/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

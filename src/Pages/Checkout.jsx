@@ -34,7 +34,7 @@ function Checkout() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:3000/api/paystack/initialize",
+        `${import.meta.env.VITE_API_URL}/api/paystack/initialize`,
         {
           method: "POST",
           headers: {

@@ -22,7 +22,7 @@ function PaymentCallback() {
     const verifyPayment = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/paystack/verify/${reference}`,
+          `${import.meta.env.VITE_API_URL}/api/paystack/verify/${reference}`,
         );
         const data = await response.json();
 

@@ -14,7 +14,7 @@ export function SeatSelection({ eventId }) {
       try {
         const token = localStorage.getItem("token");
         const res = await fetch(
-          `http://localhost:3000/events/${eventId}/seats`,
+          `${import.meta.env.VITE_API_URL}/${eventId}/seats`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -43,7 +43,7 @@ export function SeatSelection({ eventId }) {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3000/events/${eventId}/book-seat`,
+        `${import.meta.env.VITE_API_URL}/${eventId}/book-seat`,
         {
           method: "POST",
           headers: {

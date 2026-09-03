@@ -21,7 +21,10 @@ function SuperAdmin() {
         return
       }
       const token = await auth.currentUser.getIdToken();
-      const response = await fetch("http://localhost:3000/users",{ method: "GET", headers: {Authorization: `Bearer ${token}`}});
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users`,{ 
+        method: "GET", 
+        headers: {Authorization: `Bearer ${token}`
+      }});
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message);
@@ -46,7 +49,7 @@ function SuperAdmin() {
     }
     try {
       const token = await auth.currentUser.getIdToken();
-      const response = await fetch("http://localhost:3000/users/promote",{method: "PUT",headers: {"Content-Type": "application/json",Authorization: `Bearer ${token}`},
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/promote`,{method: "PUT",headers: {"Content-Type": "application/json",Authorization: `Bearer ${token}`},
         body: JSON.stringify({email: email.trim().toLowerCase(),role: role})});
       const data = await response.json();
       if (!response.ok) {
@@ -76,7 +79,7 @@ function SuperAdmin() {
         return
       }
       const token = await auth.currentUser.getIdToken();
-      const response = await fetch(`http://localhost:3000/users/${user._id}/demote`,{method: "PUT",
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${user._id}/demote`,{method: "PUT",
           headers: {Authorization: `Bearer ${token}`,}}
       );
       const data = await response.json();

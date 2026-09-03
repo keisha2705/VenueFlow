@@ -29,7 +29,7 @@ function SignIn({ showSignup }) {
       const uid = userCredential.user.uid;
 
       // sending the UID to the backend to get the user role and other info
-      const response = await fetch(`http://localhost:3000/users/${uid}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${uid}`);
       const data = await response.json();
 
       if (!response.ok) {

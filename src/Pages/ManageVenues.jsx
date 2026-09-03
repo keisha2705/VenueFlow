@@ -107,7 +107,7 @@ function ManageVenues() {
             return
         }
         const token = await auth.currentUser.getIdToken();
-        const response = await fetch("http://localhost:3000/venues", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/venues`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -128,7 +128,7 @@ function ManageVenues() {
                     return
                 }
                 const token = await auth.currentUser.getIdToken()
-                const response = await fetch("http://localhost:3000/events", {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/events`, {
                     headers: {"Authorization": `Bearer ${token}`}
                 })
                 const data = await response.json()
@@ -213,7 +213,7 @@ async function handleSubmit(event) {
         let response;
         if (editingVenue) {
             //editing the existing venue
-            response = await fetch(`http://localhost:3000/venues/${editingVenue._id}`,
+            response = await fetch(`${import.meta.env.VITE_API_URL}/venues/${editingVenue._id}`,
                 {
                     method: "PUT",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
@@ -222,7 +222,7 @@ async function handleSubmit(event) {
             );
         } else {
             //creating a new venue
-            response = await fetch("http://localhost:3000/venues",
+            response = await fetch(`${import.meta.env.VITE_API_URL}/venues`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}`},
@@ -260,7 +260,7 @@ async function handleSubmit(event) {
 async function deleteVenue(id) {
     try {
         const token = await auth.currentUser.getIdToken();
-        const response = await fetch(`http://localhost:3000/venues/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/venues/${id}`, {
             method: "DELETE",
             headers: {"Authorization": `Bearer ${token}`}
         })

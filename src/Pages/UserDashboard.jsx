@@ -14,7 +14,7 @@ function UserDashboard() {
     const fetchEvents = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:3000/events", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/events`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

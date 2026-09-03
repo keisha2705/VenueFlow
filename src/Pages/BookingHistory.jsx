@@ -17,7 +17,7 @@ function BookingHistory() {
         const userUid = localStorage.getItem("userUid") || "HC1gB96RppUzsMIzpSYpA2IhiQS2";
 
         // send a get request to the backend route
-        const response = await fetch("http://localhost:3000/bookings", {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/bookings`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

@@ -12,7 +12,7 @@ function Navbar() {
     try {
       const token = await auth.currentUser.getIdToken();
       const uid = auth.currentUser.uid;
-      const response = await fetch(`http://localhost:3000/users/${uid}`,
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${uid}`,
         {
           method: "GET",
           headers: {Authorization: `Bearer ${token}`},
