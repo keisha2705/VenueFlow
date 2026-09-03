@@ -26,7 +26,15 @@ function App() {
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           
-          {/* normal user home page */}
+
+          <Route
+            path="/events"
+            element={
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+                <AvailableVenues/>
+              </ProtectedRoute>
+            }
+          /> 
           <Route
             path="/user"
             element={
@@ -36,14 +44,7 @@ function App() {
             }
           />
           
-          <Route
-            path="/events"
-            element={
-              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
-                <AvailableVenues/>
-              </ProtectedRoute>
-            }
-          /> 
+          
           {/* normal user booking for an event */}
           <Route
             path="/bookings/:id"

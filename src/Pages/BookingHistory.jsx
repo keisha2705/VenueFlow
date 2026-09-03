@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../Styling/BookingHistory.css';
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/Navbar.jsx";
 
 function BookingHistory() {
   const [bookingHistory, setBookingHistory] = useState([]);
@@ -87,7 +87,7 @@ function BookingHistory() {
                     {booking.bookingStatus}
                   </span>
                 </div>
-
+  
                 <h3 style={{ margin: '0 0 10px 0', fontSize: '18px' }}>{booking.event}</h3>
                 <p style={{ margin: '0 0 15px 0', color: '#141414', fontSize: '14px' }}>{booking.venue}</p>
 
