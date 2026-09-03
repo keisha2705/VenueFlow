@@ -43,12 +43,12 @@ function SignIn({ showSignup }) {
       localStorage.setItem("userRole", data.role);
 
       alert("Welcome Back!");
-    navigate("/user")
+    navigate("/events")
     
     } catch (error) {
       alert(error.message);
     }
-  };
+  }
 
   return (
     <div className="login-container">
