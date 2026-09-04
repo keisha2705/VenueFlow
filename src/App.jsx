@@ -25,7 +25,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AuthPage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} 
+          />
           
 
           <Route
@@ -109,8 +110,7 @@ function App() {
             </ProtectedRoute>
           }
           />
-          </Routes>
-
+</Routes>
       </BrowserRouter>
     </>
   );
