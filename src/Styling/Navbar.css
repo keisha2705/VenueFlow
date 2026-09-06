@@ -138,10 +138,7 @@
   }
   
   .nav-links {
-    order: 3; 
-    width: 100%;
-    margin-top: 12px;
-    gap: 16px;
+    gap: 20px;
   }
     
   .nav-links a {

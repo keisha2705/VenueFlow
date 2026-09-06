@@ -8,15 +8,13 @@ import UserDashboard from "./Pages/UserDashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 import BookingPage from "./Pages/BookingPage";
 import ManageVenues from "./Pages/ManageVenues";
-import Events from "./Pages/Events";
-import AboutUs from './Pages/AboutUs';
+import AboutUs from "./Pages/AboutUs";
 import ManageEvents from "./Pages/ManageEvents";
+import BookingHistory from './Pages/BookingHistory';
 import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
-import BookingHistory from './Pages/BookingHistory';
 
-// 1. ADD THIS NAVBAR IMPORT AT THE TOP
 import Navbar from "./Components/Navbar"; 
 
 function App() {
@@ -24,7 +22,7 @@ function App() {
     <>
       <BrowserRouter>
         
-        {/* 2. PLACE THE NAVBAR HERE SO IT SHOWS ON ALL PAGES */}
+        {/* The Navbar can safely sit here because it is wrapped by BrowserRouter */}
         <Navbar />
 
         <Routes>
@@ -76,51 +74,36 @@ function App() {
             }
           />
 
-          <Route
-            path="/manager/venues"
-            element={
-              <ProtectedRoute roles={["manager", "superAdmin"]}>
-                <ManageVenues />
-              </ProtectedRoute>
-            }
-          />
-          
-          <Route
-            path="/manager/events"
-            element={
-              <ProtectedRoute roles={["manager", "superAdmin"]}>
-                <ManageEvents />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route 
-            path="/superAdmin" 
-            element={
-              <ProtectedRoute roles={["superAdmin"]}>
-                <SuperAdmin />
-              </ProtectedRoute>
-            }
-          />
-
-          <Route
-            path="/about"
-            element={
-              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
-                <AboutUs />
-              </ProtectedRoute>
-            }
-          />
-           <Route
-            path="/Application"
-            element={
-              <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
-                <ApplicationForm />
-              </ProtectedRoute>
-            }
-          />
-
           <Route path="*" element={<PageNotFound />} />
+
+          <Route path="/manager/venues" element={
+            <ProtectedRoute roles={["manager", "superAdmin"]}>
+             <ManageVenues />
+          </ProtectedRoute>
+          }/>  
+          <Route path="/manager/events" element={
+            <ProtectedRoute roles={["manager", "superAdmin"]}>
+              <ManageEvents />
+            </ProtectedRoute>
+          }/>
+          <Route path="/superAdmin" element={
+            <ProtectedRoute roles={["superAdmin"]}>
+             <SuperAdmin />
+          </ProtectedRoute>
+          }/>
+
+          <Route path="/about" element={
+            <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+              <AboutUs />
+            </ProtectedRoute>
+            }
+          />
+           <Route path="/Application" element={
+            <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
+              <ApplicationForm />
+            </ProtectedRoute>
+            }
+          />
         </Routes>
 
       </BrowserRouter>

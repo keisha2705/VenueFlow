@@ -54,7 +54,7 @@ function SignIn({ showSignup }) {
     <div className="login-container">
       <div className="login-left">
         <div className="logo">
-          <img src="/assets/LOGO.png" alt="logo" width="300" height="300" />
+          <img src="./logo1.png" alt="logo" width="300" height="300" />
         </div>
 
         <h2>WELCOME BACK</h2>
