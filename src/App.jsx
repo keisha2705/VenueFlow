@@ -27,6 +27,7 @@ function App() {
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           
+          
 
           <Route
             path="/events"

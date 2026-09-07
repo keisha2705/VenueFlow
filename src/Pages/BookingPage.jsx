@@ -32,8 +32,8 @@ export function SeatSelection({ eventId }) {
             data,
           );
         }
-      } catch (err) {
-        console.error("Layout error", err);
+      } catch (error) {
+        console.error("Layout error", error);
       }
     };
     fetchLayoutData();
