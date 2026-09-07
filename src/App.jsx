@@ -14,6 +14,8 @@ import BookingHistory from './Pages/BookingHistory';
 import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
+// import emailjs from "./pages/@emailjs/browser";
+import Checkout from "./Pages/Checkout";
 
 import Navbar from "./Components/Navbar"; 
 
@@ -29,7 +31,15 @@ function App() {
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           
-          {/* normal user home page */}
+
+          <Route
+            path="/events"
+            element={
+              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
+                <AvailableVenues/>
+              </ProtectedRoute>
+            }
+          /> 
           <Route
             path="/user"
             element={
@@ -39,14 +49,7 @@ function App() {
             }
           />
           
-          <Route
-            path="/events"
-            element={
-              <ProtectedRoute roles={["user", "manager", "superAdmin"]}>
-                <AvailableVenues/>
-              </ProtectedRoute>
-            }
-          /> 
+          
           {/* normal user booking for an event */}
           <Route
             path="/bookings/:id"
@@ -103,6 +106,12 @@ function App() {
               <ApplicationForm />
             </ProtectedRoute>
             }
+          />
+          <Route path="/Checkout" element={
+            <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
+              <Checkout />
+            </ProtectedRoute>
+          }
           />
         </Routes>
 

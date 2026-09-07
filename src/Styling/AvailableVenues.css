@@ -1,123 +1,306 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
-}
 
-.Hero-image{
-  min-height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
- background-image: url("/assets/hero.jpg");
-  display: flex;
-  flex-direction: column;     
-  justify-content: center;   
-  align-items: center;       
-  text-align: center;        
-  padding: 20px;  
- 
-  
-}
-
-.text{
-  
- font-size: 4rem;            
-  font-weight: 800;           
-  color: #ffffff;            
-  margin-bottom: 1rem;       
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6); 
-}
-
-.buttons{
-  width: 200px;
-  height: 40px;
-  border: none;
-  border-radius: 15px;
-  background: linear-gradient(135deg,#16001f,#25003d,#100014);
-  color: rgb(44, 4, 4);
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 20px;
-  /* text-align: end; */
-}
-
-.Hero-Two{
-  min-height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
- background-image: url("/assets/hero3.avif");
-  display: flex;
-  flex-direction: column;     
-  justify-content: center;   
-  align-items: center;       
-  text-align: center;        
-  padding: 20px;   
-  border-radius: 20px; 
-}
-
-
-/* Clean Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing: -0.03em;
+  border-radius: 0 !important; 
+  box-shadow: none !important; 
+  text-shadow: none !important;
 }
 
-/* 1. Main Section Container */
-.content-wrapper {
-    display: flex;
+body, html {
+  background-color: #ffffff; 
+  color: #000000;            
+  overflow-x: hidden;
+}
+
+.home-page-root.light-theme {
   width: 100%;
-  min-height: 70vh;
-  flex-wrap: wrap;
+  background-color: #ffffff;
+}
+
+.honor-hero.full-viewport-bleed.light-hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  background-image: url("/assets/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 4%;
 }
 
 
-.left-side {
-    width: 100%;
+.honor-hero.light-hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.8) 100%);
+  z-index: 1;
 }
 
-.left-side img {
-   width: 100%;
+.hero-overlay-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+}
+
+.light-hero .hero-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #25003d; 
+  margin-bottom: 24px;
+  background: transparent;
+  border-bottom: 2px solid #25003d; 
+  padding-bottom: 4px;
+}
+
+.light-hero .hero-title {
+  font-size: 7.5rem; 
+  font-weight: 900;
+  line-height: 0.95;
+  color: #000000;
+  margin-bottom: 30px;
+  text-transform: uppercase; 
+}
+
+.light-hero .hero-subtitle {
+  font-size: 1.3rem;
+  color: #333333;
+  max-width: 600px;
+  margin: 0 auto 50px auto;
+  line-height: 1.5;
+  letter-spacing: 0px;
+}
+
+
+.hero-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-primary-purple, .btn-secondary-dark {
+  padding: 20px 50px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-primary-purple {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+}
+.btn-primary-purple:hover {
+  background: #25003d;
+}
+
+.btn-secondary-dark {
+  background: transparent;
+  color: #000000;
+  border: 2px solid #000000;
+}
+.btn-secondary-dark:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+
+.fullscreen-showcase-panel {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.music-panel-bg { 
+  background-image: url("/assets/img1vflow.webp"); 
+}
+.sports-panel-bg { 
+  background-image: url("/assets/pexels-gera-cejas-3616330-38553392.jpg"); 
+}
+
+.fullscreen-showcase-panel::before {
+  display: none;
+}
+
+
+.showcase-immersive-box.light-box {
+  position: relative;
+  z-index: 2;
+  width: 45vw;
+  min-height: 100vh; 
+  background: #ffffff; 
+  padding: 10% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.left-aligned { margin-right: auto; border-right: 1px solid #111111; }
+.right-aligned { margin-left: auto; border-left: 1px solid #111111; }
+
+.light-box .content-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #25003d;
+  letter-spacing: 3px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.light-box .giant-panel-title {
+  font-size: 4.5rem;
+  font-weight: 900;
+  margin-bottom: 24px;
+  line-height: 1.0;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.light-box .giant-panel-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444444;
+  margin-bottom: 40px;
+}
+
+.portal-giant-strip.light-portals {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.giant-portal-block {
+  width: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8% 6%;
+  background-size: cover;
+  background-position: center;
+  border: none;
+}
+
+.giant-portal-block.light-layer::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+}
+
+.attend-fullscreen-bg { background-image: url("/assets/pexels-yogendras31-5185591.jpg"); }
+.host-fullscreen-bg { background-image: url("/assets/pexels-anat-landa-2162599192-38446266.jpg"); }
+
+.giant-block-content {
+  position: relative;
+  z-index: 2;
+  max-width: 550px;
+}
+
+.light-layer .block-pretitle {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #25003d;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.light-layer .giant-block-content h2 {
+  font-size: 4rem;
+  line-height: 1.0;
+  font-weight: 900;
+  color: #000000;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+}
+
+.light-layer .giant-block-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333333;
+  margin-bottom: 44px;
+}
+
+.featured-showcase-giant.light-footer-showcase {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #ffffff;
+  border-top: 1px solid #000000;
+}
+
+.content-wrapper-giant {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.left-side-giant { width: 50%; }
+.left-side-giant img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius: 9px;       
 }
 
-.right-side {
-   flex: 1;
-  min-width: 300px;
+.right-side-giant {
+  width: 50%;
   display: flex;
   align-items: center;
-  padding: 60px;
-  /* background: #f8f8f8; */
-  border-radius: 10px;    
+  padding: 8%;
+  background: #ffffff;
 }
 
-
-.right-side p {
-  font-size: 17px;
-  line-height: 3;
+.dark-text .showcase-title-giant {
+  font-size: 4.5rem;
+  font-weight: 900;
+  margin-bottom: 24px;
+  line-height: 1.0;
+  color: #000000;
+  text-transform: uppercase;
 }
 
-@media (min-width: 768px) {
-    .content-wrapper {
-        flex-direction: row;   
-    }
+.dark-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333333;
+  margin-bottom: 30px;
+}
 
-    .left-side {
-        width: 50%;            /* Strict 50% split for the image container */
-        flex-shrink: 0;
-    }
+@media (max-width: 1024px) {
+  .light-hero .hero-title { font-size: 4.5rem; }
+  .portal-giant-strip, .content-wrapper-giant, .fullscreen-showcase-panel { flex-direction: column; }
+  .giant-portal-block, .left-side-giant, .right-side-giant, .showcase-immersive-box.light-box { width: 100%; min-height: 50vh; border: none; }
+  .showcase-immersive-box.light-box { padding: 60px 24px; }
+  .light-box .giant-panel-title { font-size: 3rem; }
+}
 
-    .right-side {
-        width: 50%;            /* Strict 50% split for the text container */
-        padding-left: 20px;    /* Adds clear layout spacing right before the text starts */
-        flex-shrink: 0;
-    }
+@media (max-width: 600px) {
+  .light-hero .hero-title { font-size: 3rem; }
+  .light-layer .giant-block-content h2, .light-box .giant-panel-title, .dark-text .showcase-title-giant { font-size: 2.5rem; }
+  .hero-actions { flex-direction: column; width: 100%; }
 }
