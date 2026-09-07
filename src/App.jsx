@@ -26,8 +26,6 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          
-          
 
           <Route
             path="/events"
@@ -49,7 +47,7 @@ function App() {
           
           {/* normal user booking for an event */}
           <Route
-            path="/bookings/:id"
+            path="/bookings/:eventId"
             element={
               <ProtectedRoute roles={["user", "manager","superAdmin"]}>
                 <BookingPage />
