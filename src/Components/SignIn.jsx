@@ -48,7 +48,7 @@ function SignIn({ showSignup }) {
     } catch (error) {
       alert(error.message);
     }
-  };
+  }
 
   return (
     <div className="login-container">

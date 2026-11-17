@@ -16,6 +16,7 @@ import SuperAdmin from './Pages/SuperAdmin';
 import AvailableVenues from "./Pages/AvailableVenus";
 import ApplicationForm from './Pages/ApplicationForm';
 // import emailjs from "./pages/@emailjs/browser";
+import Checkout from "./Pages/Checkout";
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AuthPage />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} 
+          />
           
 
           <Route
@@ -102,8 +104,13 @@ function App() {
             </ProtectedRoute>
             }
           />
-          </Routes>
-
+          <Route path="/Checkout" element={
+            <ProtectedRoute roles={["user", "superAdmin", "manager"]}>
+              <Checkout />
+            </ProtectedRoute>
+          }
+          />
+</Routes>
       </BrowserRouter>
     </>
   );
